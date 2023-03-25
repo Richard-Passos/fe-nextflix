@@ -1,7 +1,7 @@
 /* Components */
 import { Container } from "./MainPage.style";
 import { Movies } from "../movies";
-import { Series } from "../Series";
+import { Series } from "../series";
 
 export default function MainPage({ popularM, popularS }) {
   return (
