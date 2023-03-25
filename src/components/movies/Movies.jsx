@@ -1,20 +1,22 @@
 /* Components */
-import { useEffect } from "react";
 import { MoviesContainer } from "./Movies.style";
 
-const API_KEY = "b681b7a1ecdbcf0bbb1bc98e9edd99ef";
+/* Logic */
+import { useEffect, useState } from "react";
+import { getMoviesOrSeries } from "@/services/TMDB_API";
 
-export async function getStaticProps() {
-  const res = await fetch(
-    `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-pt-BR&page=1`
+export default function Movies({ classification }) {
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    getMoviesOrSeries(setMovies, "movie", classification);
+  }, []);
+  return (
+    <MoviesContainer>
+      {movies &&
+        movies.map((movie) => (
+          <p key={`key-movie-${movie.id}-${classification}`}>{movie.title}</p>
+        ))}
+    </MoviesContainer>
   );
-  const popularMovies = await res.json();
-
-  return {
-    props: { a: "1123" },
-  };
-}
-
-export default function Movies({ type }) {
-  return <MoviesContainer></MoviesContainer>;
 }

@@ -6,7 +6,7 @@ export default function MovieDetails() {
   return (
     <>
       <Head>
-        <title>next-movies - Details</title>
+        <title>NextFlix - Details</title>
       </Head>
 
       <h1>Working too</h1>

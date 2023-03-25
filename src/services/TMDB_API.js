@@ -22,3 +22,21 @@ export const searchMovies = async (
     })
     .catch((error) => console.log(error));
 };
+
+export const getMoviesOrSeries = async (
+  setState,
+  type,
+  classification,
+  setTotalPages = null,
+  page = 1
+) => {
+  await axios
+    .get(
+      `https://api.themoviedb.org/3/${type}/${classification}?api_key=${API_KEY}&language=pt-BR&page=${page}`
+    )
+    .then(({ data }) => {
+      setTotalPages ? setTotalPages(data.total_pages) : null;
+      setState(classification === "latest" ? data : data.results);
+    })
+    .catch((error) => console.log(error));
+};

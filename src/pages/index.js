@@ -1,29 +1,37 @@
 /* Components */
 import Head from "next/head";
 import Link from "next/link";
-import { Movies, SearchMovies } from "@/components";
+import { MainPage, SearchMovies } from "@/components";
 import { useState } from "react";
 
 const API_KEY = "b681b7a1ecdbcf0bbb1bc98e9edd99ef";
 
 export async function getStaticProps() {
-  const res = await fetch(
+  const resPopularMovies = await fetch(
     `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=pt-BR&page=1`
   );
-  const popularMovies = await res.json();
+  const popularMovies = await resPopularMovies.json();
+
+  const resPopularSeries = await fetch(
+    `https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}&language=pt-BR&page=1`
+  );
+  const popularSeries = await resPopularSeries.json();
 
   return {
-    props: { popularMovies: popularMovies.results },
+    props: {
+      popularMovies: popularMovies.results,
+      popularSeries: popularSeries.results,
+    },
   };
 }
 
-export default function Home({ popularMovies }) {
+export default function Home({ popularMovies, popularSeries }) {
   const [searchMovies, setSearchMovies] = useState("");
 
   return (
     <>
       <Head>
-        <title>next-movies - Home</title>
+        <title>NextFlix - Home</title>
       </Head>
 
       <h1>Working</h1>
@@ -37,11 +45,10 @@ export default function Home({ popularMovies }) {
       />
 
       {(searchMovies && <SearchMovies movieName={searchMovies} />) || (
-        <Movies type="popular" />
+        <MainPage popularM={popularMovies} popularS={popularSeries} />
       )}
 
-      {popularMovies &&
-        popularMovies.map((movie) => <p key={movie.title}>{movie.title}</p>)}
+      {}
     </>
   );
 }
