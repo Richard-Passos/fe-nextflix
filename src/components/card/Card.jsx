@@ -24,10 +24,16 @@ export default function card({ title, src, release_date }) {
     <>
       <CardContainer>
         <Image src={src} alt={title} width={200} height={300} />
+
         <p>{title}</p>
-        <small>{`${months[releaseDate.getMonth(release_date)]} ${
-          releaseDate.getDate(release_date) + 1
-        }, ${releaseDate.getFullYear(release_date)}`}</small>
+
+        <small>
+          {months[releaseDate.getMonth(release_date)]
+            ? `${months[releaseDate.getMonth(release_date)]} ${
+                releaseDate.getDate(release_date) + 1
+              }, ${releaseDate.getFullYear(release_date)}`
+            : "Release date not found"}
+        </small>
       </CardContainer>
     </>
   );
