@@ -1,10 +1,9 @@
 /* Components */
 import Head from "next/head";
-import { Header } from "../header";
-import { Children } from "react";
+import { LayoutContainer } from "./Layout.style";
 import { Footer } from "../footer";
 
-export default function Layout({ children }) {
+export default function Layout({ children, classN }) {
   return (
     <>
       <Head>
@@ -13,9 +12,10 @@ export default function Layout({ children }) {
         <link rel="icon" href="/images/favicon.png" />
       </Head>
 
-      <Header />
-      {children}
-      <Footer />
+      <LayoutContainer className={classN}>
+        {children}
+        <Footer />
+      </LayoutContainer>
     </>
   );
 }

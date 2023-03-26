@@ -1,22 +1,26 @@
 /* Components */
 import { SeriesContainer } from "./Series.style";
+import Link from "next/link";
 
 /* Logic */
 import { useEffect, useState } from "react";
-import { getMoviesOrSeries } from "@/services/TMDB_API";
+import { getMedia } from "@/services/TMDB_API";
 
 export default function Movies({ classification }) {
   const [series, setSeries] = useState([]);
 
   useEffect(() => {
-    getMoviesOrSeries(setSeries, "tv", classification);
+    getMedia(setSeries, "tv", classification);
   }, []);
   return (
-    <SeriesContainer>
-      {series &&
-        series.map((serie) => (
-          <p key={`key-serie-${serie.id}-${classification}`}>{serie.name}</p>
-        ))}
-    </SeriesContainer>
+    <>
+      <SeriesContainer>
+        {series &&
+          series.map((serie) => (
+            <p key={`key-serie-${serie.id}-${classification}`}>{serie.name}</p>
+          ))}
+      </SeriesContainer>
+      <Link href={`/tv/${classification}`}>Show all</Link>
+    </>
   );
 }

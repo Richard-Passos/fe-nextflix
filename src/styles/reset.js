@@ -50,6 +50,7 @@ export default createGlobalStyle`
 
   button, input {
     font-size: inherit;
+    font-family: inherit;
   }
 
   input {

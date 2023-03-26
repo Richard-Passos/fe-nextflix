@@ -1,3 +1,6 @@
+/* Components */
+import { FooterContainer } from "./Footer.style";
+
 export default function Footer() {
-  return <></>;
+  return <FooterContainer></FooterContainer>;
 }

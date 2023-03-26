@@ -1,7 +1,7 @@
 /* Components */
 import Head from "next/head";
 import Link from "next/link";
-import { MainPage, SearchMovies } from "@/components";
+import { Header, MainPage, Pagination } from "@/components";
 import { useState } from "react";
 
 const API_KEY = "b681b7a1ecdbcf0bbb1bc98e9edd99ef";
@@ -26,7 +26,7 @@ export async function getStaticProps() {
 }
 
 export default function Home({ popularMovies, popularSeries }) {
-  const [searchMovies, setSearchMovies] = useState("");
+  const [searchMovie, setSearchMovie] = useState("");
 
   return (
     <>
@@ -34,21 +34,11 @@ export default function Home({ popularMovies, popularSeries }) {
         <title>NextFlix - Home</title>
       </Head>
 
-      <h1>Working</h1>
+      <Header input setState={setSearchMovie} />
 
-      <Link href="/details/1">Outra página</Link>
-
-      <input
-        type="search"
-        name="searchMovie"
-        onChange={(e) => setSearchMovies(e.target.value)}
-      />
-
-      {(searchMovies && <SearchMovies movieName={searchMovies} />) || (
+      {(searchMovie && <Pagination name={searchMovie} />) || (
         <MainPage popularM={popularMovies} popularS={popularSeries} />
       )}
-
-      {}
     </>
   );
 }
