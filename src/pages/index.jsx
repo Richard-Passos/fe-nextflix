@@ -1,6 +1,5 @@
 /* Components */
 import Head from "next/head";
-import Link from "next/link";
 import { Header, MainPage, Pagination } from "@/components";
 import { useState } from "react";
 

@@ -2,7 +2,7 @@
 import { CardContainer } from "./Card.style";
 import Image from "next/image";
 
-const months = [
+const MONTHS = [
   "Jan",
   "Feb",
   "Mar",
@@ -23,13 +23,13 @@ export default function card({ title, src, release_date }) {
   return (
     <>
       <CardContainer>
-        <Image src={src} alt={title} width={200} height={300} />
+        <Image src={src} alt={title} width={250} height={350} quality={50} />
 
         <p>{title}</p>
 
         <small>
-          {months[releaseDate.getMonth(release_date)]
-            ? `${months[releaseDate.getMonth(release_date)]} ${
+          {MONTHS[releaseDate.getMonth(release_date)]
+            ? `${MONTHS[releaseDate.getMonth(release_date)]} ${
                 releaseDate.getDate(release_date) + 1
               }, ${releaseDate.getFullYear(release_date)}`
             : "Release date not found"}

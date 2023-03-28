@@ -29,18 +29,6 @@ export const ButtonsContainer = styled.div`
   justify-content: center;
   align-items: center;
 
-  /* .prev-btn,
-  .next-btn {
-    position: absolute;
-
-    &.prev-btn {
-      left: 0;
-    }
-    &.next-btn {
-      right: 0;
-    }
-  } */
-
   div {
     max-width: 80%;
     padding: 0 1rem;

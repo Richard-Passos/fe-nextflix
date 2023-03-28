@@ -36,8 +36,10 @@ export default function Header({ children, input = false, setState = null }) {
             href="/"
             className="link"
             onClick={() => {
-              setState("");
-              inputSearch.current.value = "";
+              if (input) {
+                setState("");
+                inputSearch.current.value = "";
+              }
             }}
           >
             Home

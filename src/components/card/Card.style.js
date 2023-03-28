@@ -2,8 +2,8 @@
 import styled from "styled-components";
 
 export const CardContainer = styled.div`
-  width: 20rem;
-  height: 40rem;
+  width: 25rem;
+  height: 45rem;
   padding-bottom: 2.5rem;
   background-color: ${({ theme }) => theme.colors.theme};
   border: 0.1rem solid transparent;
@@ -25,14 +25,14 @@ export const CardContainer = styled.div`
   }
 
   p {
-    padding: 0 1rem;
+    padding: 0 1.5rem;
     font-size: 1.4em;
     font-weight: bold;
     line-height: 2rem;
   }
 
   small {
-    padding: 0 1rem;
+    padding: 0 1.5rem;
     font-size: 1.2em;
   }
 `;

@@ -17,7 +17,7 @@ export default function Pagination(props) {
     props.name
       ? searchContent(setMedias, props.name, setTotalPages, currPage)
       : getMedia(
-          setPaginate,
+          setMedias,
           props.mediaType,
           props.classification,
           setTotalPages,
@@ -48,7 +48,6 @@ export default function Pagination(props) {
 
       <ButtonsContainer>
         <button
-          className="prev-btn"
           onClick={() => {
             setCurrPage((prevPage) => --prevPage);
             window.scrollTo(0, 0);
@@ -69,7 +68,6 @@ export default function Pagination(props) {
         </div>
 
         <button
-          className="next-btn"
           onClick={() => {
             setCurrPage((prevPage) => ++prevPage);
             window.scrollTo(0, 0);

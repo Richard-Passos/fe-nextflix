@@ -1,19 +1,27 @@
 /* Components */
 import { Container } from "./MainPage.style";
-import { Movies } from "../movies";
-import { Series } from "../series";
+import { Medias } from "../medias";
 import Link from "next/link";
+import { Carousel } from "../carousel";
 
 export default function MainPage({ popularM, popularS }) {
   return (
     <Container>
-      {popularM && popularM.map((movie) => <p key={movie.id}>{movie.title}</p>)}
-      <Link href="/movie/popular">Show all</Link>
-      {popularS && popularS.map((serie) => <p key={serie.id}>{serie.name}</p>)}
-      <Link href="/tv/popular">Show all</Link>
-      <Movies classification="top_rated" />
-      <Series classification="top_rated" />
-      <Movies classification="upcoming" />
+      <Carousel medias={popularM}>
+        <Link href="/movie/popular" className="btn-show-all">
+          Show all
+        </Link>
+      </Carousel>
+
+      <Carousel medias={popularS}>
+        <Link href="/tv/popular" className="btn-show-all">
+          Show all
+        </Link>
+      </Carousel>
+
+      <Medias type="movie" classification="top_rated" />
+      <Medias type="tv" classification="top_rated" />
+      <Medias type="movie" classification="upcoming" />
     </Container>
   );
 }
