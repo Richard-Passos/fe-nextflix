@@ -39,16 +39,7 @@ export default function Header({ children, input = false, setState = null }) {
         )}
 
         <nav>
-          <Link
-            href="/"
-            className="link"
-            onClick={() => {
-              if (input) {
-                setState("");
-                inputSearch.current.value = "";
-              }
-            }}
-          >
+          <Link href="/" className="link">
             Home
           </Link>
         </nav>
