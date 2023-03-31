@@ -6,8 +6,27 @@ export const LayoutContainer = styled.main`
   min-height: 100vh;
   background-color: ${({ theme }) => theme.colors.themeDarker};
   color: ${({ theme }) => theme.colors.text};
+  overflow-x: hidden;
+  isolation: isolate;
 
   display: flex;
   flex-direction: column;
-  gap: 5rem;
+  gap: 10rem;
+
+  .carousels {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+  }
+
+  .skeleton-container {
+    max-width: 80%;
+    min-height: 80vh;
+    margin: 0 auto;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3rem 4rem;
+  }
 `;

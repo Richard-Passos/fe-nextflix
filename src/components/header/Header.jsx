@@ -2,6 +2,7 @@
 import { HeaderContainer, LogoContainer } from "./Header.style";
 import Link from "next/link";
 import Image from "next/image";
+import { Search } from "@styled-icons/bootstrap";
 
 /* Logic */
 import { useContext, useRef } from "react";
@@ -22,15 +23,21 @@ export default function Header({ children, input = false, setState = null }) {
       {input && (
         <input
           ref={inputSearch}
-          className="search"
-          type="search"
-          name="searchMovie"
-          placeholder="Media name"
+          className="search-input"
+          type="seasearchInputrch"
+          name="searchInput"
+          placeholder="Media title"
           onChange={(e) => setState(e.target.value)}
         />
       )}
 
       <div>
+        {!input && (
+          <Link href="search/1">
+            <Search className="search-icon" />
+          </Link>
+        )}
+
         <nav>
           <Link
             href="/"
@@ -48,8 +55,8 @@ export default function Header({ children, input = false, setState = null }) {
 
         <Image
           src={theme.icon}
-          width={25}
-          height={25}
+          width={20}
+          height={20}
           alt="theme-icon"
           className="theme-icon"
           onClick={() =>

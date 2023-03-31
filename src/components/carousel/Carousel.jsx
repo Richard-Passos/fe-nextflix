@@ -11,22 +11,28 @@ import { Card } from "../card";
 import { ArrowRightShort, ArrowLeftShort } from "@styled-icons/bootstrap";
 
 /* Logic */
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
-export default function Carousel({ children, medias }) {
+export default function Carousel({ children, title, medias }) {
   const carousel = useRef();
-  const width = carousel.current?.offsetWidth;
+
+  const [fixCarouselBug, setFixCarouselBug] = useState(null);
+  useEffect(() => {
+    setFixCarouselBug("");
+  }, []); /* Carousel din't work correctly without it */
 
   return (
     <CarouselContainer ref={carousel}>
       <CarouselProvider
-        visibleSlides={getVisibleSlides(width)}
-        step={1}
-        naturalSlideWidth={250}
-        naturalSlideHeight={300}
+        visibleSlides={getVisibleSlides(carousel.current?.offsetWidth)}
+        step={getVisibleSlides(carousel.current?.offsetWidth) - 1}
+        naturalSlideWidth={200}
+        naturalSlideHeight={350}
         totalSlides={medias.length}
         infinite
       >
+        <h2 className="title">{title.replaceAll(/[_-]/g, " ")}</h2>
+
         {children}
 
         <Slider>
@@ -35,8 +41,9 @@ export default function Carousel({ children, medias }) {
               <Card
                 src={
                   media.backdrop_path
-                    ? "https://image.tmdb.org/t/p/original" +
-                      (media.poster_path ?? media.backdrop_path)
+                    ? `https://image.tmdb.org/t/p/original${
+                        media.poster_path ?? media.backdrop_path
+                      }`
                     : "/images/noImgFound.jpg"
                 }
                 title={media.title ?? media.name}
@@ -49,6 +56,7 @@ export default function Carousel({ children, medias }) {
         <ButtonsContainer>
           <ButtonBack></ButtonBack>
           <ArrowLeftShort className="carousel__back-button" />
+
           <ButtonNext></ButtonNext>
           <ArrowRightShort className="carousel__next-button" />
         </ButtonsContainer>
@@ -59,9 +67,9 @@ export default function Carousel({ children, medias }) {
 
 const getVisibleSlides = (width) => {
   const examinedWidths = [];
-  for (let i = 0; i < 20; i++) {
-    examinedWidths.push({ width: 135 * i, slides: 0.5 * i });
-    /* Each multiple of 135 will receive + 0.5 slide*/
+  for (let i = 0; i < 30; i++) {
+    examinedWidths.push({ width: 110 * i, slides: 0.5 * i });
+    /* Each multiple of 110 will receive + 0.5 slide*/
   }
 
   return examinedWidths.find((obj) => obj.width > width)?.slides - 0.5;

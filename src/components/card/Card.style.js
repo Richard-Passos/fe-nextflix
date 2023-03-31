@@ -2,8 +2,8 @@
 import styled from "styled-components";
 
 export const CardContainer = styled.div`
-  width: 25rem;
-  height: 45rem;
+  width: 20rem;
+  height: 35rem;
   padding-bottom: 2.5rem;
   background-color: ${({ theme }) => theme.colors.theme};
   border: 0.1rem solid transparent;
@@ -13,6 +13,8 @@ export const CardContainer = styled.div`
   overflow: hidden;
   transition: 0.3s;
 
+  position: relative;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -21,7 +23,26 @@ export const CardContainer = styled.div`
   :hover {
     cursor: pointer;
     border-color: ${({ theme }) => theme.colors.primary};
-    scale: 1.1;
+    opacity: 1;
+
+    img {
+      scale: 1.1;
+    }
+  }
+
+  .image-container {
+    width: 20rem;
+    height: 25rem;
+    overflow: hidden;
+  }
+
+  .hide-img {
+    position: absolute;
+    z-index: -1;
+  }
+
+  img {
+    transition: 0.5s;
   }
 
   p {
@@ -29,6 +50,10 @@ export const CardContainer = styled.div`
     font-size: 1.4em;
     font-weight: bold;
     line-height: 2rem;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   small {

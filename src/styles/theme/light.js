@@ -7,9 +7,9 @@ export default {
     primary: `hsl(341, 98%, 39%)`,
     primaryLighter: `hsl(341, 100%, 50%)`,
 
-    themeDarker: `hsl(0, 10%, 80%)`,
-    theme: `hsl(0, 5%, 90%)`,
-    themeLighter: `hsl(0, 0%, 100%)`,
+    themeDarker: `hsl(0, 0%, 85%)`,
+    theme: `hsl(0, 0%, 90%)`,
+    themeLighter: `hsl(0, 0%, 95%)`,
 
     oppositeTheme: `hsl(235, 25%, 15%)`,
 

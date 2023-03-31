@@ -4,13 +4,13 @@ import Link from "next/link";
 
 /* Logic */
 import { useEffect, useState } from "react";
-import { getMedia } from "@/services/TMDB_API";
+import { getMedias } from "@/services/TMDB_API";
 
 export default function Medias({ type, classification }) {
   const [medias, setMedias] = useState([]);
 
   useEffect(() => {
-    getMedia(setMedias, type, classification);
+    getMedias(setMedias, type, classification);
   }, []);
   return (
     <Carousel medias={medias}>

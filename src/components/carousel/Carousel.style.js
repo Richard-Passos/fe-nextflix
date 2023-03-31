@@ -4,19 +4,17 @@ import { rgba } from "polished";
 
 export const CarouselContainer = styled.div`
   .carousel {
-    overflow: hidden;
-
     position: relative;
   }
 
   .carousel__slider-tray--horizontal {
-    width: calc(20 * (25rem + 2rem)) !important;
-    height: 57rem !important;
+    width: calc(20 * (20rem + 2rem)) !important;
+    height: 39rem !important;
     margin-left: 1rem;
     transition: 0.5s;
 
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     gap: 2rem;
   }
 
@@ -25,10 +23,30 @@ export const CarouselContainer = styled.div`
     padding: 0 !important;
   }
 
+  .title {
+    font-size: 1.6em;
+    text-transform: capitalize;
+
+    position: absolute;
+    top: 1rem;
+    left: 2%;
+
+    ::before {
+      content: "";
+      width: 0.2rem;
+      height: 100%;
+      background-color: ${({ theme }) => theme.colors.primary};
+
+      position: absolute;
+      top: 0%;
+      left: -4%;
+    }
+  }
+
   .btn-show-all {
     padding: 1rem 2rem;
-    background-color: ${({ theme }) => theme.colors.theme};
-    border: 0.1rem solid ${({ theme }) => theme.colors.opossiteTheme};
+    background-color: transparent;
+    border: 0.1rem solid ${({ theme }) => theme.colors.oppositeTheme};
     border-radius: 2rem;
     font-size: 1.2em;
     transition: 0.3s;
@@ -46,18 +64,14 @@ export const CarouselContainer = styled.div`
 `;
 
 export const ButtonsContainer = styled.div`
-  display: none;
-  @media screen and (min-width: 600px) {
-    display: block;
-  }
-
   .carousel__back-button,
   .carousel__next-button {
     width: 5rem;
     height: 5rem;
     background-color: ${({ theme }) => rgba(theme.colors.theme, 0.5)};
+    border: none;
     border-radius: 50%;
-    transition: 0.3s;
+    transition: 0.3s ease-in;
 
     position: absolute;
     top: 45%;
@@ -65,6 +79,7 @@ export const ButtonsContainer = styled.div`
 
     :hover {
       cursor: pointer;
+      background-color: ${({ theme }) => rgba(theme.colors.oppositeTheme, 0.5)};
     }
   }
   svg {
@@ -72,9 +87,19 @@ export const ButtonsContainer = styled.div`
   }
 
   .carousel__back-button {
-    left: 0.5%;
+    left: -50%;
   }
   .carousel__next-button {
-    right: 0.5%;
+    right: -50%;
+  }
+
+  ${CarouselContainer}:hover & {
+    .carousel__back-button {
+      left: 1%;
+    }
+
+    .carousel__next-button {
+      right: 1%;
+    }
   }
 `;

@@ -3,9 +3,8 @@ import styled from "styled-components";
 import { lighten, shade } from "polished";
 
 export const MainContainer = styled.section`
-  width: auto;
   max-width: 80%;
-  min-height: 85vh;
+  min-height: 80vh;
   margin: 0 auto;
 
   display: flex;
@@ -40,7 +39,7 @@ export const ButtonsContainer = styled.div`
     gap: 1rem;
   }
 
-  button {
+  a {
     padding: 1rem 2rem;
     background-color: ${({ theme }) => theme.colors.themeLighter};
     color: inherit;
@@ -57,17 +56,13 @@ export const ButtonsContainer = styled.div`
       border-color: ${({ theme }) => theme.colors.oppositeTheme};
     }
 
-    &:disabled {
+    &.disabled {
       background-color: ${({ theme }) => theme.colors.theme};
       color: ${({ theme }) =>
         theme.title === "light"
           ? lighten(0.5, theme.colors.text)
           : shade(0.5, theme.colors.text)};
-
-      :hover {
-        cursor: not-allowed;
-        border-color: transparent;
-      }
+      pointer-events: none;
     }
   }
 `;

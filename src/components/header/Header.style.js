@@ -1,29 +1,34 @@
+/* style */
+import { rgba, shade } from "polished";
+
 /* Logic */
-import { shade } from "polished";
 import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
   width: 100%;
-  min-height: 8vh;
+  min-height: 10vh;
   padding: 1.5rem 3rem;
-  background-color: ${({ theme }) => theme.colors.dark};
+  background-color: ${({ theme }) => rgba(theme.colors.dark, 0.9)};
   color: ${({ theme }) => theme.colors.light};
+
+  position: relative;
+  z-index: 1;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 2rem 5rem;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 400px) {
     padding: 1.5rem;
 
     flex-direction: column;
   }
 
-  .search {
+  .search-input {
     width: 95%;
     max-width: 35rem;
-    padding: 0.5rem 1rem;
+    padding: 0.8rem 1.6rem;
     background-color: ${({ theme }) => theme.colors.light};
     border-radius: 0.5rem;
     font-size: 1.4em;
@@ -35,6 +40,11 @@ export const HeaderContainer = styled.header`
 
   .theme-icon {
     cursor: pointer;
+  }
+
+  .search-icon {
+    width: 2rem;
+    height: 2rem;
   }
 
   & > div {

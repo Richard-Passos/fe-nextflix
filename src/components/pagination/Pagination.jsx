@@ -1,34 +1,29 @@
 /* Components */
 import { ButtonsContainer, MainContainer } from "./Pagination.style";
 import { Card } from "../card";
+import Link from "next/link";
 
 /* Logic */
 import { useEffect, useRef, useState } from "react";
-import { getMedia, searchContent } from "@/services/TMDB_API";
+import { useRouter } from "next/router";
 
-export default function Pagination(props) {
-  const [medias, setMedias] = useState();
-  const [totalPages, setTotalPages] = useState(1);
-  const [currPage, setCurrPage] = useState(1);
+export default function Pagination({ medias, totalPages }) {
+  const { query } = useRouter();
+
+  const router = useRouter();
+  const isSearch = router.pathname.match(/search/);
 
   const mainContent = useRef();
 
+  const [fixPaginationBug, setFixPaginationBug] = useState(null);
   useEffect(() => {
-    props.name
-      ? searchContent(setMedias, props.name, setTotalPages, currPage)
-      : getMedia(
-          setMedias,
-          props.mediaType,
-          props.classification,
-          setTotalPages,
-          currPage
-        );
-  }, [props.name || (props.mediaType, props.classification), currPage]);
+    setFixPaginationBug("");
+  }, []); /* Pagination din't work correctly without it */
 
   return (
     <>
       <MainContainer ref={mainContent}>
-        {(medias?.length &&
+        {(medias.length &&
           medias.map((media) => (
             <Card
               key={`key-pagination-${media.id}`}
@@ -47,46 +42,47 @@ export default function Pagination(props) {
       </MainContainer>
 
       <ButtonsContainer>
-        <button
-          onClick={() => {
-            setCurrPage((prevPage) => --prevPage);
-            window.scrollTo(0, 0);
-          }}
-          disabled={currPage === 1}
+        <Link
+          href={
+            isSearch
+              ? `/search/${query.currPage - 1}`
+              : `/${query.media}/${query.classification}/${query.currPage - 1}`
+          }
+          className={query.currPage === "1" ? "disabled" : ""}
         >
           {"<"}
-        </button>
+        </Link>
 
         <div>
           {mainContent.current &&
             createPaginationBtns(
               totalPages,
-              currPage,
-              setCurrPage,
+              isSearch,
+              query,
               mainContent.current.offsetWidth
             )}
         </div>
 
-        <button
-          onClick={() => {
-            setCurrPage((prevPage) => ++prevPage);
-            window.scrollTo(0, 0);
-          }}
-          disabled={currPage === totalPages}
+        <Link
+          href={
+            isSearch
+              ? `/search/${query.currPage - 1}`
+              : `/${query.media}/${query.classification}/${
+                  Number(query.currPage) + 1
+                }`
+          }
+          className={Number(query.currPage) === totalPages ? "disabled" : ""}
         >
           {">"}
-        </button>
+        </Link>
       </ButtonsContainer>
     </>
   );
 }
 
-const createPaginationBtns = (
-  totalPages,
-  currPage,
-  setCurrPage,
-  windowWidth
-) => {
+const createPaginationBtns = (totalPages, isSearch, query, windowWidth) => {
+  const { currPage } = query;
+
   const MAX_BTNS =
     windowWidth > 560 ? 9 : windowWidth > 345 ? 5 : windowWidth > 225 ? 3 : 2;
   const btnsOnLeft = Math.floor(MAX_BTNS / 2);
@@ -107,16 +103,17 @@ const createPaginationBtns = (
   }
 
   return btnsValue.map((num) => (
-    <button
+    <Link
       key={`key-paginationBtn-${num}`}
       value={num}
-      onClick={(e) => {
-        setCurrPage(e.target.value);
-        window.scrollTo(0, 0);
-      }}
-      disabled={Number(num) === Number(currPage)}
+      href={
+        isSearch
+          ? `/search/${num}`
+          : `/${query.media}/${query.classification}/${num}`
+      }
+      className={num === Number(currPage) ? "disabled" : ""}
     >
       {num}
-    </button>
+    </Link>
   ));
 };
