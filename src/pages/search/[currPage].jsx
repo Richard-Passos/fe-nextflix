@@ -1,20 +1,16 @@
 /* Components */
 import Head from "next/head";
 import { Header, Pagination } from "@/components";
-import SkeletonLoader from "tiny-skeleton-loader-react";
 
 /* Logic */
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
-import { ThemeContext } from "styled-components";
+import { useEffect, useState } from "react";
 import { searchMedia } from "@/services/TMDB_API";
 
 export default function Medias() {
   const router = useRouter();
 
-  const theme = useContext(ThemeContext);
-
-  const [search, setSearch] = useState("puss");
+  const [search, setSearch] = useState("a" /* Initial request to TMDB API */);
 
   const [medias, setMedias] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
@@ -27,7 +23,6 @@ export default function Medias() {
   useEffect(() => {
     if (router.query.currPage)
       searchMedia(setMedias, search, null, router.query.currPage);
-    router.query.currPage;
   }, [router.query]);
 
   return (

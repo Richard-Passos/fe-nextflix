@@ -57,7 +57,11 @@ export const getStaticPaths = async () => {
   ];
 
   medias.forEach((media) =>
-    Array(media.totalPages)
+    Array(
+      media.totalPages < 100
+        ? media.totalPages
+        : 100 /* Pre render max 100 pages */
+    )
       .fill(`${media.type} ${media.classification}`)
       .forEach((_, i) =>
         paths.push({

@@ -6,20 +6,31 @@ import { ArrowRightShort, ArrowLeftShort } from "@styled-icons/bootstrap";
 import { useEffect, useRef, useState } from "react";
 
 export default function LatestMedia({ initialMedias }) {
-  const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
   const lastMediaIndex = 4;
+  const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
+  const [switchMedia, setSwitchMedia] = useState({ boolean: false, to: "" });
 
   const mediaContainer = useRef();
+
   useEffect(() => {
-    if (mediaContainer.current) {
+    if (mediaContainer.current && switchMedia.boolean) {
       mediaContainer.current.classList.add("switching-img");
 
-      setTimeout(
-        () => mediaContainer.current.classList.remove("switching-img"),
-        500
-      );
+      setTimeout(() => {
+        mediaContainer.current.classList.remove("switching-img");
+
+        setCurrentMediaIndex((prevState) =>
+          switchMedia.to === "next"
+            ? prevState === lastMediaIndex
+              ? 0
+              : ++prevState
+            : prevState === 0
+            ? lastMediaIndex
+            : --prevState
+        );
+      }, 500);
     }
-  }, [currentMediaIndex]);
+  }, [switchMedia]);
 
   return (
     <MediaContainer
@@ -30,29 +41,13 @@ export default function LatestMedia({ initialMedias }) {
       <ButtonsContainer>
         <button
           className="prev-btn"
-          onClick={() =>
-            setTimeout(
-              () =>
-                setCurrentMediaIndex((prevState) =>
-                  prevState === 0 ? lastMediaIndex : --prevState
-                ),
-              500
-            )
-          }
+          onClick={() => setSwitchMedia({ boolean: true, to: "prev" })}
         ></button>
         <ArrowLeftShort className="prev-btn" />
 
         <button
           className="next-btn"
-          onClick={() =>
-            setTimeout(
-              () =>
-                setCurrentMediaIndex((prevState) =>
-                  prevState === lastMediaIndex ? 0 : ++prevState
-                ),
-              500
-            )
-          }
+          onClick={() => setSwitchMedia({ boolean: true, to: "next" })}
         ></button>
         <ArrowRightShort className="next-btn" />
       </ButtonsContainer>

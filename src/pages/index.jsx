@@ -7,6 +7,7 @@ import Link from "next/link";
 import { getMedias } from "@/services/TMDB_API";
 
 export default function Home({ medias, initialMedias }) {
+  medias.length;
   return (
     <>
       <Head>
