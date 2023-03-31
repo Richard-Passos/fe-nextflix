@@ -34,6 +34,7 @@ export default function card({ title, src, release_date }) {
     <>
       <CardContainer>
         <div className="image-container">
+          <button className="synopsis-btn">Synopsis</button>
           <Image
             src={src}
             alt={title}
@@ -46,7 +47,7 @@ export default function card({ title, src, release_date }) {
         </div>
         <SkeletonLoader
           width="20rem"
-          height="25rem"
+          height="23rem"
           background={theme.colors.theme}
           style={!isImageLoad ? { position: "absolute" } : { display: "none" }}
         />

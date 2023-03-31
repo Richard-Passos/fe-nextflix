@@ -6,6 +6,7 @@ export const LayoutContainer = styled.main`
   min-height: 100vh;
   background-color: ${({ theme }) => theme.colors.themeDarker};
   color: ${({ theme }) => theme.colors.text};
+  overflow-x: hidden;
   isolation: isolate;
 
   display: flex;

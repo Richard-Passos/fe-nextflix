@@ -4,15 +4,13 @@ import { rgba } from "polished";
 
 export const CarouselContainer = styled.div`
   .carousel {
-    overflow: hidden;
-
     position: relative;
   }
 
   .carousel__slider-tray--horizontal {
     width: calc(20 * (20rem + 2rem)) !important;
-    height: 35rem !important;
-    margin-left: 1rem;
+    height: 34.5rem !important;
+    margin: 0 0 -2rem 1rem;
     transition: 0.5s;
 
     display: flex;

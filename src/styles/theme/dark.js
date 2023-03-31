@@ -3,9 +3,9 @@ export default {
   icon: "/images/icon-sun.svg",
 
   colors: {
-    primaryDarker: `hsl(235, 40%, 30%)`,
+    primaryDarker: `hsl(235, 50%, 20%)`,
     primary: `hsl(235, 50%, 50%)`,
-    primaryLighter: `hsl(235, 60%, 70%)`,
+    primaryLighter: `hsl(235, 50%, 70%)`,
 
     themeDarker: `hsl(235, 20%, 10%)`,
     theme: `hsl(235, 25%, 15%)`,
