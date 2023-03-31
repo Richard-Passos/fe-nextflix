@@ -9,7 +9,7 @@ export const CarouselContainer = styled.div`
 
   .carousel__slider-tray--horizontal {
     width: calc(20 * (20rem + 2rem)) !important;
-    height: 39rem !important;
+    height: 35rem !important;
     margin-left: 1rem;
     transition: 0.5s;
 

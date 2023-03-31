@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 export const CardContainer = styled.div`
   width: 20rem;
-  height: 35rem;
-  padding-bottom: 2.5rem;
+  height: 30rem;
+  padding-bottom: 1.5rem;
   background-color: ${({ theme }) => theme.colors.theme};
   border: 0.1rem solid transparent;
   border-radius: 1rem;
@@ -39,6 +39,31 @@ export const CardContainer = styled.div`
   .hide-img {
     position: absolute;
     z-index: -1;
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .icon-favorite-container {
+    width: 6rem;
+    padding-right: 1rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .icon-favorite {
+    width: 1.5rem;
+    height: 1.5rem;
+    transition: 0.3s;
+
+    :hover {
+      color: hsl(341, 100%, 50%);
+    }
   }
 
   img {

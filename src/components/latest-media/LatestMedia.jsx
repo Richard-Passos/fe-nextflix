@@ -3,51 +3,47 @@ import { MediaContainer, ButtonsContainer } from "./LatestMedia.style";
 import { ArrowRightShort, ArrowLeftShort } from "@styled-icons/bootstrap";
 
 /* Logic */
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function LatestMedia({ initialMedias }) {
   const lastMediaIndex = 4;
   const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
-  const [switchMedia, setSwitchMedia] = useState({ boolean: false, to: "" });
-
-  const mediaContainer = useRef();
 
   useEffect(() => {
-    if (mediaContainer.current && switchMedia.boolean) {
-      mediaContainer.current.classList.add("switching-img");
-
-      setTimeout(() => {
-        mediaContainer.current.classList.remove("switching-img");
-
+    const interval = setInterval(
+      () =>
         setCurrentMediaIndex((prevState) =>
-          switchMedia.to === "next"
-            ? prevState === lastMediaIndex
-              ? 0
-              : ++prevState
-            : prevState === 0
-            ? lastMediaIndex
-            : --prevState
-        );
-      }, 500);
-    }
-  }, [switchMedia]);
+          prevState === lastMediaIndex ? 0 : ++prevState
+        ),
+      10000
+    ); /* Switch image each 10s */
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <MediaContainer
-      ref={mediaContainer}
       phoneUrl={initialMedias[currentMediaIndex].poster_path}
       desktopUrl={initialMedias[currentMediaIndex].backdrop_path}
     >
       <ButtonsContainer>
         <button
           className="prev-btn"
-          onClick={() => setSwitchMedia({ boolean: true, to: "prev" })}
+          onClick={() =>
+            setCurrentMediaIndex((prevState) =>
+              prevState === 0 ? lastMediaIndex : --prevState
+            )
+          }
         ></button>
         <ArrowLeftShort className="prev-btn" />
 
         <button
           className="next-btn"
-          onClick={() => setSwitchMedia({ boolean: true, to: "next" })}
+          onClick={() =>
+            setCurrentMediaIndex((prevState) =>
+              prevState === lastMediaIndex ? 0 : ++prevState
+            )
+          }
         ></button>
         <ArrowRightShort className="next-btn" />
       </ButtonsContainer>
