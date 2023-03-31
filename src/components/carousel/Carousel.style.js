@@ -4,6 +4,8 @@ import { rgba } from "polished";
 
 export const CarouselContainer = styled.div`
   .carousel {
+    overflow: hidden;
+
     position: relative;
   }
 

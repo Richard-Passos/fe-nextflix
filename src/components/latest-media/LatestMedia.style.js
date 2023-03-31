@@ -9,6 +9,7 @@ export const MediaContainer = styled.section`
   height: 150vw;
   max-height: 100vh;
   margin: clamp(-20rem, calc(-10rem - 7.5vh), -15rem) auto -8rem;
+  overflow: hidden;
 
   @media screen and (min-width: 600px) {
     width: 80%;
@@ -82,6 +83,7 @@ export const ButtonsContainer = styled.div`
     background-color: ${({ theme }) => rgba(theme.colors.theme, 0.5)};
     border: none;
     border-radius: 50%;
+    opacity: 0;
     transition: 0.3s ease-in;
 
     position: absolute;
@@ -98,19 +100,16 @@ export const ButtonsContainer = styled.div`
   }
 
   .prev-btn {
-    left: -50%;
+    left: 1%;
   }
   .next-btn {
-    right: -50%;
+    right: 1%;
   }
 
   ${MediaContainer}:hover & {
-    .prev-btn {
-      left: 1%;
-    }
-
+    .prev-btn,
     .next-btn {
-      right: 1%;
+      opacity: 1;
     }
   }
 `;
