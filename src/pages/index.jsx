@@ -6,7 +6,7 @@ import Link from "next/link";
 /* Logic */
 import { getMedias } from "@/services/TMDB_API";
 
-export default function Home({ medias, initialMedia }) {
+export default function Home({ medias, initialMedias }) {
   return (
     <>
       <Head>
@@ -15,10 +15,7 @@ export default function Home({ medias, initialMedia }) {
 
       <Header />
 
-      <LatestMedia
-        phoneUrl={initialMedia.poster_path}
-        desktopUrl={initialMedia.backdrop_path}
-      />
+      <LatestMedia initialMedias={initialMedias} />
 
       <div className="carousels">
         {medias.map((media, i) => (
@@ -75,15 +72,15 @@ export const getStaticProps = async () => {
     medias[i] = { ...medias[i], content: results };
   }
 
-  const initialMedia = medias.map(
+  const initialMedias = medias.map(
     ({ content }) =>
       content.filter((obj) => obj.poster_path && obj.backdrop_path)[0]
-  )[0];
+  );
 
   return {
     props: {
       medias,
-      initialMedia,
+      initialMedias,
     },
   };
 };

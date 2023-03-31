@@ -47,7 +47,7 @@ export default function card({ title, src, release_date }) {
           width="20rem"
           height="25rem"
           background={theme.colors.theme}
-          style={!isImageLoad ? {} : { display: "none" }}
+          style={!isImageLoad ? { position: "absolute" } : { display: "none" }}
         />
 
         <p>{title}</p>
