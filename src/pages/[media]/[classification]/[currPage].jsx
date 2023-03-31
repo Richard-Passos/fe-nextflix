@@ -58,13 +58,13 @@ export const getStaticPaths = async () => {
 
   medias.forEach((media) =>
     Array(media.totalPages)
-      .fill(media.type + " " + media.classification)
+      .fill(`${media.type} ${media.classification}`)
       .forEach((_, i) =>
         paths.push({
           params: {
             media: media.type,
             classification: media.classification,
-            currPage: String(i),
+            currPage: String(++i),
           },
         })
       )

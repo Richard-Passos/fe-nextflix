@@ -32,14 +32,7 @@ export const getMedias = async (mediaType, classification, page = 1) => {
     .then(({ data }) => {
       return { results: data.results, totalPages: data.total_pages };
     })
-    .catch((error) => console.log(error));
-};
-
-export const getLatestMedia = async (mediaType) => {
-  return await axios
-    .get(
-      `https://api.themoviedb.org/3/${mediaType}/latest?api_key=${API_KEY}&language=en-US`
-    )
-    .then(({ data }) => data)
-    .catch((error) => console.log(error));
+    .catch(() => {
+      return { results: [], totalPages: 1 };
+    });
 };

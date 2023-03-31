@@ -23,7 +23,7 @@ export default function Pagination({ medias, totalPages }) {
   return (
     <>
       <MainContainer ref={mainContent}>
-        {(medias.length &&
+        {(medias?.length &&
           medias.map((media) => (
             <Card
               key={`key-pagination-${media.id}`}
