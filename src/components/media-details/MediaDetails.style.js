@@ -97,6 +97,13 @@ export const Details = styled.div`
   align-items: center;
   gap: 4rem;
 
+  @media screen and (max-width: 600px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
   & > div {
     width: 100%;
     padding: 2.5rem;
