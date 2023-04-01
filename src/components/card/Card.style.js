@@ -1,5 +1,5 @@
 /* Style */
-import { rgba } from "polished";
+import { lighten, rgba, shade } from "polished";
 
 /* Logic */
 import styled from "styled-components";
@@ -36,11 +36,6 @@ export const CardContainer = styled.div`
         inset: 43% 21%;
       }
     }
-  }
-
-  .hide-img {
-    position: absolute;
-    z-index: -1;
   }
 
   .container {
@@ -114,15 +109,23 @@ export const CardContainer = styled.div`
     transition: 0.5s;
   }
 
-  p {
+  .card-title {
     padding: 0 1.5rem;
     font-size: 1.4em;
     font-weight: bold;
     line-height: 2rem;
+    transition: 0.3s;
 
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+
+    :hover {
+      color: ${({ theme }) =>
+        theme.title === "light"
+          ? lighten(0.25, theme.colors.text)
+          : shade(0.25, theme.colors.text)};
+    }
   }
 
   small {

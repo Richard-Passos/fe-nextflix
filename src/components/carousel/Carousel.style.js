@@ -23,7 +23,7 @@ export const CarouselContainer = styled.div`
     padding: 0 !important;
   }
 
-  .title {
+  .carousel-title {
     font-size: 1.6em;
     text-transform: capitalize;
 

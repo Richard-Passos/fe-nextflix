@@ -1,13 +1,17 @@
 /* Components */
 import Head from "next/head";
-import { Carousel, Header, LatestMedia } from "@/components";
+import { Carousel, Header, InitialMedia } from "@/components";
 import Link from "next/link";
 
 /* Logic */
 import { getMedias } from "@/services/TMDB_API";
 
-export default function Home({ medias, initialMedias }) {
-  medias.length;
+export default function Home({ medias }) {
+  const initialMedias = medias.map(
+    ({ content }) =>
+      content.filter((obj) => obj.poster_path && obj.backdrop_path)[0]
+  );
+
   return (
     <>
       <Head>
@@ -16,7 +20,7 @@ export default function Home({ medias, initialMedias }) {
 
       <Header />
 
-      <LatestMedia initialMedias={initialMedias} />
+      <InitialMedia initialMedias={initialMedias} />
 
       <div className="carousels">
         {medias.map((media, i) => (
@@ -73,15 +77,9 @@ export const getStaticProps = async () => {
     medias[i] = { ...medias[i], content: results };
   }
 
-  const initialMedias = medias.map(
-    ({ content }) =>
-      content.filter((obj) => obj.poster_path && obj.backdrop_path)[0]
-  );
-
   return {
     props: {
       medias,
-      initialMedias,
     },
   };
 };

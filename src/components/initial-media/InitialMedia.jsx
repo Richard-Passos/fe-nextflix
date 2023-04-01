@@ -1,11 +1,12 @@
 /* Components */
-import { MediaContainer, ButtonsContainer } from "./LatestMedia.style";
+import { MediaContainer, ButtonsContainer } from "./InitialMedia.style";
 import { ArrowRightShort, ArrowLeftShort } from "@styled-icons/bootstrap";
+import Link from "next/link";
 
 /* Logic */
 import { useEffect, useState } from "react";
 
-export default function LatestMedia({ initialMedias }) {
+export default function InitialMedia({ initialMedias }) {
   const lastMediaIndex = 4;
   const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
 
@@ -26,6 +27,13 @@ export default function LatestMedia({ initialMedias }) {
       phoneUrl={initialMedias[currentMediaIndex].poster_path}
       desktopUrl={initialMedias[currentMediaIndex].backdrop_path}
     >
+      <Link
+        className="details-link"
+        href={`/details/${
+          initialMedias[currentMediaIndex].release_date ? "movie" : "tv"
+        }/${initialMedias[currentMediaIndex].id}`}
+      ></Link>
+
       <ButtonsContainer>
         <button
           className="prev-btn"

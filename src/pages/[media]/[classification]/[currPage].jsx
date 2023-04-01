@@ -91,7 +91,7 @@ export const getStaticProps = async (context) => {
 
   return {
     props: {
-      medias: results || [],
+      medias: results,
       totalPages,
     },
   };

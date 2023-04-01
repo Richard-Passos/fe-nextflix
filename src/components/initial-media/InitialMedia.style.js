@@ -16,6 +16,22 @@ export const MediaContainer = styled.section`
     min-height: 70rem;
     height: 70rem;
   }
+
+  .details-link {
+    width: 100%;
+    height: 150vw;
+    max-height: 100vh;
+    overflow: hidden;
+
+    position: relative;
+
+    display: inherit;
+
+    @media screen and (min-width: 600px) {
+      min-height: 70rem;
+      height: 70rem;
+    }
+  }
   /*  */
 
   :before,
@@ -84,7 +100,7 @@ export const ButtonsContainer = styled.div`
     border: none;
     border-radius: 50%;
     opacity: 0;
-    transition: 0.3s ease-in;
+    transition: 0.3s;
 
     position: absolute;
     top: 45%;

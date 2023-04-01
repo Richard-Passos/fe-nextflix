@@ -7,6 +7,7 @@ import { Heart } from "@styled-icons/bootstrap";
 import { useContext, useState } from "react";
 import SkeletonLoader from "tiny-skeleton-loader-react";
 import { ThemeContext } from "styled-components";
+import Link from "next/link";
 
 const MONTHS = [
   "Jan",
@@ -23,7 +24,7 @@ const MONTHS = [
   "Dec",
 ];
 
-export default function card({ title, src, release_date }) {
+export default function card({ title, src, release_date, type, id }) {
   const releaseDate = new Date(release_date);
 
   const theme = useContext(ThemeContext);
@@ -33,8 +34,9 @@ export default function card({ title, src, release_date }) {
   return (
     <>
       <CardContainer>
-        <div className="image-container">
-          <button className="synopsis-btn">Synopsis</button>
+        <Link href={`/details/${type}/${id}`} className="image-container">
+          <button className="synopsis-btn">Details</button>
+
           <Image
             src={src}
             alt={title}
@@ -42,24 +44,29 @@ export default function card({ title, src, release_date }) {
             height={230}
             quality={50}
             onLoad={() => setIsImageLoad(true)}
-            className={isImageLoad ? "" : "hide-img"}
           />
-        </div>
+        </Link>
         <SkeletonLoader
           width="20rem"
           height="23rem"
           background={theme.colors.theme}
-          style={!isImageLoad ? { position: "absolute" } : { display: "none" }}
+          style={
+            !isImageLoad
+              ? { position: "absolute", borderRadius: "0" }
+              : { display: "none" }
+          }
         />
 
-        <p>{title}</p>
+        <Link href={`/details/${type}/${id}`} className="card-title">
+          {title}
+        </Link>
 
         <div className="container">
           <small>
-            {MONTHS[releaseDate.getMonth(release_date)]
-              ? `${MONTHS[releaseDate.getMonth(release_date)]} ${
-                  releaseDate.getDate(release_date) + 1
-                }, ${releaseDate.getFullYear(release_date)}`
+            {releaseDate
+              ? `${MONTHS[releaseDate.getMonth()]} ${
+                  releaseDate.getDate() + 1
+                }, ${releaseDate.getFullYear()}`
               : "Release date not found"}
           </small>
 

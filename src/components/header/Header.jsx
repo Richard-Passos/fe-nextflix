@@ -9,7 +9,7 @@ import { useContext, useRef } from "react";
 import { setThemeContext } from "@/pages/_app";
 import { lightTheme, darkTheme } from "@/styles/theme";
 
-export default function Header({ children, input = false, setState = null }) {
+export default function Header({ input = false, setState = null }) {
   const { theme, setTheme } = useContext(setThemeContext);
 
   const inputSearch = useRef();
@@ -33,7 +33,7 @@ export default function Header({ children, input = false, setState = null }) {
 
       <div>
         {!input && (
-          <Link href="search/1">
+          <Link href="/search/1">
             <Search className="search-icon" />
           </Link>
         )}

@@ -21,7 +21,7 @@ export const searchMedia = async (
 
       if (setTotalPages) setTotalPages(data.total_pages);
     })
-    .catch((error) => console.log(error));
+    .catch(() => setState([]));
 };
 
 export const getMedias = async (mediaType, classification, page = 1) => {
@@ -35,4 +35,22 @@ export const getMedias = async (mediaType, classification, page = 1) => {
     .catch(() => {
       return { results: [], totalPages: 1 };
     });
+};
+
+export const getMediaDetails = async (mediaType, mediaId) => {
+  const details = await axios
+    .get(
+      `https://api.themoviedb.org/3/${mediaType}/${mediaId}?api_key=${API_KEY}&language=en-US`
+    )
+    .then(({ data }) => data)
+    .catch(() => []);
+
+  const videos = await axios
+    .get(
+      `https://api.themoviedb.org/3/${mediaType}/${mediaId}/videos?api_key=${API_KEY}&language=en-US`
+    )
+    .then(({ data }) => data.results)
+    .catch(() => []);
+
+  return { details, videos };
 };

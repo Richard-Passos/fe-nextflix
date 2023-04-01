@@ -31,7 +31,7 @@ export default function Carousel({ children, title, medias }) {
         totalSlides={medias.length}
         infinite
       >
-        <h2 className="title">{title.replaceAll(/[_-]/g, " ")}</h2>
+        <h2 className="carousel-title">{title.replaceAll(/[_-]/g, " ")}</h2>
 
         {children}
 
@@ -39,6 +39,10 @@ export default function Carousel({ children, title, medias }) {
           {medias.map((media, i) => (
             <Slide index={i} key={`key-slide-${i}`}>
               <Card
+                title={media.title ?? media.name}
+                release_date={media.release_date ?? media.first_air_date}
+                type={media.release_date ? "movie" : "tv"}
+                id={media.id}
                 src={
                   media.backdrop_path
                     ? `https://image.tmdb.org/t/p/original${
@@ -46,8 +50,6 @@ export default function Carousel({ children, title, medias }) {
                       }`
                     : "/images/noImgFound.jpg"
                 }
-                title={media.title ?? media.name}
-                release_date={media.release_date || media.first_air_date}
               />
             </Slide>
           ))}

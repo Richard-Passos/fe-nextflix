@@ -1,7 +1,8 @@
 import { Layout } from "./layout";
 import { Header } from "./header";
+import { InitialMedia } from "./initial-media";
+import { MediaDetails } from "./media-details";
 import { Pagination } from "./pagination";
-import { LatestMedia } from "./latest-media";
 import { Carousel } from "./carousel";
 
-export { Layout, Header, Pagination, LatestMedia, Carousel };
+export { Layout, Header, InitialMedia, MediaDetails, Pagination, Carousel };

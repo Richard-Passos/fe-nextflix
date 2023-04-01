@@ -1,3 +1,3 @@
-import Medias from "./Medias";
+import MediaDetails from "./MediaDetails";
 
-export { Medias };
+export { MediaDetails };

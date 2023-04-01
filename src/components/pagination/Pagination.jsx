@@ -27,14 +27,17 @@ export default function Pagination({ medias, totalPages }) {
           medias.map((media) => (
             <Card
               key={`key-pagination-${media.id}`}
-              title={media.name || media.title}
+              title={media.title ?? media.name}
+              release_date={media.release_date ?? media.first_air_date}
+              type={media.release_date ? "movie" : "tv"}
+              id={media.id}
               src={
                 media.backdrop_path
-                  ? "https://image.tmdb.org/t/p/original" +
-                    (media.poster_path ?? media.backdrop_path)
+                  ? `https://image.tmdb.org/t/p/original${
+                      media.poster_path ?? media.backdrop_path
+                    }`
                   : "/images/noImgFound.jpg"
               }
-              release_date={media.release_date || media.first_air_date}
             />
           ))) || (
           <h2 className="none-media-found">None media matched your query.</h2>
