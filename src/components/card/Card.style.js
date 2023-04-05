@@ -32,7 +32,11 @@ export const CardContainer = styled.div`
         height: 100%;
       }
 
-      .synopsis-btn {
+      .details-p {
+        opacity: 1;
+      }
+
+      .details-btn {
         inset: 43% 21%;
       }
     }
@@ -77,7 +81,7 @@ export const CardContainer = styled.div`
       height: 0;
       transition: 0.3s;
 
-      background-color: ${({ theme }) => rgba(theme.colors.themeDarker, 0.8)};
+      background-color: ${({ theme }) => rgba(theme.colors.themeDarker, 0.9)};
 
       position: absolute;
       bottom: 0;
@@ -85,22 +89,34 @@ export const CardContainer = styled.div`
       z-index: 1;
     }
 
-    .synopsis-btn {
-      background-color: ${({ theme }) => rgba(theme.colors.primary, 0.5)};
-      color: ${({ theme }) => theme.colors.text};
-      border: 0.1rem solid ${({ theme }) => theme.colors.oppositeTheme};
-      border-radius: 2rem;
+    .details-p {
       font-size: 1.4em;
-      opacity: 100%;
-      transition: 0.3s;
+      transition: 0.5s;
+      opacity: 0;
 
       position: absolute;
-      inset: 150% calc((100% - 10rem) / 2);
+      top: calc((100% - 7.5rem) / 2);
+      left: calc((100% - 7.5rem) / 2);
+      z-index: 2;
+    }
+
+    .details-btn {
+      background-color: transparent;
+      color: ${({ theme }) => theme.colors.primary};
+      border: 0.1rem solid ${({ theme }) => theme.colors.primary};
+      border-radius: 2rem;
+      font-size: 1.6em;
+      transition: 0.3s;
+      overflow: hidden;
+
+      position: absolute;
+      inset: 150% 10rem;
       z-index: 2;
 
       :hover {
         cursor: pointer;
-        background-color: ${({ theme }) => theme.colors.primary};
+        background-color: ${({ theme }) =>
+          rgba(theme.colors.primaryLighter, 0.2)};
       }
     }
   }

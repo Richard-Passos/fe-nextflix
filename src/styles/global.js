@@ -10,6 +10,6 @@ export default createGlobalStyle`
   }
 
   body {
-    overflow-x: hidden; 
+    overflow-x: hidden;
   }
 `;

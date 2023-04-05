@@ -18,7 +18,7 @@ export default function App({ Component, pageProps }) {
 
   return (
     <ThemeProvider theme={theme}>
-      <ResetStyle />
+    <ResetStyle />
       <GlobalStyle />
 
       <setThemeContext.Provider value={{ theme, setTheme }}>

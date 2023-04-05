@@ -34,6 +34,7 @@ export const Content = styled.div`
 
 export const IconContainer = styled.a`
   width: 8rem;
+  margin-bottom: -1rem;
   padding: 0.5rem 1rem;
   transition: 0.3s;
   isolation: isolate;

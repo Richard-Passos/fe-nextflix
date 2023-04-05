@@ -21,6 +21,8 @@ export default function Carousel({ children, title, medias }) {
     setFixCarouselBug("");
   }, []); /* Carousel din't work correctly without it */
 
+  console.log(carousel);
+
   return (
     <CarouselContainer ref={carousel}>
       <CarouselProvider

@@ -61,6 +61,4 @@ export default createGlobalStyle`
     text-decoration: none;
     color: inherit;
   }
-
-  
 `;

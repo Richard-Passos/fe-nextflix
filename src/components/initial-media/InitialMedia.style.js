@@ -6,6 +6,7 @@ import styled from "styled-components";
 
 export const MediaContainer = styled.section`
   /* Placeholder */
+  width: 90%;
   height: 150vw;
   max-height: 100vh;
   margin: clamp(-20rem, calc(-10rem - 7.5vh), -15rem) auto -8rem;
