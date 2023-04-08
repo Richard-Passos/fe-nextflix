@@ -4,19 +4,24 @@ import styled from "styled-components";
 export const LayoutContainer = styled.main`
   width: 100%;
   min-height: 100vh;
+  margin: 0 auto;
   background-color: ${({ theme }) => theme.colors.themeDarker};
   color: ${({ theme }) => theme.colors.text};
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   overflow-x: hidden;
   isolation: isolate;
 
+  position: relative;
+
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 10rem;
 
   .carousels {
     display: flex;
     flex-direction: column;
-    gap: 5rem;
+    gap: 2.5rem;
   }
 
   .skeleton-container {

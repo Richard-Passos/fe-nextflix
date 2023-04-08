@@ -3,14 +3,14 @@ import styled from "styled-components";
 import { lighten, shade } from "polished";
 
 export const MainContainer = styled.section`
-  max-width: 80%;
-  min-height: 80vh;
+  max-width: 90%;
+  min-height: calc(80vh - 20rem);
   margin: 0 auto;
 
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 3rem 4rem;
+  gap: 3rem;
 
   .none-media-found {
     padding-top: 1rem;

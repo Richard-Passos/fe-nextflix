@@ -5,9 +5,8 @@ import { lighten, rgba, shade } from "polished";
 import styled from "styled-components";
 
 export const CardContainer = styled.div`
-  width: 20rem;
+  width: 17.5rem;
   height: 30rem;
-  padding-bottom: 1.5rem;
   background-color: ${({ theme }) => theme.colors.theme};
   border: 0.1rem solid transparent;
   border-radius: 1rem;
@@ -20,8 +19,12 @@ export const CardContainer = styled.div`
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 1rem;
+  gap: 1.25rem;
+
+  a {
+    display: block;
+    position: relative;
+  }
 
   :hover {
     border-color: ${({ theme }) => theme.colors.primary};
@@ -37,7 +40,7 @@ export const CardContainer = styled.div`
       }
 
       .details-btn {
-        inset: 43% 21%;
+        inset: 43.5% 15%;
       }
     }
   }
@@ -69,8 +72,8 @@ export const CardContainer = styled.div`
   }
 
   .image-container {
-    width: 20rem;
-    height: 25rem;
+    width: 17.5rem;
+    height: 23rem;
     overflow: hidden;
 
     position: relative;
@@ -110,7 +113,7 @@ export const CardContainer = styled.div`
       overflow: hidden;
 
       position: absolute;
-      inset: 150% 10rem;
+      inset: 150% 5rem;
       z-index: 2;
 
       :hover {
@@ -129,7 +132,7 @@ export const CardContainer = styled.div`
     padding: 0 1.5rem;
     font-size: 1.4em;
     font-weight: bold;
-    line-height: 2rem;
+    line-height: normal;
     transition: 0.3s;
 
     overflow: hidden;

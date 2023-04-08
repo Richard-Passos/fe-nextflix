@@ -1,6 +1,6 @@
 /* Components */
 import { ButtonsContainer, MainContainer } from "./Pagination.style";
-import { Card } from "../card";
+import { MediaCard } from "../media-card";
 import Link from "next/link";
 
 /* Logic */
@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 
 export default function Pagination({ medias, totalPages }) {
+  console.log("file: Pagination.jsx:11  Pagination  medias", medias);
   const { query } = useRouter();
 
   const router = useRouter();
@@ -15,70 +16,62 @@ export default function Pagination({ medias, totalPages }) {
 
   const mainContent = useRef();
 
-  const [fixPaginationBug, setFixPaginationBug] = useState(null);
+  const [initializeRef, setInitializeRef] = useState(false);
   useEffect(() => {
-    setFixPaginationBug("");
-  }, []); /* Pagination din't work correctly without it */
+    setInitializeRef(true);
+  }, []); /* Pagination don't work without it */
 
   return (
     <>
       <MainContainer ref={mainContent}>
-        {(medias?.length &&
-          medias.map((media) => (
-            <Card
-              key={`key-pagination-${media.id}`}
-              title={media.title ?? media.name}
-              release_date={media.release_date ?? media.first_air_date}
-              type={media.release_date ? "movie" : "tv"}
-              id={media.id}
-              src={
-                media.backdrop_path
-                  ? `https://image.tmdb.org/t/p/original${
-                      media.poster_path ?? media.backdrop_path
-                    }`
-                  : "/images/noImgFound.jpg"
-              }
-            />
-          ))) || (
+        {medias.length ? (
+          medias.map((media, i) => (
+            <MediaCard key={`key-pagination-card-${i}`} media={media} />
+          ))
+        ) : (
           <h2 className="none-media-found">None media matched your query.</h2>
         )}
       </MainContainer>
 
-      <ButtonsContainer>
-        <Link
-          href={
-            isSearch
-              ? `/search/${query.currPage - 1}`
-              : `/${query.media}/${query.classification}/${query.currPage - 1}`
-          }
-          className={query.currPage === "1" ? "disabled" : ""}
-        >
-          {"<"}
-        </Link>
+      {medias.length ? (
+        <ButtonsContainer>
+          <Link
+            href={
+              isSearch
+                ? `/search/${query.currPage - 1}`
+                : `/${query.mediaTypeType}/${query.mediaClassification}/${
+                    query.currPage - 1
+                  }`
+            }
+            className={query.currPage === "1" ? "disabled" : ""}
+          >
+            {"<"}
+          </Link>
 
-        <div>
-          {mainContent.current &&
-            createPaginationBtns(
-              totalPages,
-              isSearch,
-              query,
-              mainContent.current.offsetWidth
-            )}
-        </div>
+          <div>
+            {mainContent.current &&
+              createPaginationBtns(
+                totalPages,
+                isSearch,
+                query,
+                mainContent.current.offsetWidth
+              )}
+          </div>
 
-        <Link
-          href={
-            isSearch
-              ? `/search/${query.currPage - 1}`
-              : `/${query.media}/${query.classification}/${
-                  Number(query.currPage) + 1
-                }`
-          }
-          className={Number(query.currPage) === totalPages ? "disabled" : ""}
-        >
-          {">"}
-        </Link>
-      </ButtonsContainer>
+          <Link
+            href={
+              isSearch
+                ? `/search/${query.currPage - 1}`
+                : `/${query.mediaType}/${query.mediaClassification}/${
+                    Number(query.currPage) + 1
+                  }`
+            }
+            className={Number(query.currPage) === totalPages ? "disabled" : ""}
+          >
+            {">"}
+          </Link>
+        </ButtonsContainer>
+      ) : null}
     </>
   );
 }
@@ -112,7 +105,7 @@ const createPaginationBtns = (totalPages, isSearch, query, windowWidth) => {
       href={
         isSearch
           ? `/search/${num}`
-          : `/${query.media}/${query.classification}/${num}`
+          : `/${query.mediaType}/${query.mediaClassification}/${num}`
       }
       className={num === Number(currPage) ? "disabled" : ""}
     >

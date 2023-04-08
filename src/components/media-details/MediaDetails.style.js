@@ -5,13 +5,19 @@ import { lighten, rgba } from "polished";
 import styled from "styled-components";
 
 export const DetailsContainer = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+`;
+
+export const MainDetailsContainer = styled.div`
   height: 51rem;
   margin-top: -5rem;
   padding: 0 9rem;
   isolation: isolate;
 
-  background: no-repeat left calc((51vw - 17rem) - 34rem) top calc(-8vh) / cover
-    fixed url(${({ backgroundImage }) => backgroundImage});
+  background: no-repeat left calc((51vw - 17rem) - 34rem) center / cover fixed
+    url(${({ backgroundImage }) => backgroundImage});
 
   position: relative;
 
@@ -114,7 +120,7 @@ export const DetailsContainer = styled.section`
   }
 `;
 
-export const Details = styled.div`
+export const MainDetails = styled.div`
   width: 100%;
   color: ${({ theme }) => theme.colors.light};
   font-size: 1.4rem;
@@ -288,6 +294,78 @@ export const Details = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
+    }
+  }
+`;
+
+export const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5rem 0;
+
+  .cast-container {
+    overflow-x: hidden;
+    position: relative;
+
+    grid-column: span 3;
+
+    ::before {
+      content: "";
+      width: 100%;
+      height: 100%;
+      box-shadow: ${({ theme }) => theme.colors.themeDarker} -5rem 0 2rem -2.5rem
+        inset;
+      pointer-events: none;
+
+      position: absolute;
+      z-index: 1;
+    }
+  }
+
+  .details-container {
+    padding: 1rem 2.4rem;
+    overflow-x: hidden;
+
+    grid-column: 4;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+
+    div {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 0.8rem;
+
+      h3 {
+        font-size: 1.6em;
+      }
+
+      p,
+      a {
+        padding-left: 0.5rem;
+        font-size: 1.4em;
+      }
+
+      a {
+        color: ${({ theme }) => theme.colors.primary};
+
+        :hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .similar-movies {
+    grid-column: span 4;
+  }
+
+  @media screen and (max-width: 768px) {
+    .cast-container,
+    .details-container {
+      grid-column: span 5;
     }
   }
 `;

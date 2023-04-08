@@ -8,18 +8,22 @@ export const CarouselContainer = styled.div`
   }
 
   .carousel__slider-tray--horizontal {
-    width: calc(20 * (20rem + 2rem)) !important;
-    height: 34.5rem !important;
-    margin: 0 0 -2rem 1rem;
+    width: ${(props) =>
+      `calc(${props.cardsCount} * (${props.cardWidth / 10}rem + ${
+        props.cardGap / 10
+      }rem))`} !important;
+    height: ${({ cardHeight }) =>
+      `calc(${cardHeight / 10}rem + 4.5rem)`} !important;
+    margin-left: 1.5rem;
     transition: 0.5s;
 
     display: flex;
     align-items: flex-end;
-    gap: 2rem;
+    gap: ${({ cardGap }) => `${cardGap / 10}rem`};
   }
 
   .carousel__slide {
-    width: 25rem !important;
+    width: ${({ cardWidth }) => `${cardWidth / 10}rem`} !important;
     padding: 0 !important;
   }
 
@@ -29,7 +33,7 @@ export const CarouselContainer = styled.div`
 
     position: absolute;
     top: 1rem;
-    left: 2%;
+    left: calc(1% + 2rem);
 
     ::before {
       content: "";
@@ -39,7 +43,7 @@ export const CarouselContainer = styled.div`
 
       position: absolute;
       top: 0%;
-      left: -4%;
+      left: -1rem;
     }
   }
 
@@ -74,7 +78,7 @@ export const ButtonsContainer = styled.div`
     transition: 0.3s ease-in;
 
     position: absolute;
-    top: 45%;
+    top: calc((100% - 5rem) / 2);
     z-index: 1;
 
     :hover {

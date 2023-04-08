@@ -3,7 +3,7 @@ import Head from "next/head";
 import { Header, MediaDetails } from "@/components";
 import { getMediaDetails } from "@/services/TMDB_API";
 
-export default function Details({ details, videos }) {
+export default function Details({ media }) {
   return (
     <>
       <Head>
@@ -12,7 +12,7 @@ export default function Details({ details, videos }) {
 
       <Header />
 
-      <MediaDetails details={details} videos={videos} />
+      {media && <MediaDetails media={media} />}
     </>
   );
 }
@@ -27,9 +27,9 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (context) => {
   const { mediaType, mediaId } = context.params;
 
-  const { details, videos } = await getMediaDetails(mediaType, mediaId);
+  const media = await getMediaDetails(mediaType, mediaId);
 
   return {
-    props: { details, videos },
+    props: { media },
   };
 };

@@ -4,6 +4,19 @@ const { encode } = require("url-encode-decode");
 
 const API_KEY = "b681b7a1ecdbcf0bbb1bc98e9edd99ef";
 
+export const getMedias = async (mediaType, classification, page = 1) => {
+  return await axios
+    .get(
+      `https://api.themoviedb.org/3/${mediaType}/${classification}?api_key=${API_KEY}&language=en-US&page=${page}`
+    )
+    .then(({ data }) => {
+      return { results: data.results, totalPages: data.total_pages };
+    })
+    .catch(() => {
+      return { results: [], totalPages: 1 };
+    });
+};
+
 export const searchMedia = async (
   setState,
   search,
@@ -24,19 +37,6 @@ export const searchMedia = async (
     .catch(() => setState([]));
 };
 
-export const getMedias = async (mediaType, classification, page = 1) => {
-  return await axios
-    .get(
-      `https://api.themoviedb.org/3/${mediaType}/${classification}?api_key=${API_KEY}&language=en-US&page=${page}`
-    )
-    .then(({ data }) => {
-      return { results: data.results, totalPages: data.total_pages };
-    })
-    .catch(() => {
-      return { results: [], totalPages: 1 };
-    });
-};
-
 export const getMediaDetails = async (mediaType, mediaId) => {
   const details = await axios
     .get(
@@ -52,5 +52,19 @@ export const getMediaDetails = async (mediaType, mediaId) => {
     .then(({ data }) => data.results)
     .catch(() => []);
 
-  return { details, videos };
+  const castNCrew = await axios
+    .get(
+      `https://api.themoviedb.org/3/${mediaType}/${mediaId}/credits?api_key=${API_KEY}&language=en-US`
+    )
+    .then(({ data }) => [...data.cast, ...data.crew])
+    .catch(() => []);
+
+  const similarMovies = await axios
+    .get(
+      `https://api.themoviedb.org/3/${mediaType}/${mediaId}/similar?api_key=${API_KEY}&language=en-US&page=1`
+    )
+    .then(({ data }) => data.results)
+    .catch(() => []);
+
+  return { details, videos, castNCrew, similarMovies };
 };

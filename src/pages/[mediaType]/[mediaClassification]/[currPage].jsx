@@ -14,7 +14,7 @@ export default function Medias({ medias, totalPages }) {
 
       <Header />
 
-      <Pagination medias={medias} totalPages={totalPages} />
+      {medias && <Pagination medias={medias} totalPages={totalPages} />}
     </>
   );
 }
@@ -66,8 +66,8 @@ export const getStaticPaths = async () => {
       .forEach((_, i) =>
         paths.push({
           params: {
-            media: media.type,
-            classification: media.classification,
+            mediaType: media.type,
+            mediaClassification: media.classification,
             currPage: String(++i),
           },
         })
@@ -81,11 +81,11 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async (context) => {
-  const { media, classification, currPage } = context.params;
+  const { mediaType, mediaClassification, currPage } = context.params;
 
   const { results, totalPages } = await getMedias(
-    media,
-    classification,
+    mediaType,
+    mediaClassification,
     currPage
   );
 

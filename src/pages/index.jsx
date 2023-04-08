@@ -29,7 +29,7 @@ export default function Home({ medias }) {
             title={`${media.classification} ${
               media.type === "movie" ? "movies" : "series"
             }`}
-            medias={media.content}
+            slides={media.content}
           >
             <Link
               href={`/${media.type}/${media.classification}/${1}`}

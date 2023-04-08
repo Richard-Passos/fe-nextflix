@@ -1,7 +1,7 @@
 /* Componenets */
 import { HeaderContainer, LogoContainer } from "./Header.style";
 import Link from "next/link";
-import Image from "next/image";
+import { Image } from "@/utils";
 import { Search } from "@styled-icons/bootstrap";
 
 /* Logic */
