@@ -65,16 +65,6 @@ export const CarouselContainer = styled.div`
       background-color: ${({ theme }) => theme.colors.themeLighter};
     }
   }
-
-  @media screen and (max-width: 768) {
-    .carousel__back-button {
-      left: 1% !important;
-    }
-
-    .carousel__next-button {
-      right: 1% !important;
-    }
-  }
 `;
 
 export const ButtonsContainer = styled.div`
@@ -108,6 +98,16 @@ export const ButtonsContainer = styled.div`
   }
 
   ${CarouselContainer}:hover & {
+    .carousel__back-button {
+      left: 1%;
+    }
+
+    .carousel__next-button {
+      right: 1%;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
     .carousel__back-button {
       left: 1%;
     }
