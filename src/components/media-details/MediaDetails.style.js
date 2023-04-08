@@ -5,6 +5,8 @@ import { lighten, rgba } from "polished";
 import styled from "styled-components";
 
 export const DetailsContainer = styled.section`
+  margin-top: -10rem;
+
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
@@ -12,7 +14,6 @@ export const DetailsContainer = styled.section`
 
 export const MainDetailsContainer = styled.div`
   height: 51rem;
-  margin-top: -5rem;
   padding: 0 9rem;
   isolation: isolate;
 
@@ -35,12 +36,6 @@ export const MainDetailsContainer = styled.div`
     position: absolute;
     inset: 0;
     z-index: -1;
-  }
-
-  .poster-img {
-    border-radius: 2rem;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    justify-content: center;
   }
 
   .modal-video {
@@ -128,6 +123,23 @@ export const MainDetails = styled.div`
   display: flex;
   align-items: center;
   gap: 4rem;
+
+  .poster-container {
+    width: 30rem;
+    max-width: 100%;
+    border-radius: 2rem;
+    overflow: hidden;
+
+    flex: 1 0 auto;
+
+    @media screen and (max-width: 500px) {
+      align-self: center;
+    }
+  }
+
+  .poster-img {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
 
   .text-details {
     min-width: 58rem;
@@ -267,11 +279,6 @@ export const MainDetails = styled.div`
   }
 
   img {
-    max-width: 100%;
-
-    @media screen and (max-width: 500px) {
-      align-self: center;
-    }
   }
 
   @media screen and (max-width: 1100px) {
@@ -284,7 +291,7 @@ export const MainDetails = styled.div`
     }
   }
 
-  @media screen and (max-width: 375.9px) {
+  @media screen and (max-width: 376px) {
     font-size: clamp(1rem, 3.5vw, 1.4rem);
 
     .title,

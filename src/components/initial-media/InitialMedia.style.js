@@ -4,7 +4,7 @@ import { rgba } from "polished";
 /* Logic */
 import styled from "styled-components";
 
-export const MediaContainer = styled.section`
+export const InitialMediaContainer = styled.section`
   /* Placeholder */
   width: 90%;
   height: 150vw;
@@ -14,23 +14,25 @@ export const MediaContainer = styled.section`
 
   @media screen and (min-width: 600px) {
     width: 80%;
-    min-height: 70rem;
     height: 70rem;
   }
 
   .details-link {
-    width: 100%;
     height: 150vw;
     max-height: 100vh;
-    overflow: hidden;
 
-    position: relative;
+    position: absolute;
+    top: 2.5vh;
+    left: 5%;
+    right: 5%;
 
     display: inherit;
 
     @media screen and (min-width: 600px) {
-      min-height: 70rem;
       height: 70rem;
+
+      left: 10%;
+      right: 10%;
     }
   }
   /*  */
@@ -67,7 +69,6 @@ export const MediaContainer = styled.section`
     z-index: 0;
 
     @media screen and (min-width: 600px) {
-      min-height: 70rem;
       height: 70rem;
 
       left: 10%;
@@ -104,12 +105,16 @@ export const ButtonsContainer = styled.div`
     transition: 0.3s;
 
     position: absolute;
-    top: 45%;
+    top: calc((150vw + 2.5vh - 5rem) / 2);
     z-index: 1;
 
     :hover {
       cursor: pointer;
       background-color: ${({ theme }) => rgba(theme.colors.oppositeTheme, 0.5)};
+    }
+
+    @media screen and (min-width: 600px) {
+      top: calc((70rem + 2.5vh - 5rem) / 2);
     }
   }
   svg {
@@ -123,7 +128,7 @@ export const ButtonsContainer = styled.div`
     right: 1%;
   }
 
-  ${MediaContainer}:hover & {
+  ${InitialMediaContainer}:hover & {
     .prev-btn,
     .next-btn {
       opacity: 1;

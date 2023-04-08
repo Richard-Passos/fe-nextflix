@@ -61,6 +61,7 @@ const colorRating = [
 
 export default function MediaDetails({ media }) {
   const { details, videos, castNCrew, similarMovies } = media;
+  console.log("file: MediaDetails.jsx:64  MediaDetails  details", details);
 
   const router = useRouter();
 
@@ -72,8 +73,6 @@ export default function MediaDetails({ media }) {
   const releaseDate = details
     ? new Date(details.release_date ?? details.first_air_date)
     : null;
-
-  console.log(releaseDate);
 
   const runTime = details
     ? details.runtime ?? details.episode_run_time[0] ?? 0
@@ -103,28 +102,30 @@ export default function MediaDetails({ media }) {
         <div className="background-gradient" />
 
         <MainDetails>
-          <SkeletonLoader
-            width={300}
-            height={450}
-            background={theme.colors.theme}
-            style={
-              !isImageLoad
-                ? {
-                    position: "absolute",
-                    borderRadius: "2rem",
-                  }
-                : { display: "none" }
-            }
-          />
-          <Image
-            className="poster-img"
-            src={IMG_ORIGIN_PATH + details.poster_path}
-            alt="Media image"
-            width={300}
-            height={450}
-            priority
-            onLoad={() => setIsImageLoad(true)}
-          />
+          <div className="poster-container">
+            <SkeletonLoader
+              width={300}
+              height={450}
+              background={theme.colors.theme}
+              style={
+                !isImageLoad
+                  ? {
+                      position: "absolute",
+                      borderRadius: "2rem",
+                    }
+                  : { display: "none" }
+              }
+            />
+            <Image
+              className="poster-img"
+              src={IMG_ORIGIN_PATH + details.poster_path}
+              alt="Media image"
+              width={300}
+              height={450}
+              priority
+              onLoad={() => setIsImageLoad(true)}
+            />
+          </div>
 
           <div className="text-details">
             <h2 className="title">{details.title ?? details.name}</h2>
@@ -193,16 +194,17 @@ export default function MediaDetails({ media }) {
               <h3>Creator{createdBy.length !== 1 ? "s" : null}</h3>
 
               <div className="container-flex">
-                {createdBy &&
-                  createdBy.map((creator, i) => (
-                    <div key={`key-creator-${i}`} className="creators-name">
-                      <p>{creator.name}</p>
+                {createdBy.length
+                  ? createdBy.map((creator, i) => (
+                      <div key={`key-creator-${i}`} className="creators-name">
+                        <p>{creator.name}</p>
 
-                      {createdBy.length > ++i && (
-                        <span role="separator">|</span>
-                      )}
-                    </div>
-                  ))}
+                        {createdBy.length > ++i && (
+                          <span role="separator">|</span>
+                        )}
+                      </div>
+                    ))
+                  : "-"}
               </div>
             </div>
 

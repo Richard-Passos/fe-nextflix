@@ -65,6 +65,16 @@ export const CarouselContainer = styled.div`
       background-color: ${({ theme }) => theme.colors.themeLighter};
     }
   }
+
+  @media screen and (max-width: 768) {
+    .carousel__back-button {
+      left: 1% !important;
+    }
+
+    .carousel__next-button {
+      right: 1% !important;
+    }
+  }
 `;
 
 export const ButtonsContainer = styled.div`

@@ -1,5 +1,5 @@
 /* Components */
-import { MediaContainer, ButtonsContainer } from "./InitialMedia.style";
+import { InitialMediaContainer, ButtonsContainer } from "./InitialMedia.style";
 import { ArrowRightShort, ArrowLeftShort } from "@styled-icons/bootstrap";
 import Link from "next/link";
 
@@ -23,7 +23,7 @@ export default function InitialMedia({ initialMedias }) {
   }, []);
 
   return (
-    <MediaContainer
+    <InitialMediaContainer
       phoneUrl={initialMedias[currentMediaIndex].poster_path}
       desktopUrl={initialMedias[currentMediaIndex].backdrop_path}
     >
@@ -55,6 +55,6 @@ export default function InitialMedia({ initialMedias }) {
         ></button>
         <ArrowRightShort className="next-btn" />
       </ButtonsContainer>
-    </MediaContainer>
+    </InitialMediaContainer>
   );
 }
