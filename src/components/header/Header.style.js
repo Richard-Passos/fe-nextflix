@@ -1,5 +1,5 @@
 /* style */
-import { rgba, shade } from "polished";
+import { lighten, rgba, shade } from "polished";
 
 /* Logic */
 import styled from "styled-components";
@@ -8,65 +8,38 @@ export const HeaderContainer = styled.header`
   width: 100%;
   min-height: 10vh;
   padding: 1.5rem 3rem;
-  background-color: ${({ theme }) => rgba(theme.colors.dark, 0.9)};
+  background-color: ${({ theme }) => rgba(theme.colors.dark, 0.95)};
   color: ${({ theme }) => theme.colors.light};
 
   position: relative;
-  z-index: 1;
+  z-index: 2;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 2rem 5rem;
-
-  @media screen and (max-width: 400px) {
-    padding: 1.5rem;
-
-    flex-direction: column;
-  }
 
   .search-input {
     width: 95%;
     max-width: 35rem;
     padding: 0.8rem 1.6rem;
     background-color: ${({ theme }) => theme.colors.light};
-    border-radius: 0.5rem;
     font-size: 1.4em;
+    border-radius: 0.5rem;
 
-    ::-webkit-input-placeholder {
+    ::placeholder {
       color: ${({ theme }) => shade(0.1, theme.colors.gray)};
     }
   }
 
-  .theme-icon {
-    cursor: pointer;
-  }
+  .open-sidebar {
+    transition: 0.3s;
 
-  .search-icon {
-    width: 2rem;
-    height: 2rem;
-  }
-
-  & > div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 3rem;
-  }
-
-  nav {
-    padding: 0.8rem 0;
-    .link {
-      padding: 0.8rem 1.6rem;
-      border: 0.1rem solid ${({ theme }) => theme.colors.light};
-      border-radius: 0.5rem;
-      font-size: 1.4em;
-      transition: 0.3s;
-
-      :hover {
-        cursor: pointer;
-        background-color: ${({ theme }) => shade(0.7, theme.colors.light)};
-      }
+    :hover {
+      cursor: pointer;
+      color: ${({ theme }) =>
+        theme.title === "light"
+          ? lighten(0.5, theme.colors.text)
+          : shade(0.5, theme.colors.text)};
     }
   }
 `;

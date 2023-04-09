@@ -1,21 +1,23 @@
 /* Components */
-import { Image } from "@/utils";
 import {
   DetailsContainer,
   MainDetailsContainer,
   MainDetails,
   Grid,
+  SkelentonsContainer,
 } from "./MediaDetails.style";
-import SkeletonLoader from "tiny-skeleton-loader-react";
+import { Image } from "@/utils";
 import ReactStarsRating from "react-awesome-stars-rating";
-import { Heart, Play } from "@styled-icons/bootstrap";
+import { Heart, RightArrow } from "@styled-icons/boxicons-regular";
 import ModalVideo from "react-modal-video";
 import { Carousel } from "../carousel";
+import SkeletonLoader from "tiny-skeleton-loader-react";
 
 /* Logic */
 import { useContext, useState } from "react";
 import { ThemeContext } from "styled-components";
-import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { store, toggleFavMedias } from "@/redux";
 
 const IMG_ORIGIN_PATH = "https://image.tmdb.org/t/p/original";
 
@@ -59,17 +61,18 @@ const colorRating = [
   "#f1d045",
 ];
 
-export default function MediaDetails({ media }) {
-  const { details, videos, castNCrew, similarMovies } = media;
-  console.log("file: MediaDetails.jsx:64  MediaDetails  details", details);
+export default function MediaDetails({ media, isFallback }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const router = useRouter();
-
+  /* Skeleton loader uses*/
   const theme = useContext(ThemeContext);
 
   const [isImageLoad, setIsImageLoad] = useState(false);
+  /*  */
 
   /* Some Media data */
+  const { details, videos, castNCrew, similarMovies } = media;
+
   const releaseDate = details
     ? new Date(details.release_date ?? details.first_air_date)
     : null;
@@ -92,9 +95,20 @@ export default function MediaDetails({ media }) {
     : 0; /* Round to n.5 or n.0 */
   /*  */
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  /* Control fav state */
+  const { favs } = store.getState().favMedias;
+  const [isFav, setIsFav] = useState(favs.includes(details.id));
 
-  return !router.isFallback && details ? (
+  const dispatch = useDispatch();
+
+  const toggleFavState = () => {
+    setIsFav((prevState) => !prevState);
+
+    dispatch(toggleFavMedias(details.id));
+  };
+  /*  */
+
+  return !isFallback ? (
     <DetailsContainer>
       <MainDetailsContainer
         backgroundImage={IMG_ORIGIN_PATH + details.backdrop_path}
@@ -104,8 +118,8 @@ export default function MediaDetails({ media }) {
         <MainDetails>
           <div className="poster-container">
             <SkeletonLoader
-              width={300}
-              height={450}
+              width="30rem"
+              height="45rem"
               background={theme.colors.theme}
               style={
                 !isImageLoad
@@ -186,7 +200,11 @@ export default function MediaDetails({ media }) {
               </div>
 
               <div className="favorite-btn-container">
-                <Heart size={15} />
+                <Heart
+                  size="2rem"
+                  className={isFav ? "fav" : ""}
+                  onClick={toggleFavState}
+                />
               </div>
             </div>
 
@@ -232,7 +250,7 @@ export default function MediaDetails({ media }) {
                   className="trailer-btn"
                   onClick={() => setIsModalOpen(true)}
                 >
-                  <Play size={20} /> Play Trailer
+                  <RightArrow size="1.7rem" /> Play Trailer
                 </button>
               </div>
             )}
@@ -310,11 +328,23 @@ export default function MediaDetails({ media }) {
       </Grid>
     </DetailsContainer>
   ) : (
-    <SkeletonLoader
-      height="51rem"
-      background={theme.colors.theme}
-      style={{ marginTop: "-5rem" }}
-    />
+    <SkelentonsContainer>
+      <SkeletonLoader height="51rem" background={theme.colors.theme} />
+      <div>
+        <SkeletonLoader
+          width="70vw"
+          height="25rem"
+          background={theme.colors.theme}
+        />
+        <SkeletonLoader
+          width="30vw"
+          height="25rem"
+          background={theme.colors.theme}
+        />
+      </div>
+
+      <SkeletonLoader height="40rem" background={theme.colors.theme} />
+    </SkelentonsContainer>
   );
 }
 

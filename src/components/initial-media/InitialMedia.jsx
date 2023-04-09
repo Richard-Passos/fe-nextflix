@@ -1,6 +1,6 @@
 /* Components */
 import { InitialMediaContainer, ButtonsContainer } from "./InitialMedia.style";
-import { ArrowRightShort, ArrowLeftShort } from "@styled-icons/bootstrap";
+import { ChevronLeft, ChevronRight } from "@styled-icons/boxicons-regular";
 import Link from "next/link";
 
 /* Logic */
@@ -43,7 +43,7 @@ export default function InitialMedia({ initialMedias }) {
             )
           }
         ></button>
-        <ArrowLeftShort className="prev-btn" />
+        <ChevronLeft className="prev-btn" />
 
         <button
           className="next-btn"
@@ -53,7 +53,7 @@ export default function InitialMedia({ initialMedias }) {
             )
           }
         ></button>
-        <ArrowRightShort className="next-btn" />
+        <ChevronRight className="next-btn" />
       </ButtonsContainer>
     </InitialMediaContainer>
   );

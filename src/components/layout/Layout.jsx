@@ -3,7 +3,20 @@ import Head from "next/head";
 import { LayoutContainer } from "./Layout.style";
 import { Footer } from "../footer";
 
-export default function Layout({ children, classN }) {
+/* Logic */
+import { createContext } from "react";
+import { darkTheme, lightTheme } from "@/styles/theme";
+
+export default function Layout({ children, classN, themeState }) {
+  const { theme, setTheme } = themeState;
+
+  const toggleTheme = () => {
+    const themeToAply = theme.title === "light" ? darkTheme : lightTheme;
+
+    setTheme(themeToAply);
+    localStorage.setItem("THEME", JSON.stringify(themeToAply));
+  };
+
   return (
     <>
       <Head>
@@ -13,9 +26,13 @@ export default function Layout({ children, classN }) {
       </Head>
 
       <LayoutContainer className={classN}>
-        {children}
-        <Footer />
+        <themeContext.Provider value={{ theme, toggleTheme }}>
+          {children}
+          <Footer />
+        </themeContext.Provider>
       </LayoutContainer>
     </>
   );
 }
+
+export const themeContext = createContext();

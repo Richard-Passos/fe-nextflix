@@ -1,16 +1,13 @@
 /* Componenets */
 import { HeaderContainer, LogoContainer } from "./Header.style";
-import Link from "next/link";
-import { Image } from "@/utils";
-import { Search } from "@styled-icons/bootstrap";
+import { Menu } from "@styled-icons/boxicons-regular";
+import { Sidebar } from "../sidebar";
 
 /* Logic */
-import { useContext, useRef } from "react";
-import { setThemeContext } from "@/pages/_app";
-import { lightTheme, darkTheme } from "@/styles/theme";
+import { useRef, useState } from "react";
 
 export default function Header({ input = false, setState = null }) {
-  const { theme, setTheme } = useContext(setThemeContext);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const inputSearch = useRef();
 
@@ -24,39 +21,23 @@ export default function Header({ input = false, setState = null }) {
         <input
           ref={inputSearch}
           className="search-input"
-          type="seasearchInputrch"
-          name="searchInput"
+          type="search"
           placeholder="Media title"
           onChange={(e) => setState(e.target.value)}
         />
       )}
 
       <div>
-        {!input && (
-          <Link href="/search/1">
-            <Search className="search-icon" />
-          </Link>
-        )}
+        <nav></nav>
 
-        <nav>
-          <Link href="/" className="link">
-            Home
-          </Link>
-        </nav>
-
-        <Image
-          src={theme.icon}
-          width={20}
-          height={20}
-          alt="theme-icon"
-          className="theme-icon"
-          onClick={() =>
-            setTheme((prevTheme) =>
-              prevTheme.title === "light" ? darkTheme : lightTheme
-            )
-          }
+        <Menu
+          size="3rem"
+          className="open-sidebar"
+          onClick={() => setIsSidebarOpen(true)}
         />
       </div>
+
+      <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
     </HeaderContainer>
   );
 }

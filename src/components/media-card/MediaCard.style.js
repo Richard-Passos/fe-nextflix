@@ -21,76 +21,12 @@ export const CardContainer = styled.div`
   flex-direction: column;
   gap: 1.25rem;
 
-  a {
-    display: block;
-    position: relative;
-  }
-
-  :hover {
-    border-color: ${({ theme }) => theme.colors.primary};
-    opacity: 1;
-
-    .image-container {
-      :after {
-        height: 100%;
-      }
-
-      .details-p {
-        opacity: 1;
-      }
-
-      .details-btn {
-        inset: 43.5% 15%;
-      }
-    }
-  }
-
-  .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .icon-favorite-container {
-    width: 6rem;
-    padding-right: 1rem;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .icon-favorite {
-    width: 1.5rem;
-    height: 1.5rem;
-    transition: 0.3s;
-
-    :hover {
-      cursor: pointer;
-      color: hsl(341, 100%, 50%);
-    }
-  }
-
   .image-container {
     width: 17.5rem;
     height: 23rem;
     overflow: hidden;
 
     position: relative;
-
-    :after {
-      content: "";
-      width: 100%;
-      height: 0;
-      transition: 0.3s;
-
-      background-color: ${({ theme }) => rgba(theme.colors.themeDarker, 0.9)};
-
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      z-index: 1;
-    }
 
     .details-p {
       font-size: 1.4em;
@@ -113,8 +49,12 @@ export const CardContainer = styled.div`
       overflow: hidden;
 
       position: absolute;
-      inset: 150% 5rem;
+      inset: 100% 5rem;
       z-index: 2;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
       :hover {
         cursor: pointer;
@@ -122,17 +62,39 @@ export const CardContainer = styled.div`
           rgba(theme.colors.primaryLighter, 0.2)};
       }
     }
-  }
 
-  img {
-    transition: 0.5s;
+    :before {
+      content: "";
+      width: 100%;
+      height: 0;
+      transition: 0.3s;
+
+      background-color: ${({ theme }) => rgba(theme.colors.themeDarker, 0.9)};
+
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      z-index: 1;
+    }
+
+    :hover {
+      :before {
+        height: 100%;
+      }
+
+      .details-p {
+        opacity: 1;
+      }
+
+      .details-btn {
+        inset: 44% 15% 43%;
+      }
+    }
   }
 
   .card-title {
     padding: 0 1.5rem;
     font-size: 1.4em;
-    font-weight: bold;
-    line-height: normal;
     transition: 0.3s;
 
     overflow: hidden;
@@ -147,8 +109,37 @@ export const CardContainer = styled.div`
     }
   }
 
-  small {
+  .container {
     padding: 0 1.5rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  small {
     font-size: 1.2em;
+  }
+
+  .icon-favorite-container {
+    width: 6rem;
+    margin-right: -1.5rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .icon-favorite {
+      transition: 0.3s;
+
+      :hover {
+        cursor: pointer;
+        color: hsl(341, 100%, 50%);
+      }
+    }
+
+    .fav {
+      color: hsl(341, 100%, 50%);
+    }
   }
 `;

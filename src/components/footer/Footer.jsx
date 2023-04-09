@@ -15,16 +15,16 @@ export default function Footer() {
       </Content>
 
       <Content>
-        <h4>Made contact</h4>
+        <h4>Make contact</h4>
 
         <div>
           <IconContainer href="https://github.com/Richard-Passos">
-            <Github className="icon" />
+            <Github size="3em" />
             <p className="icon-name">Github</p>
           </IconContainer>
 
           <IconContainer href="https://www.linkedin.com/in/richard-passos-91703624b/">
-            <LinkedinSquare className="icon" />
+            <LinkedinSquare size="3em" />
             <p className="icon-name">LinkedIn</p>
           </IconContainer>
         </div>

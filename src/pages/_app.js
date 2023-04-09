@@ -4,9 +4,12 @@ import { Layout } from "@/components";
 import { Lato } from "next/font/google";
 
 /* Logic */
-import { createContext, useState } from "react";
+import { useEffect, useState } from "react";
 import { lightTheme } from "@/styles/theme";
 import { ThemeProvider } from "styled-components";
+import { Provider } from "react-redux";
+import { store, persistor } from "@/redux";
+import { PersistGate } from "redux-persist/integration/react";
 
 const lato = Lato({
   weight: ["400", "700"],
@@ -16,18 +19,23 @@ const lato = Lato({
 export default function App({ Component, pageProps }) {
   const [theme, setTheme] = useState(lightTheme);
 
+  useEffect(() => {
+    localStorage.getItem("THEME") &&
+      setTheme(JSON.parse(localStorage.getItem("THEME")));
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <ResetStyle />
       <GlobalStyle />
 
-      <setThemeContext.Provider value={{ theme, setTheme }}>
-        <Layout classN={lato.className}>
-          <Component {...pageProps} />
-        </Layout>
-      </setThemeContext.Provider>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <Layout classN={lato.className} themeState={{ theme, setTheme }}>
+            <Component {...pageProps} />
+          </Layout>
+        </PersistGate>
+      </Provider>
     </ThemeProvider>
   );
 }
-
-export const setThemeContext = createContext();

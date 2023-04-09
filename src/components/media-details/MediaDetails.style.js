@@ -201,6 +201,10 @@ export const MainDetails = styled.div`
           color: hsl(341, 100%, 50%);
         }
       }
+
+      .fav {
+        color: hsl(341, 100%, 50%);
+      }
     }
 
     div {
@@ -244,6 +248,7 @@ export const MainDetails = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 0.5rem;
 
     ::before {
       content: "";
@@ -374,5 +379,19 @@ export const Grid = styled.div`
     .details-container {
       grid-column: span 5;
     }
+  }
+`;
+
+export const SkelentonsContainer = styled.section`
+  margin-top: -10rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    gap: 2.4rem;
   }
 `;

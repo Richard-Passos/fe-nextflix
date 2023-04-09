@@ -3,7 +3,12 @@ import Head from "next/head";
 import { Header, MediaDetails } from "@/components";
 import { getMediaDetails } from "@/services/TMDB_API";
 
+/* Logic */
+import { useRouter } from "next/router";
+
 export default function Details({ media }) {
+  const router = useRouter();
+
   return (
     <>
       <Head>
@@ -12,7 +17,7 @@ export default function Details({ media }) {
 
       <Header />
 
-      {media && <MediaDetails media={media} />}
+      {media && <MediaDetails media={media} isFallback={router.isFallback} />}
     </>
   );
 }

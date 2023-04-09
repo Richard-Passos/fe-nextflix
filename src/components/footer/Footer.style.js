@@ -45,11 +45,6 @@ export const IconContainer = styled.a`
   justify-content: space-evenly;
   align-items: center;
 
-  .icon {
-    min-width: 3em;
-    max-width: 3em;
-  }
-
   .icon-name {
     color: ${({ theme }) => theme.colors.dark};
     font-size: 0;

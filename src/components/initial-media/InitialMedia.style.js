@@ -14,6 +14,7 @@ export const InitialMediaContainer = styled.section`
 
   @media screen and (min-width: 600px) {
     width: 80%;
+    min-height: 70rem;
     height: 70rem;
   }
 
@@ -29,6 +30,7 @@ export const InitialMediaContainer = styled.section`
     display: inherit;
 
     @media screen and (min-width: 600px) {
+      min-height: 70rem;
       height: 70rem;
 
       left: 10%;
@@ -69,6 +71,7 @@ export const InitialMediaContainer = styled.section`
     z-index: 0;
 
     @media screen and (min-width: 600px) {
+      min-height: 70rem;
       height: 70rem;
 
       left: 10%;

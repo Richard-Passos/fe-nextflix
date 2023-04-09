@@ -3,27 +3,27 @@ import styled from "styled-components";
 import { rgba } from "polished";
 
 export const CarouselContainer = styled.div`
+  max-width: 100vw;
+
   .carousel {
     position: relative;
   }
 
   .carousel__slider-tray--horizontal {
     width: ${(props) =>
-      `calc(${props.cardsCount} * (${props.cardWidth / 10}rem + ${
-        props.cardGap / 10
-      }rem))`} !important;
-    height: ${({ cardHeight }) =>
-      `calc(${cardHeight / 10}rem + 4.5rem)`} !important;
+      `calc(${props.cardsCount} * (${props.cardWidth}px + ${props.cardGap}px))`} !important;
+    height: ${({ cardHeight }) => `calc(${cardHeight}px + 4.5rem)`} !important;
     margin-left: 1.5rem;
     transition: 0.5s;
 
     display: flex;
     align-items: flex-end;
-    gap: ${({ cardGap }) => `${cardGap / 10}rem`};
+    gap: ${({ cardGap }) => `${cardGap}px`};
   }
 
-  .carousel__slide {
-    width: ${({ cardWidth }) => `${cardWidth / 10}rem`} !important;
+  .carousel__slide,
+  .carousel__inner-slide {
+    width: ${({ cardWidth }) => `${cardWidth}px`} !important;
     padding: 0 !important;
   }
 
@@ -58,7 +58,7 @@ export const CarouselContainer = styled.div`
     position: absolute;
     top: 0;
     right: 1%;
-    z-index: 10;
+    z-index: 1;
 
     :hover {
       cursor: pointer;

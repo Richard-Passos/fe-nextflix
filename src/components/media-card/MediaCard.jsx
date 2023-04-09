@@ -1,13 +1,15 @@
 /* Components */
 import { CardContainer } from "./MediaCard.style";
 import { Image } from "@/utils";
-import { Heart } from "@styled-icons/bootstrap";
+import { Heart } from "@styled-icons/boxicons-regular";
 import Link from "next/link";
 
 /* Logic */
 import { useContext, useState } from "react";
 import SkeletonLoader from "tiny-skeleton-loader-react";
 import { ThemeContext } from "styled-components";
+import { store, toggleFavMedias } from "@/redux";
+import { useDispatch } from "react-redux";
 
 const MONTHS = [
   "Jan",
@@ -35,6 +37,19 @@ export default function MediaCard({ media }) {
 
   const theme = useContext(ThemeContext);
   const [isImageLoad, setIsImageLoad] = useState(false);
+
+  /* Control fav state */
+  const { favs } = store.getState().favMedias;
+  const [isFav, setIsFav] = useState(favs.includes(id));
+
+  const dispatch = useDispatch();
+
+  const toggleFavState = () => {
+    setIsFav((prevState) => !prevState);
+
+    dispatch(toggleFavMedias(id));
+  };
+  /*  */
 
   return (
     <CardContainer>
@@ -67,8 +82,8 @@ export default function MediaCard({ media }) {
         />
       </Link>
 
-      <Link href={`/details/${type}/${id}`} className="card-title">
-        {title}
+      <Link href={`/details/${type}/${id}`}>
+        <h2 className="card-title">{title}</h2>
       </Link>
 
       <div className="container">
@@ -80,8 +95,12 @@ export default function MediaCard({ media }) {
             : "Release date not found"}
         </small>
 
-        <div className="icon-favorite-container">
-          <Heart className="icon-favorite" />
+        <div className="icon-favorite-container" role="button">
+          <Heart
+            className={`icon-favorite ${isFav ? "fav" : ""}`}
+            size="1.7rem"
+            onClick={toggleFavState}
+          />
         </div>
       </div>
     </CardContainer>

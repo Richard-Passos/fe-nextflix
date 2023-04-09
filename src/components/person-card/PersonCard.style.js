@@ -19,6 +19,16 @@ export const CardContainer = styled.div`
     justify-content: space-between;
     gap: 1rem;
 
+    .image-container {
+      width: 10rem;
+      height: 10rem;
+      border-radius: 50%;
+      overflow: hidden;
+      img {
+        margin-top: -1rem;
+      }
+    }
+
     h4,
     h5 {
       margin: 0 auto;
@@ -44,9 +54,5 @@ export const CardContainer = styled.div`
       font-size: 1em;
       font-weight: 400;
     }
-  }
-
-  img {
-    border-radius: 50%;
   }
 `;
