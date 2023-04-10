@@ -131,6 +131,10 @@ export const CardContainer = styled.div`
 
     svg {
       transition: 0.3s;
+
+      :hover {
+        cursor: pointer;
+      }
     }
 
     .fav {
