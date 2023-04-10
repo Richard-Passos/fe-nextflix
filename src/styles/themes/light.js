@@ -1,6 +1,5 @@
 export default {
   title: "light",
-  icon: "/images/icon-moon.svg",
 
   colors: {
     primaryDarker: `hsl(341, 90%, 30%)`,

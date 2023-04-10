@@ -197,9 +197,6 @@ export const MainDetails = styled.div`
 
       :hover {
         cursor: pointer;
-        svg {
-          color: hsl(341, 100%, 50%);
-        }
       }
 
       .fav {

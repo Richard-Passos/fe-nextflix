@@ -38,33 +38,24 @@ export const searchMedia = async (
 };
 
 export const getMediaDetails = async (mediaType, mediaId) => {
-  const details = await axios
-    .get(
-      `https://api.themoviedb.org/3/${mediaType}/${mediaId}?api_key=${API_KEY}&language=en-US`
-    )
-    .then(({ data }) => data)
-    .catch(() => []);
+  const repeatUrl = (queryFor = null) =>
+    `https://api.themoviedb.org/3/${mediaType}/${mediaId}${
+      queryFor ? `/${queryFor}` : ""
+    }?api_key=${API_KEY}&language=en-US`;
 
-  const videos = await axios
-    .get(
-      `https://api.themoviedb.org/3/${mediaType}/${mediaId}/videos?api_key=${API_KEY}&language=en-US`
-    )
-    .then(({ data }) => data.results)
-    .catch(() => []);
+  const [details, videos, castNCrew, similarMovies] = await Promise.all([
+    axios.get(repeatUrl()),
+    axios.get(repeatUrl("videos")),
+    axios.get(repeatUrl("credits")),
+    axios.get(repeatUrl("similar")),
+  ])
+    .then((values) => values.map((value) => value?.data))
+    .catch(() => [{}, {}, {}, {}]);
 
-  const castNCrew = await axios
-    .get(
-      `https://api.themoviedb.org/3/${mediaType}/${mediaId}/credits?api_key=${API_KEY}&language=en-US`
-    )
-    .then(({ data }) => [...data.cast, ...data.crew])
-    .catch(() => []);
-
-  const similarMovies = await axios
-    .get(
-      `https://api.themoviedb.org/3/${mediaType}/${mediaId}/similar?api_key=${API_KEY}&language=en-US&page=1`
-    )
-    .then(({ data }) => data.results)
-    .catch(() => []);
-
-  return { details, videos, castNCrew, similarMovies };
+  return {
+    details,
+    videos: videos?.results,
+    castNCrew: [...castNCrew?.cast, ...castNCrew?.crew],
+    similarMovies: similarMovies?.results,
+  };
 };

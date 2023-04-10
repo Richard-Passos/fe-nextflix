@@ -95,7 +95,7 @@ export default function MediaDetails({ media, isFallback }) {
     : 0; /* Round to n.5 or n.0 */
   /*  */
 
-  /* Control fav state */
+  /* Control favMedias state */
   const { favs } = store.getState().favMedias;
   const [isFav, setIsFav] = useState(favs.includes(details.id));
 

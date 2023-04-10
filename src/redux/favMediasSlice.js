@@ -15,7 +15,7 @@ export const favMediasSlice = createSlice({
       if (isMediaFav !== -1) {
         state.favs.splice(isMediaFav, 1);
       } else {
-        state.favs.push(action.payload);
+        state.favs.unshift(action.payload);
       }
     },
   },

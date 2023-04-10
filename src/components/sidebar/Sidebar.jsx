@@ -12,12 +12,11 @@ import Link from "next/link";
 import { Github, LinkedinSquare } from "@styled-icons/boxicons-logos";
 
 /* Logic */
-import { useContext, useEffect } from "react";
-import { themeContext } from "../layout/Layout";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleTheme } from "@/redux";
 
 export default function Sidebar({ isOpen, setIsOpen }) {
-  const { theme, toggleTheme } = useContext(themeContext);
-
   useEffect(() => {
     document.querySelector("body").style.overflowY = isOpen
       ? "hidden"
@@ -25,6 +24,12 @@ export default function Sidebar({ isOpen, setIsOpen }) {
 
     if (isOpen) window.scrollTo(0, 0);
   }, [isOpen]);
+
+  /* Control appTheme state */
+  const { theme } = useSelector((state) => state.appTheme);
+
+  const dispatch = useDispatch();
+  /*  */
 
   return (
     <SidebarContainer isOpen={isOpen}>
@@ -51,7 +56,7 @@ export default function Sidebar({ isOpen, setIsOpen }) {
           </Link>
         </Item>
 
-        <Item onClick={toggleTheme}>
+        <Item onClick={() => dispatch(toggleTheme("switch-theme"))}>
           {theme.title === "light" ? <Moon size="2rem" /> : <Sun size="2rem" />}{" "}
           Switch Theme
         </Item>

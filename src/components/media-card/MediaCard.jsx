@@ -38,7 +38,7 @@ export default function MediaCard({ media }) {
   const theme = useContext(ThemeContext);
   const [isImageLoad, setIsImageLoad] = useState(false);
 
-  /* Control fav state */
+  /* Control favMedias state */
   const { favs } = store.getState().favMedias;
   const [isFav, setIsFav] = useState(favs.includes(id));
 

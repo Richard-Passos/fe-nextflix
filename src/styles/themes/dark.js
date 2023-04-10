@@ -1,6 +1,5 @@
 export default {
   title: "dark",
-  icon: "/images/icon-sun.svg",
 
   colors: {
     primaryDarker: `hsl(235, 50%, 20%)`,

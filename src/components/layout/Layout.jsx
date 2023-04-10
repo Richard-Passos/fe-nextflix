@@ -4,35 +4,39 @@ import { LayoutContainer } from "./Layout.style";
 import { Footer } from "../footer";
 
 /* Logic */
-import { createContext } from "react";
-import { darkTheme, lightTheme } from "@/styles/theme";
+import { toggleTheme } from "@/redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { ThemeProvider } from "styled-components";
 
-export default function Layout({ children, classN, themeState }) {
-  const { theme, setTheme } = themeState;
+export default function Layout({ children, classN }) {
+  /* Control appTheme state */
+  const { theme } = useSelector((state) => state.appTheme);
 
-  const toggleTheme = () => {
-    const themeToAply = theme.title === "light" ? darkTheme : lightTheme;
+  const dispatch = useDispatch();
 
-    setTheme(themeToAply);
-    localStorage.setItem("THEME", JSON.stringify(themeToAply));
-  };
+  useEffect(() => {
+    if (!theme?.title) dispatch(toggleTheme("first-time"));
+  }, []);
 
-  return (
-    <>
-      <Head>
-        <meta name="description" content="movies with search and pagination" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/images/favicon.png" />
-      </Head>
+  /*  */
 
-      <LayoutContainer className={classN}>
-        <themeContext.Provider value={{ theme, toggleTheme }}>
+  if (theme.title)
+    return (
+      <ThemeProvider theme={theme}>
+        <Head>
+          <meta
+            name="description"
+            content="movies with search and pagination"
+          />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <link rel="icon" href="/images/favicon.png" />
+        </Head>
+
+        <LayoutContainer className={classN}>
           {children}
           <Footer />
-        </themeContext.Provider>
-      </LayoutContainer>
-    </>
-  );
+        </LayoutContainer>
+      </ThemeProvider>
+    );
 }
-
-export const themeContext = createContext();

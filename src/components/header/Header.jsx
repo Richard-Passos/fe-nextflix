@@ -5,6 +5,7 @@ import { Sidebar } from "../sidebar";
 
 /* Logic */
 import { useRef, useState } from "react";
+import Link from "next/link";
 
 export default function Header({ input = false, setState = null }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -14,7 +15,9 @@ export default function Header({ input = false, setState = null }) {
   return (
     <HeaderContainer>
       <LogoContainer>
-        <h1 className="logo">NextFlix</h1>
+        <Link href="/">
+          <h1 className="logo">NextFlix</h1>
+        </Link>
       </LogoContainer>
 
       {input && (
