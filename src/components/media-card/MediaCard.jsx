@@ -97,7 +97,7 @@ export default function MediaCard({ media }) {
 
         <div className="icon-favorite-container" role="button">
           <Heart
-            className={`icon-favorite ${isFav ? "fav" : ""}`}
+            className={isFav ? "fav" : ""}
             size="1.7rem"
             onClick={toggleFavState}
           />

@@ -129,13 +129,8 @@ export const CardContainer = styled.div`
     justify-content: center;
     align-items: center;
 
-    .icon-favorite {
+    svg {
       transition: 0.3s;
-
-      :hover {
-        cursor: pointer;
-        color: hsl(341, 100%, 50%);
-      }
     }
 
     .fav {

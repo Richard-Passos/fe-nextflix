@@ -191,12 +191,12 @@ export const MainDetails = styled.div`
 
       position: relative;
 
-      svg {
-        transition: 0.3s;
-      }
-
       :hover {
         cursor: pointer;
+      }
+
+      svg {
+        transition: 0.3s;
       }
 
       .fav {
