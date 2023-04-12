@@ -1,5 +1,6 @@
 /* Style */
 import { rgba } from "polished";
+import { ArrowsContainer as ArrowsCarousel } from "../carousel";
 
 /* Logic */
 import styled from "styled-components";
@@ -7,35 +8,18 @@ import styled from "styled-components";
 export const InitialMediaContainer = styled.section`
   /* Placeholder */
   width: 90%;
-  height: 150vw;
-  max-height: 100vh;
-  margin: clamp(-20rem, calc(-10rem - 7.5vh), -15rem) auto -8rem;
-  overflow: hidden;
+  height: min(150vw, 100vh);
+  margin: calc(-10vh - 10rem + 2.5vh) auto -8rem;
 
   @media screen and (min-width: 600px) {
     width: 80%;
-    min-height: 70rem;
-    height: 70rem;
+    height: clamp(60rem, 87vh, 70rem);
   }
 
   .details-link {
-    height: 150vw;
-    max-height: 100vh;
-
-    position: absolute;
-    top: 2.5vh;
-    left: 5%;
-    right: 5%;
+    height: 100%;
 
     display: inherit;
-
-    @media screen and (min-width: 600px) {
-      min-height: 70rem;
-      height: 70rem;
-
-      left: 10%;
-      right: 10%;
-    }
   }
   /*  */
 
@@ -57,83 +41,57 @@ export const InitialMediaContainer = styled.section`
   }
 
   ::before {
-    height: 150vw;
-    max-height: 100vh;
-    border-radius: 2rem;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
-      rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-
-    filter: saturate(1.5);
-
-    top: 2.5vh;
-    left: 5%;
-    right: 5%;
-    z-index: 0;
-
-    @media screen and (min-width: 600px) {
-      min-height: 70rem;
-      height: 70rem;
-
-      left: 10%;
-      right: 10%;
-    }
-  }
-
-  :after {
-    width: 100%;
-    height: 147vw;
-    max-height: 97vh;
+    height: min(147vw, 97vh);
     filter: saturate(2);
 
-    top: 0;
-    left: 0;
+    inset: 0;
     z-index: -1;
 
     @media screen and (min-width: 600px) {
-      min-height: 67rem;
-      height: 67rem;
+      height: clamp(57rem, 84vh, 67rem);
+    }
+  }
+
+  ::after {
+    height: min(150vw, 100vh);
+    border-radius: 2rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0 1.3rem 2.7rem -0.5rem,
+      rgba(0, 0, 0, 0.3) 0 0.8rem 1.6rem -0.8rem;
+    filter: saturate(1.5);
+    pointer-events: none;
+
+    inset: 2.5vh 5%;
+
+    @media screen and (min-width: 600px) {
+      height: clamp(60rem, 87vh, 70rem);
+
+      inset-inline: 10%;
     }
   }
 `;
 
-export const ButtonsContainer = styled.div`
-  .prev-btn,
-  .next-btn {
-    width: 5rem;
-    height: 5rem;
-    background-color: ${({ theme }) => rgba(theme.colors.theme, 0.5)};
-    border: none;
-    border-radius: 50%;
+export const ArrowsContainer = styled(ArrowsCarousel)`
+  .prev-arrow,
+  .next-arrow {
     opacity: 0;
-    transition: 0.3s;
 
-    position: absolute;
-    top: calc((150vw + 2.5vh - 5rem) / 2);
-    z-index: 1;
-
-    :hover {
-      cursor: pointer;
-      background-color: ${({ theme }) => rgba(theme.colors.oppositeTheme, 0.5)};
-    }
+    top: calc((min(150vw, 100vh) + 2.5vh - 5rem) / 2);
 
     @media screen and (min-width: 600px) {
-      top: calc((70rem + 2.5vh - 5rem) / 2);
+      top: calc((clamp(60rem, 87vh, 70rem) + 2.5vh - 5rem) / 2);
     }
   }
-  svg {
-    pointer-events: none;
-  }
 
-  .prev-btn {
+  .prev-arrow {
     left: 1%;
   }
-  .next-btn {
+  .next-arrow {
     right: 1%;
   }
 
   ${InitialMediaContainer}:hover & {
-    .prev-btn,
-    .next-btn {
+    .prev-arrow,
+    .next-arrow {
       opacity: 1;
     }
   }

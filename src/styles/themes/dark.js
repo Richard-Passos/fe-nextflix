@@ -10,12 +10,12 @@ export default {
     theme: `hsl(235, 25%, 15%)`,
     themeLighter: `hsl(235, 30%, 20%)`,
 
-    oppositeTheme: `hsl(0, 5%, 90%)`,
+    oppositeTheme: `hsl(0, 0%, 90%)`,
 
     text: `hsl(220, 60%, 99%)`,
 
     dark: `hsl(220, 10%, 5%)`,
     light: `hsl(220, 60%, 95%)`,
-    gray: `hsl(220, 10%, 60%)`,
+    gray: `hsl(220, 12%, 60%)`,
   },
 };

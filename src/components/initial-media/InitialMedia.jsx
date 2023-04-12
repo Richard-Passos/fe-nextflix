@@ -1,19 +1,19 @@
 /* Components */
-import { InitialMediaContainer, ButtonsContainer } from "./InitialMedia.style";
-import { ChevronLeft, ChevronRight } from "@styled-icons/boxicons-regular";
+import { InitialMediaContainer, ArrowsContainer } from "./InitialMedia.style";
 import Link from "next/link";
+import { ChevronLeft, ChevronRight } from "@styled-icons/boxicons-regular";
 
 /* Logic */
 import { useEffect, useState } from "react";
 
 export default function InitialMedia({ initialMedias }) {
   const lastMediaIndex = 4;
-  const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
+  const [currMediaIndex, setCurrMediaIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(
       () =>
-        setCurrentMediaIndex((prevState) =>
+        setCurrMediaIndex((prevState) =>
           prevState === lastMediaIndex ? 0 : ++prevState
         ),
       10000
@@ -24,37 +24,39 @@ export default function InitialMedia({ initialMedias }) {
 
   return (
     <InitialMediaContainer
-      phoneUrl={initialMedias[currentMediaIndex].poster_path}
-      desktopUrl={initialMedias[currentMediaIndex].backdrop_path}
+      phoneUrl={initialMedias[currMediaIndex].poster_path}
+      desktopUrl={initialMedias[currMediaIndex].backdrop_path}
     >
       <Link
         className="details-link"
         href={`/details/${
-          initialMedias[currentMediaIndex].release_date ? "movie" : "tv"
-        }/${initialMedias[currentMediaIndex].id}`}
+          initialMedias[currMediaIndex].title ? "movie" : "tv"
+        }/${initialMedias[currMediaIndex].id}`}
       ></Link>
 
-      <ButtonsContainer>
+      <ArrowsContainer>
         <button
-          className="prev-btn"
+          className="prev-arrow"
           onClick={() =>
-            setCurrentMediaIndex((prevState) =>
+            setCurrMediaIndex((prevState) =>
               prevState === 0 ? lastMediaIndex : --prevState
             )
           }
-        ></button>
-        <ChevronLeft className="prev-btn" />
+        >
+          <ChevronLeft size="5rem" />
+        </button>
 
         <button
-          className="next-btn"
+          className="next-arrow"
           onClick={() =>
-            setCurrentMediaIndex((prevState) =>
+            setCurrMediaIndex((prevState) =>
               prevState === lastMediaIndex ? 0 : ++prevState
             )
           }
-        ></button>
-        <ChevronRight className="next-btn" />
-      </ButtonsContainer>
+        >
+          <ChevronRight size="5rem" />
+        </button>
+      </ArrowsContainer>
     </InitialMediaContainer>
   );
 }

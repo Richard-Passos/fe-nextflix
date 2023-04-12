@@ -10,8 +10,8 @@ export const CardContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.theme};
   border: 0.1rem solid transparent;
   border-radius: 1rem;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
-    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0 1.3rem 2.7rem -0.5rem,
+    rgba(0, 0, 0, 0.3) 0 0.8rem 1.6rem -0.8rem;
   overflow: hidden;
   transition: 0.3s;
 

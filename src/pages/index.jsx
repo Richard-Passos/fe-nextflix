@@ -7,10 +7,19 @@ import Link from "next/link";
 import { getMedias } from "@/services/TMDB_API";
 
 export default function Home({ medias }) {
-  const initialMedias = medias.map(
-    ({ content }) =>
-      content.filter((obj) => obj.poster_path && obj.backdrop_path)[0]
-  );
+  const initialMedias = [];
+
+  medias.forEach(({ content }) => {
+    const filter = content.filter(
+      (obj) => obj.poster_path && obj.backdrop_path
+    );
+
+    const uniqueMedia = filter.find(
+      ({ id }) => !initialMedias.find((item) => item.id === id)
+    );
+
+    initialMedias.push(uniqueMedia);
+  });
 
   return (
     <>

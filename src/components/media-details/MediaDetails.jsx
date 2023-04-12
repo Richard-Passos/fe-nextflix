@@ -14,7 +14,7 @@ import { Carousel } from "../carousel";
 import SkeletonLoader from "tiny-skeleton-loader-react";
 
 /* Logic */
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "styled-components";
 import { useDispatch } from "react-redux";
 import { store, toggleFavMedias } from "@/redux";
@@ -62,12 +62,21 @@ const colorRating = [
 ];
 
 export default function MediaDetails({ media, isFallback }) {
+  console.log("file: MediaDetails.jsx:65  MediaDetails  media", media.details);
+  console.log(
+    "file: MediaDetails.jsx:65  MediaDetails  isFallback",
+    isFallback
+  );
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   /* Skeleton loader uses*/
   const theme = useContext(ThemeContext);
 
   const [isImageLoad, setIsImageLoad] = useState(false);
+
+  useEffect(() => {
+    setIsImageLoad(false);
+  }, [media]);
   /*  */
 
   /* Some Media data */
@@ -108,7 +117,7 @@ export default function MediaDetails({ media, isFallback }) {
   };
   /*  */
 
-  return !isFallback ? (
+  return !isFallback && media.details ? (
     <DetailsContainer>
       <MainDetailsContainer
         backgroundImage={IMG_ORIGIN_PATH + details.backdrop_path}
@@ -194,12 +203,13 @@ export default function MediaDetails({ media, isFallback }) {
                 <ReactStarsRating
                   isEdit={false}
                   value={rating}
+                  size="2.5rem"
                   primaryColor={colorRating[Math.ceil(rating * 2)]}
                 />
                 <span>{textRating[Math.ceil(rating * 2)]}</span>
               </div>
 
-              <div className="favorite-btn-container">
+              <div className="fav-btn-container">
                 <Heart
                   size="2rem"
                   className={isFav ? "fav" : ""}
@@ -232,28 +242,32 @@ export default function MediaDetails({ media, isFallback }) {
               <p>{details.overview}</p>
             </div>
 
-            {videos[0] && (
-              <div className="trailer-container">
-                <ModalVideo
-                  channel="youtube"
-                  autoplay
-                  isOpen={isModalOpen}
-                  videoId={
-                    videos.filter((video) => video.type === "Trailer")[0].key ||
-                    videos[0].key
-                  }
-                  onClose={() => setIsModalOpen(false)}
-                  className="trailer-modal"
-                />
+            <div className="trailer-container">
+              {videos[0] ? (
+                <>
+                  <ModalVideo
+                    channel="youtube"
+                    autoplay
+                    isOpen={isModalOpen}
+                    videoId={
+                      videos.filter((video) => video.type === "Trailer")[0]
+                        .key || videos[0].key
+                    }
+                    onClose={() => setIsModalOpen(false)}
+                    className="trailer-modal"
+                  />
 
-                <button
-                  className="trailer-btn"
-                  onClick={() => setIsModalOpen(true)}
-                >
-                  <RightArrow size="1.7rem" /> Play Trailer
-                </button>
-              </div>
-            )}
+                  <button
+                    className="trailer-btn"
+                    onClick={() => setIsModalOpen(true)}
+                  >
+                    <RightArrow size="1.7rem" /> Play Trailer
+                  </button>
+                </>
+              ) : (
+                <p className="none-trailers">None trailers found</p>
+              )}
+            </div>
           </div>
         </MainDetails>
       </MainDetailsContainer>

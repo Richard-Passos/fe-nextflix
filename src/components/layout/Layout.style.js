@@ -7,7 +7,7 @@ export const LayoutContainer = styled.main`
   margin: 0 auto;
   background-color: ${({ theme }) => theme.colors.themeDarker};
   color: ${({ theme }) => theme.colors.text};
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0 0.3rem 0.8rem;
   overflow-x: hidden;
   isolation: isolate;
 

@@ -14,7 +14,7 @@ export const SidebarContainer = styled.aside`
 
   position: absolute;
   top: 0;
-  right: ${({ isOpen }) => (isOpen ? "0" : "-100vw")};
+  right: ${({ isOpen }) => (isOpen ? "0" : "min(-28rem, -100vw)")};
 
   display: flex;
   flex-direction: column;
@@ -23,7 +23,7 @@ export const SidebarContainer = styled.aside`
   header {
     min-height: 10vh;
     padding: 0 3rem;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 0.3rem 0.8rem;
 
     display: flex;
     justify-content: flex-end;

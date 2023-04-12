@@ -14,7 +14,7 @@ export default function Medias({ medias, totalPages }) {
 
       <Header />
 
-      {medias && <Pagination medias={medias} totalPages={totalPages} />}
+      <Pagination medias={medias} totalPages={totalPages} />
     </>
   );
 }
@@ -76,7 +76,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
 };
 

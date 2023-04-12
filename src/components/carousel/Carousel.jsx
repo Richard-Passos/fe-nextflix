@@ -1,5 +1,5 @@
 /* Components */
-import { CarouselContainer, ButtonsContainer } from "./Carousel.style";
+import { CarouselContainer, ArrowsContainer } from "./Carousel.style";
 import {
   CarouselProvider,
   Slider,
@@ -41,6 +41,10 @@ export default function Carousel({ children, title, slides, type = "media" }) {
   const CARD_GAP = 15 * (pageWidth >= 2000 ? 1.6 : 1);
   /*  */
 
+  console.log(
+    Math.floor(carousel?.current?.offsetWidth / (CARD_WIDTH + CARD_GAP))
+  );
+
   return (
     <CarouselContainer
       ref={carousel}
@@ -52,10 +56,11 @@ export default function Carousel({ children, title, slides, type = "media" }) {
       <div>
         <CarouselProvider
           visibleSlides={
-            carousel?.current?.offsetWidth / (CARD_WIDTH + CARD_GAP) -
-            (CARD_WIDTH >= 175 ? 0.1 : 0.2)
+            carousel?.current?.offsetWidth / (CARD_WIDTH + CARD_GAP)
           }
-          step={carousel?.current?.offsetWidth / (CARD_WIDTH + CARD_GAP) - 1}
+          step={Math.floor(
+            carousel?.current?.offsetWidth / (CARD_WIDTH + CARD_GAP)
+          )}
           naturalSlideWidth={CARD_WIDTH}
           naturalSlideHeight={CARD_HEIGHT}
           totalSlides={slides.length}
@@ -78,13 +83,15 @@ export default function Carousel({ children, title, slides, type = "media" }) {
                 ))}
           </Slider>
 
-          <ButtonsContainer>
-            <ButtonBack></ButtonBack>
-            <ChevronLeft className="carousel__back-button" />
+          <ArrowsContainer>
+            <ButtonBack className="prev-arrow">
+              <ChevronLeft size="5rem" />
+            </ButtonBack>
 
-            <ButtonNext></ButtonNext>
-            <ChevronRight className="carousel__next-button" />
-          </ButtonsContainer>
+            <ButtonNext className="next-arrow">
+              <ChevronRight size="5rem" />
+            </ButtonNext>
+          </ArrowsContainer>
         </CarouselProvider>
       </div>
     </CarouselContainer>

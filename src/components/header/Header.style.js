@@ -12,7 +12,7 @@ export const HeaderContainer = styled.header`
   color: ${({ theme }) => theme.colors.light};
 
   position: relative;
-  z-index: 2;
+  z-index: 100;
 
   display: flex;
   justify-content: space-between;

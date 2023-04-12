@@ -21,6 +21,7 @@ export const MainDetailsContainer = styled.div`
     url(${({ backgroundImage }) => backgroundImage});
 
   position: relative;
+  z-index: 10;
 
   display: flex;
   align-items: center;
@@ -39,12 +40,14 @@ export const MainDetailsContainer = styled.div`
   }
 
   .modal-video {
+    width: calc((51rem - 4.5rem) * 2);
+    height: calc(51rem - 4.5rem);
     background-color: ${({ theme }) => theme.colors.dark};
     border-radius: 1rem 0 1rem 1rem !important;
 
     position: absolute;
-    inset: calc((100% - clamp(0rem, 90vw, 100rem) / 2) / 2)
-      calc((100% - clamp(0rem, 90vw, 100rem)) / 2);
+    inset: calc(0.5rem + 3.5rem) calc((100% - ((51rem - 4.5rem) * 2)) / 2);
+
     z-index: 100;
 
     & iframe {
@@ -138,7 +141,7 @@ export const MainDetails = styled.div`
   }
 
   .poster-img {
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 0.3rem 0.8rem;
   }
 
   .text-details {
@@ -183,7 +186,7 @@ export const MainDetails = styled.div`
     align-items: center;
     gap: 1rem;
 
-    .favorite-btn-container {
+    .fav-btn-container {
       width: 4rem;
       height: 4rem;
       background-color: hsl(235, 30%, 20%);
@@ -270,6 +273,11 @@ export const MainDetails = styled.div`
         left: 0;
       }
     }
+  }
+
+  .none-trailers {
+    padding-top: 0.8rem;
+    font-size: 1.2em;
   }
 
   & > div {

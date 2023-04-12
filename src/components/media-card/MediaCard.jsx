@@ -5,7 +5,7 @@ import { Heart } from "@styled-icons/boxicons-regular";
 import Link from "next/link";
 
 /* Logic */
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import SkeletonLoader from "tiny-skeleton-loader-react";
 import { ThemeContext } from "styled-components";
 import { store, toggleFavMedias } from "@/redux";
@@ -35,8 +35,15 @@ export default function MediaCard({ media }) {
 
   const releaseDate = new Date(release_date);
 
+  /* Skeleton loader uses */
   const theme = useContext(ThemeContext);
+
   const [isImageLoad, setIsImageLoad] = useState(false);
+
+  useEffect(() => {
+    setIsImageLoad(false);
+  }, [media]);
+  /*  */
 
   /* Control favMedias state */
   const { favs } = store.getState().favMedias;

@@ -1,9 +1,12 @@
-/* Logic */
-import styled from "styled-components";
+/* Style */
 import { rgba } from "polished";
 
+/* Logic */
+import styled from "styled-components";
+
 export const CarouselContainer = styled.div`
-  max-width: 100vw;
+  max-width: 97vw;
+  margin: 0 auto;
 
   .carousel {
     position: relative;
@@ -13,7 +16,7 @@ export const CarouselContainer = styled.div`
     width: ${(props) =>
       `calc(${props.cardsCount} * (${props.cardWidth}px + ${props.cardGap}px))`} !important;
     height: ${({ cardHeight }) => `calc(${cardHeight}px + 4.5rem)`} !important;
-    margin-left: 1.5rem;
+    margin-left: 0.7rem;
     transition: 0.5s;
 
     display: flex;
@@ -67,52 +70,54 @@ export const CarouselContainer = styled.div`
   }
 `;
 
-export const ButtonsContainer = styled.div`
-  .carousel__back-button,
-  .carousel__next-button {
-    width: 5rem;
-    height: 5rem;
+export const ArrowsContainer = styled.div`
+  .prev-arrow,
+  .next-arrow {
+    padding: 0;
+    color: inherit;
     background-color: ${({ theme }) => rgba(theme.colors.theme, 0.5)};
     border: none;
     border-radius: 50%;
     transition: 0.3s ease-in;
+    overflow: hidden;
 
     position: absolute;
     top: calc((100% - 5rem) / 2);
     z-index: 1;
+
+    svg {
+      background-color: ${({ theme }) => rgba(theme.colors.theme, 0.5)};
+    }
 
     :hover {
       cursor: pointer;
       background-color: ${({ theme }) => rgba(theme.colors.oppositeTheme, 0.5)};
     }
   }
-  svg {
-    pointer-events: none;
-  }
 
-  .carousel__back-button {
+  .prev-arrow {
     left: -50%;
   }
-  .carousel__next-button {
+  .next-arrow {
     right: -50%;
   }
 
   ${CarouselContainer}:hover & {
-    .carousel__back-button {
+    .prev-arrow {
       left: 1%;
     }
 
-    .carousel__next-button {
+    .next-arrow {
       right: 1%;
     }
   }
 
   @media screen and (max-width: 768px) {
-    .carousel__back-button {
+    .prev-arrow {
       left: 1%;
     }
 
-    .carousel__next-button {
+    .next-arrow {
       right: 1%;
     }
   }
