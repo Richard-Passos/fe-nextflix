@@ -18,19 +18,6 @@ export const HeaderContainer = styled.header`
   justify-content: space-between;
   align-items: center;
 
-  .search-input {
-    width: 95%;
-    max-width: 35rem;
-    padding: 0.8rem 1.6rem;
-    background-color: ${({ theme }) => theme.colors.light};
-    font-size: 1.4em;
-    border-radius: 0.5rem;
-
-    ::placeholder {
-      color: ${({ theme }) => shade(0.1, theme.colors.gray)};
-    }
-  }
-
   .open-sidebar {
     transition: 0.3s;
 

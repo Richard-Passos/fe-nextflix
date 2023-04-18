@@ -15,6 +15,7 @@ import { Github, LinkedinSquare } from "@styled-icons/boxicons-logos";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "@/redux";
+import { v4 as uuidv4 } from "uuid";
 
 export default function Sidebar({ isOpen, setIsOpen }) {
   useEffect(() => {
@@ -31,30 +32,30 @@ export default function Sidebar({ isOpen, setIsOpen }) {
   const dispatch = useDispatch();
   /*  */
 
+  const itemsContent = [
+    <Link key={uuidv4()} href="/search/1">
+      <Search className="search-icon" size="2rem" /> Search Media
+    </Link>,
+    <Link key={uuidv4()} href="/favorites" className="link">
+      <Heart size="2rem" /> Favorites
+    </Link>,
+    <Link key={uuidv4()} href="/" className="link">
+      <Home size="2rem" /> Homepage
+    </Link>,
+  ];
+
   return (
     <SidebarContainer isOpen={isOpen}>
       <header>
-        <X size="3rem" onClick={() => setIsOpen(false)} />
+        <X size="3.5rem" onClick={() => setIsOpen(false)} />
       </header>
 
       <div>
-        <Item>
-          <Link href="/search/1">
-            <Search className="search-icon" size="2rem" /> Search Media
-          </Link>
-        </Item>
-
-        <Item>
-          <Link href="/" className="link">
-            <Heart size="2rem" /> Favorites
-          </Link>
-        </Item>
-
-        <Item>
-          <Link href="/" className="link">
-            <Home size="2rem" /> Homepage
-          </Link>
-        </Item>
+        {itemsContent.map((content) => (
+          <Item key={uuidv4()} onClick={() => setIsOpen(false)}>
+            {content}
+          </Item>
+        ))}
 
         <Item onClick={() => dispatch(toggleTheme("switch-theme"))}>
           {theme.title === "light" ? <Moon size="2rem" /> : <Sun size="2rem" />}{" "}

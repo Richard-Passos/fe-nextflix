@@ -40,13 +40,14 @@ export const MainDetailsContainer = styled.div`
   }
 
   .modal-video {
-    width: calc((51rem - 4.5rem) * 2);
-    height: calc(51rem - 4.5rem);
+    width: min(calc((51rem - 4.5rem) * 2), 98vw);
+    height: min(calc(51rem - 4.5rem), 49vw);
     background-color: ${({ theme }) => theme.colors.dark};
     border-radius: 1rem 0 1rem 1rem !important;
 
     position: absolute;
-    inset: calc(0.5rem + 3.5rem) calc((100% - ((51rem - 4.5rem) * 2)) / 2);
+    inset: calc(0.5rem + 3.5rem)
+      max(calc((100% - ((51rem - 4.5rem) * 2)) / 2), calc((100% - 98vw) / 2));
 
     z-index: 100;
 
@@ -194,16 +195,17 @@ export const MainDetails = styled.div`
 
       position: relative;
 
-      :hover {
-        cursor: pointer;
-      }
-
       svg {
         transition: 0.3s;
       }
 
+      :hover {
+        cursor: pointer;
+        color: ${() => rgba("hsl(341, 100%, 50%)", 0.5)};
+      }
+
       .fav {
-        color: hsl(341, 100%, 50%);
+        color: hsl(341, 100%, 50%) !important;
       }
     }
 
@@ -304,8 +306,8 @@ export const MainDetails = styled.div`
   @media screen and (max-width: 376px) {
     font-size: clamp(1rem, 3.5vw, 1.4rem);
 
-    .title,
-    .trailer-container {
+    > .title,
+    > .trailer-container {
       text-align: center;
 
       display: flex;

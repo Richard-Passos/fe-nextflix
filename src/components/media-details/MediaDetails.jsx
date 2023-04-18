@@ -18,6 +18,7 @@ import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "styled-components";
 import { useDispatch } from "react-redux";
 import { store, toggleFavMedias } from "@/redux";
+import { v4 as uuidv4 } from "uuid";
 
 const IMG_ORIGIN_PATH = "https://image.tmdb.org/t/p/original";
 
@@ -62,11 +63,6 @@ const colorRating = [
 ];
 
 export default function MediaDetails({ media, isFallback }) {
-  console.log("file: MediaDetails.jsx:65  MediaDetails  media", media.details);
-  console.log(
-    "file: MediaDetails.jsx:65  MediaDetails  isFallback",
-    isFallback
-  );
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   /* Skeleton loader uses*/
@@ -157,7 +153,7 @@ export default function MediaDetails({ media, isFallback }) {
               <li>
                 <div className="container-flex">
                   {details.genres.map((genre, i) => (
-                    <div key={`key-genre-${i}`}>
+                    <div key={uuidv4()}>
                       <p className="genres-name">{genre.name}</p>
 
                       {details.genres.length > ++i && (
@@ -209,12 +205,8 @@ export default function MediaDetails({ media, isFallback }) {
                 <span>{textRating[Math.ceil(rating * 2)]}</span>
               </div>
 
-              <div className="fav-btn-container">
-                <Heart
-                  size="2rem"
-                  className={isFav ? "fav" : ""}
-                  onClick={toggleFavState}
-                />
+              <div className="fav-btn-container" onClick={toggleFavState}>
+                <Heart size="2rem" className={isFav ? "fav" : ""} />
               </div>
             </div>
 
@@ -224,7 +216,7 @@ export default function MediaDetails({ media, isFallback }) {
               <div className="container-flex">
                 {createdBy.length
                   ? createdBy.map((creator, i) => (
-                      <div key={`key-creator-${i}`} className="creators-name">
+                      <div key={uuidv4()} className="creators-name">
                         <p>{creator.name}</p>
 
                         {createdBy.length > ++i && (
@@ -265,7 +257,7 @@ export default function MediaDetails({ media, isFallback }) {
                   </button>
                 </>
               ) : (
-                <p className="none-trailers">None trailers found</p>
+                <p className="none-trailers">Trailer not found</p>
               )}
             </div>
           </div>

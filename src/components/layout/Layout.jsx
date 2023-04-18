@@ -1,6 +1,7 @@
 /* Components */
 import Head from "next/head";
 import { LayoutContainer } from "./Layout.style";
+import { Header } from "../header";
 import { Footer } from "../footer";
 
 /* Logic */
@@ -34,6 +35,7 @@ export default function Layout({ children, classN }) {
         </Head>
 
         <LayoutContainer className={classN}>
+          <Header />
           {children}
           <Footer />
         </LayoutContainer>

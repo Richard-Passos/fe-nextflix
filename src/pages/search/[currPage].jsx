@@ -1,39 +1,49 @@
 /* Components */
 import Head from "next/head";
-import { Header, Pagination } from "@/components";
+import { Pagination } from "@/components";
+import { SearchInput } from "@/utils";
 
 /* Logic */
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { searchMedia } from "@/services/TMDB_API";
+import { useDebounce } from "use-debounce";
 
 export default function Medias() {
   const router = useRouter();
+  const baseLink = "/search";
 
-  const [search, setSearch] = useState("a" /* Initial request to TMDB API */);
+  const [search, setSearch] = useState("");
+  const [debouncedSearch] = useDebounce(search, 800);
 
   const [medias, setMedias] = useState([]);
+  const [page] = useState(router.query.currPage);
   const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
-    searchMedia(setMedias, search, setTotalPages);
-    router.push("/search/1");
-  }, [search]);
+    searchMedia(setMedias, debouncedSearch, setTotalPages);
+    router.push(`${baseLink}/1`);
+  }, [debouncedSearch]);
 
   useEffect(() => {
-    if (router.query.currPage)
-      searchMedia(setMedias, search, null, router.query.currPage);
-  }, [router.query]);
+    searchMedia(setMedias, debouncedSearch, null, page);
+  }, [page]);
 
   return (
     <>
       <Head>
-        <title>NextFlix - Pagination</title>
+        <title>NextFlix - Search</title>
       </Head>
 
-      <Header input setState={setSearch} />
+      <SearchInput
+        className="search-input"
+        type="search"
+        placeholder="Media Title"
+        onChange={(e) => setSearch(e.target.value)}
+        autoFocus
+      />
 
-      <Pagination medias={medias} totalPages={totalPages} />
+      <Pagination medias={medias} totalPages={totalPages} baseLink={baseLink} />
     </>
   );
 }

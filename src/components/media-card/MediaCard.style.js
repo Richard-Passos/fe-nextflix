@@ -134,11 +134,12 @@ export const CardContainer = styled.div`
 
       :hover {
         cursor: pointer;
+        color: ${() => rgba("hsl(341, 100%, 50%)", 0.5)};
       }
     }
 
     .fav {
-      color: hsl(341, 100%, 50%);
+      color: hsl(341, 100%, 50%) !important;
     }
   }
 `;

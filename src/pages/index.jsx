@@ -1,10 +1,11 @@
 /* Components */
 import Head from "next/head";
-import { Carousel, Header, InitialMedia } from "@/components";
+import { Carousel, InitialMedia } from "@/components";
 import Link from "next/link";
 
 /* Logic */
 import { getMedias } from "@/services/TMDB_API";
+import { v4 as uuidv4 } from "uuid";
 
 export default function Home({ medias }) {
   const initialMedias = [];
@@ -27,21 +28,19 @@ export default function Home({ medias }) {
         <title>NextFlix - Home</title>
       </Head>
 
-      <Header />
-
       <InitialMedia initialMedias={initialMedias} />
 
       <div className="carousels">
-        {medias.map((media, i) => (
+        {medias.map((media) => (
           <Carousel
-            key={`key-carousel-${i}`}
+            key={uuidv4()}
             title={`${media.classification} ${
               media.type === "movie" ? "movies" : "series"
             }`}
             slides={media.content}
           >
             <Link
-              href={`/${media.type}/${media.classification}/${1}`}
+              href={`/${media.type}/${media.classification}/1`}
               className="btn-show-all"
             >
               Show All

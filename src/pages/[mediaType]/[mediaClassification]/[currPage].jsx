@@ -1,20 +1,22 @@
 /* Components */
 import Head from "next/head";
-import { Header, Pagination } from "@/components";
+import { Pagination } from "@/components";
 
 /* Logic */
 import { getMedias } from "@/services/TMDB_API";
+import { useRouter } from "next/router";
 
 export default function Medias({ medias, totalPages }) {
+  const { mediaType, mediaClassification } = useRouter().query;
+  const baseLink = `/${mediaType}/${mediaClassification}`;
+
   return (
     <>
       <Head>
         <title>NextFlix - Pagination</title>
       </Head>
 
-      <Header />
-
-      <Pagination medias={medias} totalPages={totalPages} />
+      <Pagination medias={medias} totalPages={totalPages} baseLink={baseLink} />
     </>
   );
 }
@@ -76,7 +78,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 };
 

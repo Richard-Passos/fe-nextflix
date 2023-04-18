@@ -1,6 +1,6 @@
 /* Components */
 import Head from "next/head";
-import { Header, MediaDetails } from "@/components";
+import { MediaDetails } from "@/components";
 import { getMediaDetails } from "@/services/TMDB_API";
 
 /* Logic */
@@ -12,10 +12,8 @@ export default function Details({ media }) {
   return (
     <>
       <Head>
-        <title>NextFlix - Media details</title>
+        <title>NextFlix - Media Details</title>
       </Head>
-
-      <Header />
 
       {media && <MediaDetails media={media} isFallback={router.isFallback} />}
     </>

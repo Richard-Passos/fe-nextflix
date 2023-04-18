@@ -13,6 +13,7 @@ import { ChevronRight, ChevronLeft } from "@styled-icons/boxicons-regular";
 
 /* Logic */
 import { useEffect, useRef, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 export default function Carousel({ children, title, slides, type = "media" }) {
   const [pageWidth, setPageWidth] = useState(null);
@@ -41,10 +42,6 @@ export default function Carousel({ children, title, slides, type = "media" }) {
   const CARD_GAP = 15 * (pageWidth >= 2000 ? 1.6 : 1);
   /*  */
 
-  console.log(
-    Math.floor(carousel?.current?.offsetWidth / (CARD_WIDTH + CARD_GAP))
-  );
-
   return (
     <CarouselContainer
       ref={carousel}
@@ -72,12 +69,12 @@ export default function Carousel({ children, title, slides, type = "media" }) {
           <Slider>
             {type === "media"
               ? slides.map((media, i) => (
-                  <Slide index={i} key={`key-slide-${i}`}>
+                  <Slide index={i} key={uuidv4()}>
                     <MediaCard media={media} />
                   </Slide>
                 ))
               : slides.map((person, i) => (
-                  <Slide index={i} key={`key-slide-${i}`}>
+                  <Slide index={i} key={uuidv4()}>
                     <PersonCard person={person} />
                   </Slide>
                 ))}
