@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight } from "@styled-icons/boxicons-regular";
 
 /* Logic */
 import { useRouter } from "next/router";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 const MAX_BTNS = 9;
 export default function Buttons({ baseLink, totalPages }) {
@@ -14,7 +14,7 @@ export default function Buttons({ baseLink, totalPages }) {
   if (currPage)
     return (
       <ButtonsContainer maxBtns={MAX_BTNS} currPage={currPage}>
-        <button disabled={+currPage === 1}>
+        <button disabled={currPage <= 1}>
           <Link href={`${baseLink}/${+currPage - 1}`}>
             <ChevronLeft size="2rem" />
           </Link>
@@ -24,7 +24,7 @@ export default function Buttons({ baseLink, totalPages }) {
           <div>{createPaginationBtns(currPage, totalPages, baseLink)}</div>
         </div>
 
-        <button disabled={+currPage === totalPages}>
+        <button disabled={currPage >= totalPages}>
           <Link href={`${baseLink}/${+currPage + 1}`}>
             <ChevronRight size="2rem" />
           </Link>

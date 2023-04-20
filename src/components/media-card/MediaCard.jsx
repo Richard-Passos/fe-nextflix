@@ -8,8 +8,8 @@ import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import SkeletonLoader from "tiny-skeleton-loader-react";
 import { ThemeContext } from "styled-components";
-import { store, toggleFavMedias } from "@/redux";
-import { useDispatch } from "react-redux";
+import { toggleFavMedias } from "@/redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const MONTHS = [
   "Jan",
@@ -55,7 +55,7 @@ export default function MediaCard({ media }) {
   /*  */
 
   /* Control favMedias state */
-  const { favs } = store.getState().favMedias;
+  const { favs } = useSelector((state) => state.favMedias);
   const [isFav, setIsFav] = useState(favs.find((media) => media.id === id));
 
   const dispatch = useDispatch();
@@ -73,6 +73,10 @@ export default function MediaCard({ media }) {
       })
     );
   };
+
+  useEffect(() => {
+    setIsFav(favs.find((media) => media.id === id));
+  }, [favs]);
   /*  */
 
   return (

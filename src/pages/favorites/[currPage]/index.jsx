@@ -11,10 +11,10 @@ export default function Favorites() {
   const { currPage } = useRouter().query;
 
   const contentPerPage = 20;
-  const medias = favs.slice(
-    (currPage - 1) * contentPerPage,
-    contentPerPage * currPage
-  );
+  const medias =
+    currPage > 0
+      ? favs.slice((currPage - 1) * contentPerPage, contentPerPage * currPage)
+      : [];
 
   const totalPages = favs.length / contentPerPage;
 
