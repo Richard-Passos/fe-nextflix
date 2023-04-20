@@ -54,8 +54,8 @@ export const getMediaDetails = async (mediaType, mediaId) => {
 
   return {
     details,
-    videos: videos?.results,
-    castNCrew: [...castNCrew?.cast, ...castNCrew?.crew],
-    similarMovies: similarMovies?.results,
+    videos: videos.results,
+    castNCrew: [...castNCrew.cast, ...castNCrew.crew],
+    similarMovies: similarMovies.results,
   };
 };

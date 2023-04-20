@@ -10,7 +10,9 @@ export const favMediasSlice = createSlice({
   initialState,
   reducers: {
     toggleFavMedias: (state, action) => {
-      const isMediaFav = state.favs.findIndex((id) => id === action.payload);
+      const isMediaFav = state.favs.findIndex(
+        (media) => media.id === action.payload.id
+      );
 
       if (isMediaFav !== -1) {
         state.favs.splice(isMediaFav, 1);

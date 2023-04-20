@@ -36,7 +36,7 @@ export default function Sidebar({ isOpen, setIsOpen }) {
     <Link key={uuidv4()} href="/search/1">
       <Search className="search-icon" size="2rem" /> Search Media
     </Link>,
-    <Link key={uuidv4()} href="/favorites" className="link">
+    <Link key={uuidv4()} href="/favorites/1" className="link">
       <Heart size="2rem" /> Favorites
     </Link>,
     <Link key={uuidv4()} href="/" className="link">

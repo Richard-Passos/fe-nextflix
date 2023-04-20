@@ -56,14 +56,22 @@ export default function MediaCard({ media }) {
 
   /* Control favMedias state */
   const { favs } = store.getState().favMedias;
-  const [isFav, setIsFav] = useState(favs.includes(id));
+  const [isFav, setIsFav] = useState(favs.find((media) => media.id === id));
 
   const dispatch = useDispatch();
 
   const toggleFavState = () => {
     setIsFav((prevState) => !prevState);
 
-    dispatch(toggleFavMedias(id));
+    dispatch(
+      toggleFavMedias({
+        id,
+        release_date: media.release_date ?? media.first_air_date,
+        poster_path: media.poster_path,
+        title,
+        type,
+      })
+    );
   };
   /*  */
 

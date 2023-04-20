@@ -78,9 +78,17 @@ export default function MediaDetails({ media, isFallback }) {
   /* Some Media data */
   const { details, videos, castNCrew, similarMovies } = media;
 
-  const releaseDate = details
-    ? new Date(details.release_date ?? details.first_air_date)
-    : null;
+  /* Normalize date */
+  const date = new Date(details.release_date ?? details.first_air_date);
+
+  const year = date.getFullYear();
+  const month = MONTHS[date.getMonth()];
+  const day = date.getDate().toString().padStart(2, "0");
+
+  const releaseDate = date
+    ? `${month} ${day}, ${year}`
+    : "Release date not found";
+  /*  */
 
   const runTime = details
     ? details.runtime ?? details.episode_run_time[0] ?? 0
@@ -102,14 +110,24 @@ export default function MediaDetails({ media, isFallback }) {
 
   /* Control favMedias state */
   const { favs } = store.getState().favMedias;
-  const [isFav, setIsFav] = useState(favs.includes(details.id));
+  const [isFav, setIsFav] = useState(
+    favs.find((media) => media.id === details.id)
+  );
 
   const dispatch = useDispatch();
 
   const toggleFavState = () => {
     setIsFav((prevState) => !prevState);
 
-    dispatch(toggleFavMedias(details.id));
+    dispatch(
+      toggleFavMedias({
+        id: details.id,
+        release_date: details.release_date ?? details.first_air_date,
+        poster_path: details.poster_path,
+        title: details.title ?? details.name,
+        type: details.title ? "movie" : "tv",
+      })
+    );
   };
   /*  */
 
@@ -167,15 +185,7 @@ export default function MediaDetails({ media, isFallback }) {
               <li>
                 <div className="container-flex">
                   <h4>Release date:</h4>
-                  <p>
-                    {releaseDate
-                      ? `${MONTHS[releaseDate.getMonth()]} ${(
-                          releaseDate.getDate() + 1
-                        )
-                          .toString()
-                          .padStart(2, "0")}, ${releaseDate.getFullYear()}`
-                      : "Release date not found"}
-                  </p>
+                  <p>{releaseDate}</p>
 
                   <span role="separator">|</span>
 
