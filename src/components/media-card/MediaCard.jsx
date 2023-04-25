@@ -1,7 +1,7 @@
 /* Components */
 import { CardContainer } from "./MediaCard.style";
 import { Image } from "@/utils";
-import { Heart } from "@styled-icons/boxicons-regular";
+import { FiHeart } from "react-icons/fi";
 import Link from "next/link";
 
 /* Logic */
@@ -82,9 +82,6 @@ export default function MediaCard({ media }) {
   return (
     <CardContainer>
       <Link href={`/${type}/details/${id}`} className="image-container">
-        <p className="details-p">Go to media</p>
-        <button className="details-btn">Details</button>
-
         <SkeletonLoader
           width="17.5rem"
           height="23rem"
@@ -118,7 +115,7 @@ export default function MediaCard({ media }) {
         <small>{releaseDate}</small>
 
         <div className="icon-favorite-container" role="button">
-          <Heart
+          <FiHeart
             className={isFav ? "fav" : ""}
             size="1.7rem"
             onClick={toggleFavState}

@@ -1,62 +1,89 @@
 /* Components */
-import { InitialMediaContainer, ArrowsContainer } from "./InitialMedia.style";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import { Container, MainImage, IllustrationImage } from "./InitialMedia.style";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight } from "@styled-icons/boxicons-regular";
+import { Image } from "@/utils";
 
 /* Logic */
-import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { useEffect, useRef } from "react";
 
 export default function InitialMedia({ initialMedias }) {
-  const lastMediaIndex = 4;
-  const [currMediaIndex, setCurrMediaIndex] = useState(0);
+  const mainCarousel = useRef();
+  const thumbCarousel = useRef();
 
   useEffect(() => {
-    const interval = setInterval(
-      () =>
-        setCurrMediaIndex((prevState) =>
-          prevState === lastMediaIndex ? 0 : ++prevState
-        ),
-      10000
-    ); /* Switch image each 10s */
-
-    return () => clearInterval(interval);
-  }, []);
+    if (mainCarousel.current)
+      mainCarousel.current.sync(thumbCarousel.current.splide);
+  }, [mainCarousel, thumbCarousel]);
 
   return (
-    <InitialMediaContainer
-      phoneUrl={initialMedias[currMediaIndex].poster_path}
-      desktopUrl={initialMedias[currMediaIndex].backdrop_path}
-    >
-      <Link
-        className="details-link"
-        href={`/details/${
-          initialMedias[currMediaIndex].title ? "movie" : "tv"
-        }/${initialMedias[currMediaIndex].id}`}
-      ></Link>
-
-      <ArrowsContainer>
-        <button
-          className="prev-arrow"
-          onClick={() =>
-            setCurrMediaIndex((prevState) =>
-              prevState === 0 ? lastMediaIndex : --prevState
-            )
-          }
+    <Container>
+      <MainImage>
+        <Splide
+          ref={mainCarousel}
+          options={{
+            type: "fade",
+            rewind: true,
+            perPage: 1,
+            autoplay: true,
+            interval: 5000,
+          }}
         >
-          <ChevronLeft size="5rem" />
-        </button>
+          {initialMedias.map((media) => (
+            <SplideSlide key={uuidv4()}>
+              <Link
+                href={`/${media.title ? "movie" : "tv"}/details/${media.id}`}
+              >
+                <picture className="image-container">
+                  <source
+                    srcSet={`https://image.tmdb.org/t/p/original${media.backdrop_path}`}
+                    media="(min-width: 600px)"
+                  />
 
-        <button
-          className="next-arrow"
-          onClick={() =>
-            setCurrMediaIndex((prevState) =>
-              prevState === lastMediaIndex ? 0 : ++prevState
-            )
-          }
+                  <Image
+                    src={`https://image.tmdb.org/t/p/original${media.poster_path}`}
+                    fill
+                    sizes="(min-width: 0px) 90vw"
+                    priority
+                    alt="Initial image"
+                  />
+                </picture>
+              </Link>
+            </SplideSlide>
+          ))}
+        </Splide>
+      </MainImage>
+
+      <IllustrationImage>
+        <Splide
+          ref={thumbCarousel}
+          options={{
+            type: "fade",
+            pagination: false,
+            arrows: false,
+          }}
         >
-          <ChevronRight size="5rem" />
-        </button>
-      </ArrowsContainer>
-    </InitialMediaContainer>
+          {initialMedias.map((media) => (
+            <SplideSlide key={uuidv4()}>
+              <picture>
+                <source
+                  srcSet={`https://image.tmdb.org/t/p/original${media.backdrop_path}`}
+                  media="(min-width: 600px)"
+                />
+
+                <Image
+                  src={`https://image.tmdb.org/t/p/original${media.poster_path}`}
+                  fill
+                  sizes="(min-width: 0px) 100vw"
+                  priority
+                  alt="Illustration image"
+                />
+              </picture>
+            </SplideSlide>
+          ))}
+        </Splide>
+      </IllustrationImage>
+    </Container>
   );
 }

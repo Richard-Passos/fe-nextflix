@@ -65,9 +65,8 @@ export const ButtonsContainer = styled.div`
               100% - 58.44rem +
                 (
                   ${({ maxBtns, currPage }) =>
-                    13.3 * currPage > 5
-                      ? 0
-                      : Math.ceil(maxBtns / 2) - currPage}rem
+                    13.3 *
+                    (currPage > 5 ? 0 : Math.ceil(maxBtns / 2) - currPage)}rem
                 )
             ) / 2
         );

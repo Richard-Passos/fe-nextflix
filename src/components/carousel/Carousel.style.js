@@ -2,41 +2,97 @@
 import { rgba } from "polished";
 
 /* Logic */
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const rotate = keyframes`
+  from {
+    transform: rotate(45deg);
+  }
+  to {
+    transform: rotate(405deg);
+  }
+`;
 
 export const CarouselContainer = styled.div`
-  max-width: 97vw;
-  margin: 0 auto;
+  position: relative;
 
-  .carousel {
-    position: relative;
+  .splide {
+    .splide__slide {
+      padding: 0.1rem;
+      border-radius: 1rem;
+      overflow: hidden;
+      opacity: 0.5;
+      transition: 0.3s;
+
+      ::before {
+        content: "";
+        width: 200%;
+        height: 50%;
+        border-radius: 1rem;
+        background-color: transparent;
+        transform: rotate(45deg);
+
+        position: absolute;
+        top: 25%;
+        left: -50%;
+        z-index: -1;
+      }
+
+      &.is-active,
+      :hover {
+        opacity: 1;
+
+        :before {
+          background-color: ${({ theme }) => theme.colors.primary};
+
+          animation: ${rotate} 5s ease-out infinite;
+        }
+      }
+    }
+
+    .splide__arrow {
+      top: calc(50% - 1.25rem);
+
+      svg {
+        fill: ${({ theme }) => rgba(theme.colors.oppositeTheme, 0.5)};
+      }
+
+      :hover {
+        svg {
+          fill: ${({ theme }) => theme.colors.primary};
+        }
+      }
+    }
+
+    .splide__pagination {
+      bottom: -1rem;
+
+      .splide__pagination__page {
+        background-color: ${({ theme }) =>
+          rgba(theme.colors.oppositeTheme, 0.5)};
+
+        :hover {
+          background-color: ${({ theme }) => rgba(theme.colors.primary, 0.5)};
+        }
+
+        &.is-active {
+          background-color: ${({ theme }) => theme.colors.primary};
+        }
+      }
+
+      @media screen and (min-width: 540px) {
+        bottom: 0;
+      }
+    }
   }
 
-  .carousel__slider-tray--horizontal {
-    width: ${(props) =>
-      `calc(${props.cardsCount} * (${props.cardWidth}px + ${props.cardGap}px))`} !important;
-    height: ${({ cardHeight }) => `calc(${cardHeight}px + 4.5rem)`} !important;
-    margin-left: 0.7rem;
-    transition: 0.5s;
-
-    display: flex;
-    align-items: flex-end;
-    gap: ${({ cardGap }) => `${cardGap}px`};
-  }
-
-  .carousel__slide,
-  .carousel__inner-slide {
-    width: ${({ cardWidth }) => `${cardWidth}px`} !important;
-    padding: 0 !important;
-  }
-
-  .carousel-title {
-    font-size: 1.6em;
+  > .title {
+    font-size: 1.4em;
     text-transform: capitalize;
 
     position: absolute;
-    top: 1rem;
-    left: calc(1% + 2rem);
+    top: -0.5rem;
+    left: 3rem;
 
     ::before {
       content: "";
@@ -45,80 +101,37 @@ export const CarouselContainer = styled.div`
       background-color: ${({ theme }) => theme.colors.primary};
 
       position: absolute;
-      top: 0%;
+      top: 0;
       left: -1rem;
     }
   }
 
   .btn-show-all {
-    padding: 1rem 2rem;
-    background-color: transparent;
-    border: 0.1rem solid ${({ theme }) => theme.colors.oppositeTheme};
-    border-radius: 2rem;
-    font-size: 1.2em;
-    transition: 0.3s;
+    font-size: 1.4em;
+    font-weight: bold;
 
     position: absolute;
-    top: 0;
-    right: 1%;
-    z-index: 1;
+    top: -0.5rem;
+    right: 3rem;
+    z-index: 10;
 
-    :hover {
-      cursor: pointer;
-      background-color: ${({ theme }) => theme.colors.themeLighter};
-    }
-  }
-`;
+    :before {
+      content: "";
+      height: 0.1rem;
+      background-color: ${({ theme }) => theme.colors.text};
+      transition: 0.3s;
 
-export const ArrowsContainer = styled.div`
-  .prev-arrow,
-  .next-arrow {
-    padding: 0;
-    color: inherit;
-    background-color: ${({ theme }) => rgba(theme.colors.theme, 0.5)};
-    border: none;
-    border-radius: 50%;
-    transition: 0.3s ease-in;
-    overflow: hidden;
-
-    position: absolute;
-    top: calc((100% - 5rem) / 2);
-    z-index: 1;
-
-    svg {
-      background-color: ${({ theme }) => rgba(theme.colors.theme, 0.5)};
+      position: absolute;
+      bottom: -0.25rem;
+      inset-inline: 50%;
     }
 
     :hover {
       cursor: pointer;
-      background-color: ${({ theme }) => rgba(theme.colors.oppositeTheme, 0.5)};
-    }
-  }
 
-  .prev-arrow {
-    left: -50%;
-  }
-  .next-arrow {
-    right: -50%;
-  }
-
-  ${CarouselContainer}:hover & {
-    .prev-arrow {
-      left: 1%;
-    }
-
-    .next-arrow {
-      right: 1%;
-    }
-  }
-
-  @media screen and (max-width: 768px) {
-    .prev-arrow {
-      left: 1%;
-    }
-
-    .next-arrow {
-      right: 1%;
+      :before {
+        inset-inline: 0;
+      }
     }
   }
 `;

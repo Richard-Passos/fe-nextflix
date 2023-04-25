@@ -1,82 +1,71 @@
 /* Components */
-import { SidebarContainer, Item, IconContainer } from "./Sidebar.style";
-import {
-  Heart,
-  Home,
-  Moon,
-  Search,
-  Sun,
-  X,
-} from "@styled-icons/boxicons-regular";
+import { SidebarContainer, List } from "./Sidebar.style";
+import { FiHeart, FiHome, FiMoon, FiSearch, FiSun, FiX } from "react-icons/fi";
 import Link from "next/link";
-import { Github, LinkedinSquare } from "@styled-icons/boxicons-logos";
 
 /* Logic */
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "@/redux";
 import { v4 as uuidv4 } from "uuid";
+import { Contact } from "../contact";
+
+const itemsContent = [
+  <Link key={uuidv4()} href="/search/1">
+    <FiSearch className="search-icon" size="2rem" /> Search Media
+  </Link>,
+  <Link key={uuidv4()} href="/favorites/1" className="link">
+    <FiHeart size="2rem" /> Favorites
+  </Link>,
+  <Link key={uuidv4()} href="/" className="link">
+    <FiHome size="2rem" /> Homepage
+  </Link>,
+];
 
 export default function Sidebar({ isOpen, setIsOpen }) {
   useEffect(() => {
-    document.querySelector("body").style.overflowY = isOpen
-      ? "hidden"
-      : "initial";
+    if (isOpen) {
+      document.querySelector("body").style.overflowY = "hidden";
 
-    if (isOpen) window.scrollTo(0, 0);
+      window.scrollTo(0, 0);
+    } else {
+      document.querySelector("body").style.overflowY = "initial";
+    }
   }, [isOpen]);
 
-  /* Control appTheme state */
+  /* Theme state */
   const { theme } = useSelector((state) => state.appTheme);
 
   const dispatch = useDispatch();
   /*  */
 
-  const itemsContent = [
-    <Link key={uuidv4()} href="/search/1">
-      <Search className="search-icon" size="2rem" /> Search Media
-    </Link>,
-    <Link key={uuidv4()} href="/favorites/1" className="link">
-      <Heart size="2rem" /> Favorites
-    </Link>,
-    <Link key={uuidv4()} href="/" className="link">
-      <Home size="2rem" /> Homepage
-    </Link>,
-  ];
-
   return (
     <SidebarContainer isOpen={isOpen}>
       <header>
-        <X size="3.5rem" onClick={() => setIsOpen(false)} />
+        <FiX size="3em" onClick={() => setIsOpen((prevState) => !prevState)} />
       </header>
 
-      <div>
+      <List>
         {itemsContent.map((content) => (
-          <Item key={uuidv4()} onClick={() => setIsOpen(false)}>
+          <li key={uuidv4()} onClick={() => setIsOpen(false)}>
             {content}
-          </Item>
+          </li>
         ))}
 
-        <Item onClick={() => dispatch(toggleTheme("switch-theme"))}>
-          {theme.title === "light" ? <Moon size="2rem" /> : <Sun size="2rem" />}{" "}
-          Switch Theme
-        </Item>
-      </div>
+        <li onClick={() => dispatch(toggleTheme("switch-theme"))}>
+          <span>
+            {theme.title === "light" ? (
+              <FiMoon size="2rem" />
+            ) : (
+              <FiSun size="2rem" />
+            )}{" "}
+            Switch Theme
+          </span>
+        </li>
+      </List>
 
       <footer>
-        <h3>Make Contact</h3>
-
-        <div>
-          <IconContainer href="https://github.com/Richard-Passos">
-            <Github size="3em" />
-            <p className="icon-name">Github</p>
-          </IconContainer>
-
-          <IconContainer href="https://www.linkedin.com/in/richard-passos-91703624b/">
-            <LinkedinSquare size="3em" />
-            <p className="icon-name">LinkedIn</p>
-          </IconContainer>
-        </div>
+        <Contact />
       </footer>
     </SidebarContainer>
   );

@@ -1,12 +1,10 @@
 /* style */
-import { lighten, rgba, shade } from "polished";
+import { rgba } from "polished";
 
 /* Logic */
 import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
-  width: 100%;
-  min-height: 10vh;
   padding: 1.5rem 3rem;
   background-color: ${({ theme }) => rgba(theme.colors.dark, 0.95)};
   color: ${({ theme }) => theme.colors.light};
@@ -18,15 +16,12 @@ export const HeaderContainer = styled.header`
   justify-content: space-between;
   align-items: center;
 
-  .open-sidebar {
+  .sidebar-opener {
     transition: 0.3s;
 
     :hover {
       cursor: pointer;
-      color: ${({ theme }) =>
-        theme.title === "light"
-          ? lighten(0.5, theme.colors.text)
-          : shade(0.5, theme.colors.text)};
+      color: ${({ theme }) => rgba(theme.colors.light, 0.5)};
     }
   }
 `;
@@ -40,6 +35,11 @@ export const LogoContainer = styled.div`
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+
+  /* To be behind sidebar */
+  position: relative;
+  z-index: -1;
+  /*  */
 
   .logo {
     font-size: 3em;

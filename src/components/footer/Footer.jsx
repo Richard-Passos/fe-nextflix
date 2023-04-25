@@ -1,6 +1,6 @@
 /* Components */
-import { Container, Content, IconContainer } from "./Footer.style";
-import { Github, LinkedinSquare } from "@styled-icons/boxicons-logos";
+import { Container, Content } from "./Footer.style";
+import { Contact } from "../contact";
 
 export default function Footer() {
   return (
@@ -15,19 +15,7 @@ export default function Footer() {
       </Content>
 
       <Content>
-        <h4>Make contact</h4>
-
-        <div>
-          <IconContainer href="https://github.com/Richard-Passos">
-            <Github size="3em" />
-            <p className="icon-name">Github</p>
-          </IconContainer>
-
-          <IconContainer href="https://www.linkedin.com/in/richard-passos-91703624b/">
-            <LinkedinSquare size="3em" />
-            <p className="icon-name">LinkedIn</p>
-          </IconContainer>
-        </div>
+        <Contact />
       </Content>
     </Container>
   );

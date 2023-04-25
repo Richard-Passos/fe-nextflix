@@ -1,7 +1,6 @@
 /* Components */
 import Head from "next/head";
 import { Carousel, InitialMedia } from "@/components";
-import Link from "next/link";
 
 /* Logic */
 import { getMedias } from "@/services/TMDB_API";
@@ -38,14 +37,8 @@ export default function Home({ medias }) {
               media.type === "movie" ? "movies" : "series"
             }`}
             slides={media.content}
-          >
-            <Link
-              href={`/${media.type}/${media.classification}/1`}
-              className="btn-show-all"
-            >
-              Show All
-            </Link>
-          </Carousel>
+            link={`/${media.type}/${media.classification}/1`}
+          />
         ))}
       </div>
     </>

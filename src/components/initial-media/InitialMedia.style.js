@@ -1,98 +1,121 @@
 /* Style */
-import { rgba } from "polished";
-import { ArrowsContainer as ArrowsCarousel } from "../carousel";
 
 /* Logic */
+import { rgba } from "polished";
 import styled from "styled-components";
 
-export const InitialMediaContainer = styled.section`
-  /* Placeholder */
-  width: 90%;
-  height: min(150vw, 100vh);
-  margin: calc(-10vh - 10rem + 2.5vh) auto -8rem;
+export const Container = styled.section`
+  height: clamp(50rem, 185vw, 80rem);
+  margin-block: -16rem -10rem;
+
+  position: relative;
 
   @media screen and (min-width: 600px) {
-    width: 80%;
-    height: clamp(60rem, 87vh, 70rem);
+    height: clamp(40rem, 60vw, 70rem);
   }
 
-  .details-link {
+  picture {
+    width: 100%;
     height: 100%;
+    filter: saturate(1.5);
+
+    position: relative;
 
     display: inherit;
   }
-  /*  */
+`;
 
-  :before,
-  :after {
-    content: "";
-    transition: 0.5s ease-out;
+export const MainImage = styled.div`
+  width: 100%;
+  margin: 0 auto;
 
-    background: no-repeat center / cover
-      url(https://image.tmdb.org/t/p/original${({ phoneUrl }) => phoneUrl});
+  @media screen and (min-width: 600px) {
+    width: 80%;
+  }
 
-    position: absolute;
+  a {
+    width: 100%;
+    height: clamp(40rem, 150vw, 70rem);
 
     @media screen and (min-width: 600px) {
-      background-image: url(https://image.tmdb.org/t/p/original${({
-        desktopUrl,
-      }) => desktopUrl});
+      height: clamp(30rem, 50vw, 60rem);
+    }
+
+    display: inline-block;
+
+    img {
+      border-radius: 2rem;
     }
   }
 
-  ::before {
-    height: min(147vw, 97vh);
-    filter: saturate(2);
+  .splide {
+    .splide__arrow {
+      margin-inline: 1.5rem;
+      top: calc(50% - 1.25rem);
 
-    inset: 0;
-    z-index: -1;
+      @media screen and (min-width: 600px) {
+        margin-inline: -3rem;
+      }
 
-    @media screen and (min-width: 600px) {
-      height: clamp(57rem, 84vh, 67rem);
+      svg {
+        fill: ${({ theme }) => theme.colors.oppositeTheme};
+      }
+
+      :hover {
+        svg {
+          fill: ${({ theme }) => theme.colors.primary};
+        }
+      }
+
+      ::before {
+        content: "";
+        width: 5rem;
+        height: 5rem;
+        background-color: ${({ theme }) => rgba(theme.colors.theme, 0.5)};
+        border-radius: 50%;
+
+        position: absolute;
+        z-index: -1;
+      }
     }
-  }
 
-  ::after {
-    height: min(150vw, 100vh);
-    border-radius: 2rem;
-    box-shadow: rgba(50, 50, 93, 0.25) 0 1.3rem 2.7rem -0.5rem,
-      rgba(0, 0, 0, 0.3) 0 0.8rem 1.6rem -0.8rem;
-    filter: saturate(1.5);
-    pointer-events: none;
+    .splide__pagination {
+      bottom: 0;
 
-    inset: 2.5vh 5%;
+      .splide__pagination__page {
+        background-color: ${({ theme }) =>
+          rgba(theme.colors.oppositeTheme, 0.5)};
 
-    @media screen and (min-width: 600px) {
-      height: clamp(60rem, 87vh, 70rem);
+        :hover {
+          background-color: ${({ theme }) => rgba(theme.colors.primary, 0.5)};
+        }
 
-      inset-inline: 10%;
+        &.is-active {
+          background-color: ${({ theme }) => theme.colors.primary};
+        }
+      }
     }
   }
 `;
 
-export const ArrowsContainer = styled(ArrowsCarousel)`
-  .prev-arrow,
-  .next-arrow {
-    opacity: 0;
+export const IllustrationImage = styled.div`
+  width: 100%;
 
-    top: calc((min(150vw, 100vh) + 2.5vh - 5rem) / 2);
+  position: absolute;
+  top: 0;
+  z-index: -1;
+
+  display: inline-block;
+
+  .splide {
+    padding: 0;
+  }
+
+  picture {
+    height: clamp(40rem, 150vw, 70rem);
 
     @media screen and (min-width: 600px) {
-      top: calc((clamp(60rem, 87vh, 70rem) + 2.5vh - 5rem) / 2);
-    }
-  }
-
-  .prev-arrow {
-    left: 1%;
-  }
-  .next-arrow {
-    right: 1%;
-  }
-
-  ${InitialMediaContainer}:hover & {
-    .prev-arrow,
-    .next-arrow {
-      opacity: 1;
+      height: clamp(30rem, 50vw, 60rem);
     }
   }
 `;

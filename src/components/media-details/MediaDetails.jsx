@@ -8,7 +8,7 @@ import {
 } from "./MediaDetails.style";
 import { Image } from "@/utils";
 import ReactStarsRating from "react-awesome-stars-rating";
-import { Heart, RightArrow } from "@styled-icons/boxicons-regular";
+import { FiHeart, FiPlay } from "react-icons/fi";
 import ModalVideo from "react-modal-video";
 import { Carousel } from "../carousel";
 import SkeletonLoader from "tiny-skeleton-loader-react";
@@ -216,7 +216,7 @@ export default function MediaDetails({ media, isFallback }) {
               </div>
 
               <div className="fav-btn-container" onClick={toggleFavState}>
-                <Heart size="2rem" className={isFav ? "fav" : ""} />
+                <FiHeart size="2rem" className={isFav ? "fav" : ""} />
               </div>
             </div>
 
@@ -263,7 +263,7 @@ export default function MediaDetails({ media, isFallback }) {
                     className="trailer-btn"
                     onClick={() => setIsModalOpen(true)}
                   >
-                    <RightArrow size="1.7rem" /> Play Trailer
+                    <FiPlay size="1.7rem" /> Play Trailer
                   </button>
                 </>
               ) : (
@@ -276,12 +276,12 @@ export default function MediaDetails({ media, isFallback }) {
 
       <Grid>
         <div className="cast-container">
-          {castNCrew && (
+          {castNCrew.length && (
             <Carousel
-              children={null}
               title="Cast & Crew"
               slides={castNCrew}
-              type="cast"
+              link={null}
+              type="castNCrew"
             />
           )}
         </div>
@@ -337,8 +337,12 @@ export default function MediaDetails({ media, isFallback }) {
         </div>
 
         <div className="similar-movies">
-          {similarMovies && (
-            <Carousel title="Similar Movies" slides={similarMovies} />
+          {similarMovies.length && (
+            <Carousel
+              title="Similar Movies"
+              slides={similarMovies}
+              link={null}
+            />
           )}
         </div>
       </Grid>

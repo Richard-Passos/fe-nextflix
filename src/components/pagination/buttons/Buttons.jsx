@@ -1,7 +1,7 @@
 /* Components */
 import { ButtonsContainer } from "./Buttons.style";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight } from "@styled-icons/boxicons-regular";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 /* Logic */
 import { useRouter } from "next/router";
@@ -16,7 +16,7 @@ export default function Buttons({ baseLink, totalPages }) {
       <ButtonsContainer maxBtns={MAX_BTNS} currPage={currPage}>
         <button disabled={currPage <= 1}>
           <Link href={`${baseLink}/${+currPage - 1}`}>
-            <ChevronLeft size="2rem" />
+            <FiChevronLeft size="2rem" />
           </Link>
         </button>
 
@@ -26,7 +26,7 @@ export default function Buttons({ baseLink, totalPages }) {
 
         <button disabled={currPage >= totalPages}>
           <Link href={`${baseLink}/${+currPage + 1}`}>
-            <ChevronRight size="2rem" />
+            <FiChevronRight size="2rem" />
           </Link>
         </button>
       </ButtonsContainer>

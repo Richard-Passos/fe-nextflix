@@ -1,11 +1,11 @@
 /* Componenets */
 import { HeaderContainer, LogoContainer } from "./Header.style";
-import { Menu } from "@styled-icons/boxicons-regular";
+import { FiMenu } from "react-icons/fi";
 import { Sidebar } from "../sidebar";
+import Link from "next/link";
 
 /* Logic */
 import { useState } from "react";
-import Link from "next/link";
 
 export default function Header() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -18,15 +18,11 @@ export default function Header() {
         </Link>
       </LogoContainer>
 
-      <div>
-        <nav></nav>
-
-        <Menu
-          size="3.5rem"
-          className="open-sidebar"
-          onClick={() => setIsSidebarOpen(true)}
-        />
-      </div>
+      <FiMenu
+        size="3em"
+        className="sidebar-opener"
+        onClick={() => setIsSidebarOpen(true)}
+      />
 
       <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
     </HeaderContainer>

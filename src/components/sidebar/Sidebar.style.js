@@ -1,28 +1,27 @@
 /* Style */
-import { lighten, rgba, shade } from "polished";
-import { IconContainer as FooterIconContainer } from "../footer";
+import { rgba } from "polished";
 
 /* Logic */
 import styled from "styled-components";
 
 export const SidebarContainer = styled.aside`
   width: 28rem;
-  min-height: 100vh;
+  height: 100vh;
   background-color: ${({ theme }) => theme.colors.themeDarker};
   color: ${({ theme }) => theme.colors.text};
-  transition: ${({ isOpen }) => (isOpen ? "0.5s linear" : "1s ease-in")};
+  transition: right 0.5s linear;
 
   position: absolute;
   top: 0;
-  right: ${({ isOpen }) => (isOpen ? "0" : "min(-28rem, -100vw)")};
+  right: ${({ isOpen }) => (isOpen ? "0" : "-28rem")};
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
   header {
-    min-height: 10vh;
-    padding: 0 3rem;
+    height: 6rem;
+    padding-inline: 3rem;
     box-shadow: rgba(0, 0, 0, 0.24) 0 0.3rem 0.8rem;
 
     display: flex;
@@ -31,90 +30,65 @@ export const SidebarContainer = styled.aside`
 
     svg {
       transition: 0.3s;
+
       :hover {
         cursor: pointer;
-        color: ${({ theme }) =>
-          theme.title === "light"
-            ? lighten(0.5, theme.colors.text)
-            : shade(0.5, theme.colors.text)};
+        color: ${({ theme }) => rgba(theme.colors.text, 0.5)};
       }
     }
   }
 
-  > div {
-    min-height: 80vh;
-    padding: 2.4rem;
-    font-size: 1.6rem;
+  footer {
+    height: 9rem;
 
-    display: flex;
-    flex-direction: column;
-    gap: 2.4rem;
+    .icon-container {
+      :before {
+        background-color: ${({ theme }) => theme.colors.oppositeTheme};
+      }
+
+      .icon-name {
+        color: ${({ theme }) => theme.colors.themeDarker};
+      }
+
+      :hover {
+        color: ${({ theme }) => theme.colors.themeDarker};
+      }
+    }
   }
 
-  :before {
+  ::before {
     content: "";
     background-color: ${({ theme }) => rgba(theme.colors.oppositeTheme, 0.5)};
-    transition: ${({ isOpen }) => (isOpen ? "1s linear" : "0.5s linear")};
+    transition: 0.5s ease-in-out;
 
     position: absolute;
-    inset: -100vh 100% 0
-      ${({ isOpen }) =>
-        isOpen ? "calc(-100vw + 28rem)" : "calc(100vw + 28rem)"};
-  }
-
-  footer {
-    min-height: 10vh;
-    color: ${({ theme }) => theme.colors.oppositeTheme};
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-
-    h3 {
-      font-size: 1.4em;
-    }
-
-    div {
-      display: flex;
-    }
+    inset: 0;
+    left: ${({ isOpen }) => (isOpen ? "calc(-100vw + 28rem)" : "28rem")};
+    z-index: -1;
   }
 `;
 
-export const Item = styled.div`
+export const List = styled.ul`
+  min-height: calc(100vh - 15rem);
+  padding: 2.4rem;
+  font-size: 1.4rem;
+
   display: flex;
-  align-items: center;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 2.4rem;
 
-  a {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
+  li {
+    > :first-child {
+      transition: 0.3s;
 
-  > * {
-    transition: 0.3s;
-  }
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
 
-  :hover {
-    cursor: pointer;
-    color: ${({ theme }) =>
-      theme.title === "light"
-        ? lighten(0.5, theme.colors.text)
-        : shade(0.5, theme.colors.text)};
-  }
-`;
-
-export const IconContainer = styled(FooterIconContainer)`
-  .icon-name {
-    color: ${({ theme }) => theme.colors.themeDarker};
-  }
-
-  :before {
-    background-color: ${({ theme }) => theme.colors.oppositeTheme};
-  }
-
-  :hover {
-    color: ${({ theme }) => theme.colors.themeDarker};
+    :hover {
+      cursor: pointer;
+      color: ${({ theme }) => rgba(theme.colors.text, 0.5)};
+    }
   }
 `;
