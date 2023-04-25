@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 export const SidebarContainer = styled.aside`
   width: 28rem;
-  height: 100vh;
+  height: 100svh;
   background-color: ${({ theme }) => theme.colors.themeDarker};
   color: ${({ theme }) => theme.colors.text};
   transition: right 0.5s linear;
