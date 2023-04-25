@@ -1,7 +1,7 @@
 <h1 align="center">:file_cabinet: NextFlix</h1>
 
 ## :memo: Descrição
-Desafio pessoa, fazer listagem de filmes, utilizando de carrosséis e paginação para melhor organização, redux e redux-persist para armazenar o estado global dos favoritos e do tema e styled-components para a estilização.
+Desafio pessoal, fazer listagem de filmes, utilizando de carrosséis e paginação para melhor organização, redux e redux-persist para armazenar o estado global dos favoritos e do tema e styled-components para a estilização.
 
 ## :wrench: Tecnologias utilizadas
 * Next;
@@ -12,7 +12,7 @@ Desafio pessoa, fazer listagem de filmes, utilizando de carrosséis e paginaçã
 ## :rocket: Rodando o projeto
 Para rodar o repositório é recomendado acessar:
 ```
-https://nextflix-roan.vercel.app
+https://nextflix-coral-seven.vercel.app
 ```
 
 ## :handshake: Colaboradores
