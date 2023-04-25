@@ -8,10 +8,12 @@ export default createGlobalStyle`
   html {
     font-size: 62.5%;
 
+    height: -webkit-fill-available;
     scroll-behavior: smooth;
   }
 
   body {
     overflow-x: hidden;
+    height: -webkit-fill-available;
   }
 `;
