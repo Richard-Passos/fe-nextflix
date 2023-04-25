@@ -69,7 +69,7 @@ export const SidebarContainer = styled.aside`
 `;
 
 export const List = styled.ul`
-  min-height: calc(100vh - 15rem);
+  min-height: calc(100svh - 15rem);
   padding: 2.4rem;
   font-size: 1.4rem;
 
