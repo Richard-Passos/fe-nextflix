@@ -1,7 +1,8 @@
 /* Logic */
 import axios from "axios";
-import { API_KEY } from "API_KEY";
 import { encode } from "url-encode-decode";
+
+const API_KEY = "b681b7a1ecdbcf0bbb1bc98e9edd99ef";
 
 export const getMedias = async (mediaType, classification, page = 1) =>
   await axios
