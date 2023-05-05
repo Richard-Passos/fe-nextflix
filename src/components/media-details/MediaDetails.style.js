@@ -7,9 +7,26 @@ import styled from "styled-components";
 export const Container = styled.section`
   margin-top: -8rem;
 
+  position: relative;
+
   display: flex;
   flex-direction: column;
   gap: 5rem;
+
+  .go-back {
+    background: none;
+    border: none;
+    transition: color 0.3s;
+
+    position: fixed;
+    top: 1.3rem;
+    z-index: 11;
+
+    :hover {
+      cursor: pointer;
+      color: ${({ theme }) => rgba(theme.colors.text, 0.5)};
+    }
+  }
 `;
 
 export const Main = styled.div`

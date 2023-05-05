@@ -2,6 +2,7 @@
 import { IMG_ORIGIN_PATH } from "@/utils";
 import { Container, Main } from "./MediaDetails.style";
 import { MainDetails, ExtraDetails } from "./utils";
+import { FiChevronLeft } from "react-icons/fi";
 
 /* Logic */
 import { Fragment } from "react";
@@ -12,6 +13,10 @@ export default function MediaDetails({ media }) {
 
   return (
     <Container>
+      <button className="go-back" onClick={() => history.go(-1)}>
+        <FiChevronLeft size="3em" />
+      </button>
+
       <Main bgImage={bgImage}>
         <div className="bg-gradient" />
 

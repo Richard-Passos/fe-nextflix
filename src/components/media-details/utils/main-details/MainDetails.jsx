@@ -83,6 +83,7 @@ export default function MainDetails({ media, displayContent }) {
                 isOpen={isModalOpen}
                 videoId={videos[0].key}
                 onClose={() => setIsModalOpen(false)}
+                className="modal"
               />
 
               <button

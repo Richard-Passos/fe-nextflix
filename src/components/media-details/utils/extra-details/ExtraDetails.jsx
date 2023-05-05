@@ -54,9 +54,9 @@ export default function ExtraDetails({ media, displayContent }) {
         </div>
       </div>
 
-      {similarMovies.length && (
+      {similarMovies.length ? (
         <Carousel title="Similar Medias" slides={similarMovies} link={null} />
-      )}
+      ) : null}
     </Container>
   );
 }
