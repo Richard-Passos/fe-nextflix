@@ -1,25 +1,41 @@
 /* Components */
-import { SidebarContainer, List } from "./Sidebar.style";
-import { FiHeart, FiHome, FiMoon, FiSearch, FiSun, FiX } from "react-icons/fi";
+import { Container, List } from "./Sidebar.style";
 import Link from "next/link";
+import { FiMoon, FiSun, FiHeart, FiSearch, FiX } from "react-icons/fi";
+import { AiOutlineHome } from "react-icons/ai";
+import { Contact } from "../contact";
 
 /* Logic */
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleTheme } from "@/redux";
+import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
-import { Contact } from "../contact";
+import { toggleTheme } from "@/redux";
 
-const itemsContent = [
-  <Link key={uuidv4()} href="/search/1">
-    <FiSearch className="search-icon" size="2rem" /> Search Media
-  </Link>,
-  <Link key={uuidv4()} href="/favorites/1" className="link">
-    <FiHeart size="2rem" /> Favorites
-  </Link>,
-  <Link key={uuidv4()} href="/" className="link">
-    <FiHome size="2rem" /> Homepage
-  </Link>,
+const items = [
+  {
+    href: "/search/1",
+    content: (
+      <>
+        <FiSearch className="search-icon" size="1.5em" /> Search Media
+      </>
+    ),
+  },
+  {
+    href: "/favorites/1",
+    content: (
+      <>
+        <FiHeart size="1.5em" /> Favorites
+      </>
+    ),
+  },
+  {
+    href: "/",
+    content: (
+      <>
+        <AiOutlineHome size="1.5em" /> Homepage
+      </>
+    ),
+  },
 ];
 
 export default function Sidebar({ isOpen, setIsOpen }) {
@@ -36,37 +52,33 @@ export default function Sidebar({ isOpen, setIsOpen }) {
   /* Theme state */
   const { theme } = useSelector((state) => state.appTheme);
 
+  const themeIcon =
+    theme.title === "light" ? <FiMoon size="1.5em" /> : <FiSun size="1.5em" />;
+
   const dispatch = useDispatch();
   /*  */
 
   return (
-    <SidebarContainer isOpen={isOpen}>
+    <Container isOpen={isOpen}>
       <header>
         <FiX size="3em" onClick={() => setIsOpen((prevState) => !prevState)} />
       </header>
 
       <List>
-        {itemsContent.map((content) => (
+        {items.map(({ href, content }) => (
           <li key={uuidv4()} onClick={() => setIsOpen(false)}>
-            {content}
+            <Link href={href}>{content}</Link>
           </li>
         ))}
 
         <li onClick={() => dispatch(toggleTheme("switch-theme"))}>
-          <span>
-            {theme.title === "light" ? (
-              <FiMoon size="2rem" />
-            ) : (
-              <FiSun size="2rem" />
-            )}{" "}
-            Switch Theme
-          </span>
+          <span>{themeIcon} Switch Theme</span>
         </li>
       </List>
 
       <footer>
         <Contact />
       </footer>
-    </SidebarContainer>
+    </Container>
   );
 }

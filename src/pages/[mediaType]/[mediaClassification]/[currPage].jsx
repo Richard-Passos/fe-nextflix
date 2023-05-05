@@ -1,13 +1,14 @@
 /* Components */
 import Head from "next/head";
-import { Pagination } from "@/components";
+import { NotFound, Pagination } from "@/components";
 
 /* Logic */
 import { getMedias } from "@/services/TMDB_API";
 import { useRouter } from "next/router";
 
-export default function Medias({ medias, totalPages }) {
+export default function PageMedias({ medias, totalPages }) {
   const { mediaType, mediaClassification } = useRouter().query;
+
   const baseLink = `/${mediaType}/${mediaClassification}`;
 
   return (
@@ -16,7 +17,15 @@ export default function Medias({ medias, totalPages }) {
         <title>NextFlix - Pagination</title>
       </Head>
 
-      <Pagination medias={medias} totalPages={totalPages} baseLink={baseLink} />
+      {medias ? (
+        <Pagination
+          medias={medias}
+          totalPages={totalPages}
+          baseLink={baseLink}
+        />
+      ) : (
+        <NotFound />
+      )}
     </>
   );
 }

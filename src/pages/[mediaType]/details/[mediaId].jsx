@@ -1,21 +1,18 @@
 /* Components */
 import Head from "next/head";
-import { MediaDetails } from "@/components";
-import { getMediaDetails } from "@/services/TMDB_API";
+import { MediaDetails, NotFound } from "@/components";
 
 /* Logic */
-import { useRouter } from "next/router";
+import { getMediaDetails } from "@/services/TMDB_API";
 
-export default function Details({ media }) {
-  const router = useRouter();
-
+export default function DetailMedias({ media }) {
   return (
     <>
       <Head>
-        <title>NextFlix - Media Details</title>
+        <title>NextFlix - Details</title>
       </Head>
 
-      {media && <MediaDetails media={media} isFallback={router.isFallback} />}
+      {media ? <MediaDetails media={media} /> : <NotFound />}
     </>
   );
 }
@@ -27,8 +24,8 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async (context) => {
-  const { mediaType, mediaId } = context.params;
+export const getStaticProps = async ({ params }) => {
+  const { mediaType, mediaId } = params;
 
   const media = await getMediaDetails(mediaType, mediaId);
 

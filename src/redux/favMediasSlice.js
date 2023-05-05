@@ -9,16 +9,12 @@ export const favMediasSlice = createSlice({
   name: "favorite-medias",
   initialState,
   reducers: {
-    toggleFavMedias: (state, action) => {
-      const isMediaFav = state.favs.findIndex(
-        (media) => media.id === action.payload.id
-      );
+    toggleFavMedias: (state, { payload }) => {
+      const mediaIndex = state.favs.findIndex(({ id }) => id === payload.id);
 
-      if (isMediaFav !== -1) {
-        state.favs.splice(isMediaFav, 1);
-      } else {
-        state.favs.unshift(action.payload);
-      }
+      mediaIndex !== -1
+        ? state.favs.splice(mediaIndex, 1)
+        : state.favs.unshift(payload);
     },
   },
 });

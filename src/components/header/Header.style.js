@@ -4,13 +4,11 @@ import { rgba } from "polished";
 /* Logic */
 import styled from "styled-components";
 
-export const HeaderContainer = styled.header`
+export const Container = styled.header`
   padding: 1.5rem 3rem;
-  background-color: ${({ theme }) => rgba(theme.colors.dark, 0.95)};
   color: ${({ theme }) => theme.colors.light};
 
   position: relative;
-  z-index: 100;
 
   display: flex;
   justify-content: space-between;
@@ -19,14 +17,34 @@ export const HeaderContainer = styled.header`
   .sidebar-opener {
     transition: 0.3s;
 
+    z-index: 2;
+
     :hover {
       cursor: pointer;
-      color: ${({ theme }) => rgba(theme.colors.light, 0.5)};
+      color: ${({ theme }) => rgba(theme.colors.light, 0.75)};
     }
+  }
+
+  ::before,
+  ::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: ${({ theme }) => theme.colors.dark};
+
+    position: absolute;
+    left: 0;
+    z-index: -1;
+  }
+
+  ::after {
+    background-color: ${({ theme }) => rgba(theme.colors.dark, 0.5)};
+
+    z-index: 1;
   }
 `;
 
-export const LogoContainer = styled.div`
+export const Logo = styled.div`
   background: linear-gradient(
     to bottom,
     ${({ theme }) => theme.colors.primaryLighter},
@@ -36,12 +54,9 @@ export const LogoContainer = styled.div`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
-  /* To be behind sidebar */
-  position: relative;
-  z-index: -1;
-  /*  */
+  z-index: 2;
 
-  .logo {
+  h1 {
     font-size: 3em;
   }
 `;

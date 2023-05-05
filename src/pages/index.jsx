@@ -1,25 +1,13 @@
 /* Components */
 import Head from "next/head";
-import { Carousel, InitialMedia } from "@/components";
+import { HighlightMedia, Carousel } from "@/components";
 
 /* Logic */
 import { getMedias } from "@/services/TMDB_API";
 import { v4 as uuidv4 } from "uuid";
 
 export default function Home({ medias }) {
-  const initialMedias = [];
-
-  medias.forEach(({ content }) => {
-    const filter = content.filter(
-      (obj) => obj.poster_path && obj.backdrop_path
-    );
-
-    const uniqueMedia = filter.find(
-      ({ id }) => !initialMedias.find((item) => item.id === id)
-    );
-
-    initialMedias.push(uniqueMedia);
-  });
+  const highlightMedias = getMediasToHighlight(medias);
 
   return (
     <>
@@ -27,17 +15,17 @@ export default function Home({ medias }) {
         <title>NextFlix - Home</title>
       </Head>
 
-      <InitialMedia initialMedias={initialMedias} />
+      <HighlightMedia medias={highlightMedias} />
 
       <div className="carousels">
-        {medias.map((media) => (
+        {medias.map(({ classification, type, content }) => (
           <Carousel
             key={uuidv4()}
-            title={`${media.classification} ${
-              media.type === "movie" ? "movies" : "series"
+            title={`${classification} ${
+              type === "movie" ? "movies" : "series"
             }`}
-            slides={media.content}
-            link={`/${media.type}/${media.classification}/1`}
+            slides={content}
+            link={`/${type}/${classification}/1`}
           />
         ))}
       </div>
@@ -83,4 +71,22 @@ export const getStaticProps = async () => {
       medias,
     },
   };
+};
+
+const getMediasToHighlight = (medias) => {
+  const highlightMedias = [];
+
+  medias.forEach(({ content }) => {
+    const filter = content.filter(
+      ({ poster_path, backdrop_path }) => poster_path && backdrop_path
+    );
+
+    const uniqueMedia = filter.find(
+      ({ id }) => !highlightMedias.find((media) => media.id === id)
+    );
+
+    highlightMedias.push(uniqueMedia);
+  });
+
+  return highlightMedias;
 };

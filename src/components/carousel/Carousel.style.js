@@ -5,121 +5,47 @@ import { rgba } from "polished";
 import styled, { keyframes } from "styled-components";
 
 const rotate = keyframes`
-  from {
-    transform: rotate(45deg);
-  }
   to {
-    transform: rotate(405deg);
+    transform: rotate(1turn);
   }
 `;
 
-export const CarouselContainer = styled.div`
+export const Container = styled.div`
+  font-size: 1.4rem;
+
   position: relative;
 
-  .splide {
-    .splide__slide {
-      padding: 0.1rem;
-      border-radius: 1rem;
-      overflow: hidden;
-      opacity: 0.5;
-      transition: 0.3s;
-
-      ::before {
-        content: "";
-        width: 200%;
-        height: 50%;
-        border-radius: 1rem;
-        background-color: transparent;
-        transform: rotate(45deg);
-
-        position: absolute;
-        top: 25%;
-        left: -50%;
-        z-index: -1;
-      }
-
-      &.is-active,
-      :hover {
-        opacity: 1;
-
-        :before {
-          background-color: ${({ theme }) => theme.colors.primary};
-
-          animation: ${rotate} 5s ease-out infinite;
-        }
-      }
-    }
-
-    .splide__arrow {
-      top: calc(50% - 1.25rem);
-
-      svg {
-        fill: ${({ theme }) => rgba(theme.colors.oppositeTheme, 0.5)};
-      }
-
-      :hover {
-        svg {
-          fill: ${({ theme }) => theme.colors.primary};
-        }
-      }
-    }
-
-    .splide__pagination {
-      bottom: -1rem;
-
-      .splide__pagination__page {
-        background-color: ${({ theme }) =>
-          rgba(theme.colors.oppositeTheme, 0.5)};
-
-        :hover {
-          background-color: ${({ theme }) => rgba(theme.colors.primary, 0.5)};
-        }
-
-        &.is-active {
-          background-color: ${({ theme }) => theme.colors.primary};
-        }
-      }
-
-      @media screen and (min-width: 540px) {
-        bottom: 0;
-      }
-    }
-  }
-
   > .title {
-    font-size: 1.4em;
+    font-size: 1em;
     text-transform: capitalize;
 
     position: absolute;
-    top: -0.5rem;
-    left: 3rem;
+    left: 4rem;
+    z-index: 1;
 
     ::before {
       content: "";
-      width: 0.2rem;
       height: 100%;
-      background-color: ${({ theme }) => theme.colors.primary};
+      border-inline: 0.1rem solid ${({ theme }) => theme.colors.primary};
 
       position: absolute;
-      top: 0;
+      top: -0.1rem;
       left: -1rem;
     }
   }
 
   .btn-show-all {
-    font-size: 1.4em;
     font-weight: bold;
 
     position: absolute;
-    top: -0.5rem;
     right: 3rem;
-    z-index: 10;
+    z-index: 1;
 
     :before {
       content: "";
       height: 0.1rem;
-      background-color: ${({ theme }) => theme.colors.text};
-      transition: 0.3s;
+      background-color: ${({ theme }) => theme.colors.oppositeTheme};
+      transition: inset-inline 0.3s;
 
       position: absolute;
       bottom: -0.25rem;
@@ -131,6 +57,70 @@ export const CarouselContainer = styled.div`
 
       :before {
         inset-inline: 0;
+      }
+    }
+  }
+
+  .splide {
+    .splide__slide {
+      padding: 0.1rem;
+      border-radius: 1rem;
+      overflow: hidden;
+      opacity: ${({ theme }) => (theme.title === "light" ? 0.8 : 0.5)};
+      transition: opacity 0.3s;
+
+      ::before {
+        content: "";
+        width: 200%;
+        height: 50%;
+        animation: ${rotate} 10s linear infinite;
+
+        position: absolute;
+        top: 25%;
+        left: -50%;
+      }
+
+      :hover,
+      &.is-active {
+        opacity: 1;
+      }
+
+      &.is-active:before {
+        background-color: ${({ theme }) => theme.colors.primary};
+      }
+    }
+
+    .splide__arrow {
+      width: 2.5rem;
+
+      top: calc(50% - 1.25rem);
+
+      svg {
+        fill: ${({ theme }) => rgba(theme.colors.oppositeTheme, 0.25)};
+
+        :hover {
+          fill: ${({ theme }) => theme.colors.oppositeTheme};
+        }
+      }
+    }
+
+    .splide__pagination {
+      @media screen and (max-width: 600px) {
+        opacity: 0;
+      }
+
+      .splide__pagination__page {
+        background-color: ${({ theme }) =>
+          rgba(theme.colors.oppositeTheme, 0.25)};
+
+        :hover {
+          background-color: ${({ theme }) =>
+            rgba(theme.colors.oppositeTheme, 0.5)};
+        }
+
+        &.is-active {
+          background-color: ${({ theme }) => theme.colors.oppositeTheme};
+        }
       }
     }
   }

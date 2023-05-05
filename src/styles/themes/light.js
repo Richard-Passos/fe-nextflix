@@ -2,8 +2,7 @@ export default {
   title: "light",
 
   colors: {
-    primaryDarker: `hsl(341, 90%, 30%)`,
-    primary: `hsl(341, 98%, 39%)`,
+    primary: `hsl(341, 100%, 40%)`,
     primaryLighter: `hsl(341, 100%, 50%)`,
 
     themeDarker: `hsl(0, 0%, 85%)`,
@@ -12,10 +11,9 @@ export default {
 
     oppositeTheme: `hsl(235, 25%, 15%)`,
 
-    text: `hsl(220, 12%, 5%)`,
+    text: `hsl(235, 20%, 5%)`,
 
-    dark: `hsl(220, 10%, 5%)`,
-    light: `hsl(220, 60%, 95%)`,
-    gray: `hsl(220, 10%, 60%)`,
+    dark: `hsl(220, 30%, 5%)`,
+    light: `hsl(220, 30%, 95%)`,
   },
 };

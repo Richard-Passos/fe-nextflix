@@ -4,16 +4,18 @@ import { rgba } from "polished";
 /* Logic */
 import styled from "styled-components";
 
-export const SidebarContainer = styled.aside`
+export const Container = styled.aside`
+  --bg-color: ${({ theme }) => theme.colors.themeDarker};
+
   width: 28rem;
   height: 100svh;
-  background-color: ${({ theme }) => theme.colors.themeDarker};
   color: ${({ theme }) => theme.colors.text};
   transition: right 0.5s linear;
 
   position: absolute;
   top: 0;
   right: ${({ isOpen }) => (isOpen ? "0" : "-28rem")};
+  z-index: 100;
 
   display: flex;
   flex-direction: column;
@@ -22,7 +24,7 @@ export const SidebarContainer = styled.aside`
   header {
     height: 6rem;
     padding-inline: 3rem;
-    box-shadow: rgba(0, 0, 0, 0.24) 0 0.3rem 0.8rem;
+    box-shadow: 0 0.8rem 2.4rem rgba(0, 0, 0, 0.15);
 
     display: flex;
     justify-content: flex-end;
@@ -41,30 +43,41 @@ export const SidebarContainer = styled.aside`
   footer {
     height: 9rem;
 
-    .icon-container {
+    .icon {
       :before {
         background-color: ${({ theme }) => theme.colors.oppositeTheme};
       }
 
       .icon-name {
-        color: ${({ theme }) => theme.colors.themeDarker};
+        color: var(--bg-color);
       }
 
       :hover {
-        color: ${({ theme }) => theme.colors.themeDarker};
+        color: var(--bg-color);
       }
     }
   }
 
-  ::before {
+  ::before,
+  ::after {
     content: "";
-    background-color: ${({ theme }) => rgba(theme.colors.oppositeTheme, 0.5)};
-    transition: 0.5s ease-in-out;
+    height: 100%;
 
     position: absolute;
-    inset: 0;
-    left: ${({ isOpen }) => (isOpen ? "calc(-100vw + 28rem)" : "28rem")};
+    right: 0;
     z-index: -1;
+  }
+
+  ::before {
+    background-color: ${({ theme }) => rgba(theme.colors.oppositeTheme, 0.5)};
+    transition: left 0.5s ease-in-out;
+
+    left: ${({ isOpen }) => (isOpen ? "calc(-100vw + 28rem)" : "28rem")};
+  }
+
+  ::after {
+    width: 100%;
+    background-color: var(--bg-color);
   }
 `;
 

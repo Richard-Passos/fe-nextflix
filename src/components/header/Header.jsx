@@ -1,8 +1,8 @@
 /* Componenets */
-import { HeaderContainer, LogoContainer } from "./Header.style";
-import { FiMenu } from "react-icons/fi";
-import { Sidebar } from "../sidebar";
+import { Container, Logo } from "./Header.style";
 import Link from "next/link";
+import { FiMenu } from "react-icons/fi";
+import { Sidebar } from "@/components";
 
 /* Logic */
 import { useState } from "react";
@@ -11,12 +11,12 @@ export default function Header() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <HeaderContainer>
-      <LogoContainer>
+    <Container>
+      <Logo>
         <Link href="/">
-          <h1 className="logo">NextFlix</h1>
+          <h1>NextFlix</h1>
         </Link>
-      </LogoContainer>
+      </Logo>
 
       <FiMenu
         size="3em"
@@ -25,6 +25,6 @@ export default function Header() {
       />
 
       <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
-    </HeaderContainer>
+    </Container>
   );
 }

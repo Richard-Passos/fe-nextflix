@@ -2,7 +2,7 @@
 import styled from "styled-components";
 
 export const Container = styled.footer`
-  padding: 3rem 1rem;
+  padding: 3rem clamp(1rem, 2.5vw, 2.5rem);
   background-color: ${({ theme }) => theme.colors.dark};
   color: ${({ theme }) => theme.colors.light};
 
@@ -14,6 +14,7 @@ export const Container = styled.footer`
 `;
 
 export const Content = styled.div`
+  max-width: 100rem;
   text-align: center;
 
   display: flex;
@@ -28,5 +29,6 @@ export const Content = styled.div`
 
   p {
     font-size: 1.4em;
+    line-height: normal;
   }
 `;

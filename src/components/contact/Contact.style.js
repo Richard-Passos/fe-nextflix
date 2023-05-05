@@ -18,22 +18,33 @@ export const Container = styled.div`
   div {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    gap: 2rem 1rem;
   }
 `;
 
-export const IconContainer = styled.a`
-  width: 8rem;
-  margin-bottom: -1rem;
-  padding: 1rem 2rem;
-  transition: 0.3s;
+export const Icon = styled.a`
+  width: 6.5rem;
+  margin-bottom: -0.8rem;
+  padding: 0.8rem 1.6rem;
   isolation: isolate;
+  transition: 0.3s;
 
   position: relative;
 
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
+
+  svg {
+    flex: 0 0 2.5rem;
+  }
+
+  .icon-name {
+    color: ${({ theme }) => theme.colors.dark};
+    font-size: 1.4em;
+    font-weight: bold;
+    pointer-events: none;
+  }
 
   :before {
     content: "";
@@ -41,25 +52,15 @@ export const IconContainer = styled.a`
     height: 100%;
     background-color: ${({ theme }) => theme.colors.light};
     border-radius: 2rem;
-    transition: 0.3s;
+    transition: width 0.3s;
 
     position: absolute;
     left: 0;
     z-index: -1;
   }
 
-  .icon-name {
-    color: ${({ theme }) => theme.colors.dark};
-    font-size: 1.6em;
-    font-weight: bold;
-
-    position: absolute;
-    right: 2rem;
-    z-index: -1;
-  }
-
   :hover {
-    width: 15rem;
+    width: 13rem;
     color: ${({ theme }) => theme.colors.dark};
 
     :before {

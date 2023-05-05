@@ -4,7 +4,6 @@ import { persistStore, persistReducer } from "redux-persist";
 import favMediasSlice from "./favMediasSlice";
 import themeSlice from "./themeSlice";
 import { configureStore } from "@reduxjs/toolkit";
-
 import thunk from "redux-thunk";
 
 const persistConfigs = [

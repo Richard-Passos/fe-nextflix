@@ -1,64 +1,41 @@
 /* Components */
-import { CardContainer } from "./PersonCard.style";
-import { Image } from "@/utils";
-
-/* Logic */
-import { useContext, useEffect, useState } from "react";
-import SkeletonLoader from "tiny-skeleton-loader-react";
-import { ThemeContext } from "styled-components";
+import { Container } from "./PersonCard.style";
+import { Image, IMG_ORIGIN_PATH } from "@/utils";
 
 export default function PersonCard({ person }) {
-  /* Skeleton loader uses */
-  const theme = useContext(ThemeContext);
+  const { id, name, profile_path, character, job, known_for_department } =
+    person;
 
-  const [isImageLoad, setIsImageLoad] = useState(false);
-  console.log("file: PersonCard.jsx:15  PersonCard  isImageLoad", {
-    name: isImageLoad,
-    isImageLoad,
-  });
+  const personPath = _normalizedPersonPath(id, name);
 
-  useEffect(() => {
-    setIsImageLoad(false);
-  }, [person]);
-  /*  */
+  return (
+    <Container href={personPath} target="_blank">
+      <Image
+        src={
+          profile_path
+            ? IMG_ORIGIN_PATH + profile_path
+            : "/images/personNotFound.svg"
+        }
+        alt={name}
+        width={100}
+        height={150}
+        className="img"
+      />
 
-  const normalizedPersonPath = person
-    ? `https://www.themoviedb.org/person/${person.id}-${person.name
-        .toLowerCase()
-        .replaceAll(" ", "-")}`
-    : "";
+      <div className="text-info">
+        <h4 className="name">{name}</h4>
 
-  if (person)
-    return (
-      <CardContainer href={normalizedPersonPath} target="_blank">
-        <div className="image-container">
-          <SkeletonLoader
-            width="10rem"
-            height="10rem"
-            background={theme.colors.theme}
-            style={
-              !isImageLoad
-                ? { position: "absolute", borderRadius: "50%" }
-                : { display: "none" }
-            }
-          />
+        <p className="job">{character ?? job}</p>
 
-          <Image
-            src={
-              person.profile_path
-                ? `https://image.tmdb.org/t/p/original/${person.profile_path}`
-                : "/images/noImgFound.jpg"
-            }
-            alt={person.name}
-            width={100}
-            height={150}
-            quality={25}
-            onLoad={() => setIsImageLoad(true)}
-          />
-        </div>
-
-        <h4>{person.name}</h4>
-        <p>{person.character ?? person.job}</p>
-      </CardContainer>
-    );
+        <small className="department">
+          {known_for_department.toLowerCase()}
+        </small>
+      </div>
+    </Container>
+  );
 }
+
+const _normalizedPersonPath = (id, name) =>
+  `https://www.themoviedb.org/person/${id}-${name
+    .toLowerCase()
+    .replaceAll(" ", "-")}`;

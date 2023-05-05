@@ -1,30 +1,38 @@
 /* Components */
-import { Pagination } from "@/components";
-import { useRouter } from "next/router";
+import Head from "next/head";
+import { NotFound, Pagination } from "@/components";
 
 /* Logic */
 import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
 export default function Favorites() {
-  const { favs } = useSelector((theme) => theme.favMedias);
-  console.log("file: index.jsx:10  Favorites  favs", favs);
-  const { currPage } = useRouter().query;
+  const { favs } = useSelector(({ favMedias }) => favMedias);
 
+  const currPage = Math.max(useRouter().query.currPage, 1);
   const contentPerPage = 20;
-  const medias =
-    currPage > 0
-      ? favs.slice((currPage - 1) * contentPerPage, contentPerPage * currPage)
-      : [];
 
+  const medias = favs.slice(
+    (currPage - 1) * contentPerPage,
+    contentPerPage * currPage
+  );
   const totalPages = favs.length / contentPerPage;
 
   return (
-    <section>
-      <Pagination
-        medias={medias}
-        baseLink="/favorites"
-        totalPages={Math.ceil(totalPages)}
-      />
-    </section>
+    <>
+      <Head>
+        <title>NextFlix - Favorites</title>
+      </Head>
+
+      {currPage ? (
+        <Pagination
+          medias={medias}
+          baseLink="/favorites"
+          totalPages={Math.ceil(totalPages)}
+        />
+      ) : (
+        <NotFound />
+      )}
+    </>
   );
 }

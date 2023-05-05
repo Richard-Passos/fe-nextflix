@@ -49,8 +49,13 @@ export default createGlobalStyle`
   }
 
   button, input {
+    color: inherit;
     font-size: inherit;
     font-family: inherit;
+  }
+
+  button {
+    font-weight: bold;
   }
 
   input {
@@ -60,5 +65,9 @@ export default createGlobalStyle`
   a {
     text-decoration: none;
     color: inherit;
+  }
+
+  picture {
+    display: inherit;
   }
 `;

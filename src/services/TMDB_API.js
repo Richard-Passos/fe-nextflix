@@ -1,11 +1,10 @@
 /* Logic */
 import axios from "axios";
-const { encode } = require("url-encode-decode");
+import { API_KEY } from "API_KEY";
+import { encode } from "url-encode-decode";
 
-const API_KEY = "b681b7a1ecdbcf0bbb1bc98e9edd99ef";
-
-export const getMedias = async (mediaType, classification, page = 1) => {
-  return await axios
+export const getMedias = async (mediaType, classification, page = 1) =>
+  await axios
     .get(
       `https://api.themoviedb.org/3/${mediaType}/${classification}?api_key=${API_KEY}&language=en-US&page=${page}`
     )
@@ -13,13 +12,12 @@ export const getMedias = async (mediaType, classification, page = 1) => {
       return { results: data.results, totalPages: data.total_pages };
     })
     .catch(() => {
-      return { results: [], totalPages: 1 };
+      return { results: null, totalPages: 1 };
     });
-};
 
 export const searchMedia = async (
-  setState,
   search,
+  setState,
   setTotalPages = null,
   page = 1
 ) => {
@@ -27,7 +25,7 @@ export const searchMedia = async (
 
   await axios
     .get(
-      `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&language=en-US&page=${page}&include_adult=false&query=${encodeSearch}`
+      `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&language=en-US&page=${page}&query=${encodeSearch}`
     )
     .then(({ data }) => {
       setState(data.results);
@@ -49,13 +47,15 @@ export const getMediaDetails = async (mediaType, mediaId) => {
     axios.get(repeatUrl("credits")),
     axios.get(repeatUrl("similar")),
   ])
-    .then((values) => values.map((value) => value?.data))
-    .catch(() => [{}, {}, {}, {}]);
+    .then((values) => values.map(({ data }) => data))
+    .catch(() => []);
 
-  return {
-    details,
-    videos: videos.results,
-    castNCrew: [...castNCrew.cast, ...castNCrew.crew],
-    similarMovies: similarMovies.results,
-  };
+  return details
+    ? {
+        details,
+        videos: videos.results,
+        castNCrew: [...castNCrew.cast, ...castNCrew.crew],
+        similarMovies: similarMovies.results,
+      }
+    : null;
 };
