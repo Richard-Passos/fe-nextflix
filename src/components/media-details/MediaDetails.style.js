@@ -15,6 +15,7 @@ export const Container = styled.section`
 
   .go-back {
     background: none;
+    color: ${({ theme }) => theme.colors.primary};
     border: none;
     transition: color 0.3s;
 
@@ -24,7 +25,7 @@ export const Container = styled.section`
 
     :hover {
       cursor: pointer;
-      color: ${({ theme }) => rgba(theme.colors.text, 0.5)};
+      color: ${({ theme }) => rgba(theme.colors.primary, 0.5)};
     }
   }
 `;
