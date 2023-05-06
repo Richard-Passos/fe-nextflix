@@ -25,7 +25,7 @@ export const Container = styled.section`
 
     :hover {
       cursor: pointer;
-      color: ${({ theme }) => rgba(theme.colors.primary, 0.5)};
+      color: ${({ theme }) => theme.colors.primaryLighter};
     }
   }
 `;
