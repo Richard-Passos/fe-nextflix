@@ -4,7 +4,7 @@ import { FiSearch, FiX } from "react-icons/fi";
 
 export default function InputSearch({ onChange }) {
   return (
-    <Form>
+    <Form onSubmit={(e) => e.preventDefault()}>
       <button type="button">
         <FiSearch size="2rem" />
       </button>

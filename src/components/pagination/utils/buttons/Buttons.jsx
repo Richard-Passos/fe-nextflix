@@ -38,10 +38,6 @@ const createPaginationBtns = (currPage, MAX_BTNS, totalPages, baseLink) => {
     currPage <= Math.ceil(MAX_BTNS / 2)
       ? currPage - 1
       : Math.floor(MAX_BTNS / 2);
-  console.log(
-    "file: Buttons.jsx:38  createPaginationBtns  btnsOnLeft",
-    btnsOnLeft
-  );
 
   const btnsValue = [];
   for (let i = 0; i <= MAX_BTNS; i++) {

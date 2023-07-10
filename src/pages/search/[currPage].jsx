@@ -36,13 +36,7 @@ export default function SearchMedias() {
         <title>NextFlix - Search</title>
       </Head>
 
-      <InputSearch
-        onChange={(e) => {
-          e.preventDefault();
-
-          setSearch(e.target.value);
-        }}
-      />
+      <InputSearch onChange={(e) => setSearch(e.target.value)} />
 
       <Pagination medias={medias} totalPages={totalPages} baseLink={baseLink} />
     </>
