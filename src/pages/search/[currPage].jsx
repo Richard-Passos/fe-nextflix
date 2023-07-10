@@ -38,6 +38,8 @@ export default function SearchMedias() {
 
       <InputSearch
         onChange={(e) => {
+          e.preventDefault();
+
           setSearch(e.target.value);
         }}
       />
