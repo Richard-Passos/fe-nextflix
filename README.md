@@ -1,9 +1,13 @@
 <h1 align="center">:file_cabinet: Nextflix</h1>
 
+<br>
+
 ## :memo: Description
 I created a website that lists movies and TV series using the TMDB API to access information about these medias. For better organization, I used carousels and pagination. I utilized Redux and Redux-Persist for global state management and Styled-Components for styling. 
 
 The website includes a homepage for an overview of the medias, a page with details for each media, a search page, and a favorites page. Additionally, the website allows for theme switching.
+
+<br>
 
 ## :wrench: Technologies used
 * NextJS
@@ -11,11 +15,14 @@ The website includes a homepage for an overview of the medias, a page with detai
 * Redux
 * JavaScript
 
-## :rocket: Running the project
-### To run the repository, it is recommended to access:
+<br>
+
+## :rocket: Run project
 ```
 https://nextflix-coral-seven.vercel.app
 ```
+
+<br>
 
 ## :handshake: Team
 <table>
@@ -31,5 +38,7 @@ https://nextflix-coral-seven.vercel.app
   </tr>
 </table>
 
-## :dart: Project status
+<br>
+
+## :dart: Status
 Finished
