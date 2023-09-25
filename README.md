@@ -1,7 +1,9 @@
 <h1 align="center">:file_cabinet: Nextflix</h1>
 
 ## :memo: Description
-I created a website that lists movies and TV series using the TMDB API to access information about these medias. For better organization, I used carousels and pagination. I utilized Redux and Redux-Persist for global state management and Styled-Components for styling. The website includes a homepage for an overview of the medias, a page with details for each media, a search page, and a favorites page. Additionally, the website allows for theme switching.
+I created a website that lists movies and TV series using the TMDB API to access information about these medias. For better organization, I used carousels and pagination. I utilized Redux and Redux-Persist for global state management and Styled-Components for styling. 
+
+The website includes a homepage for an overview of the medias, a page with details for each media, a search page, and a favorites page. Additionally, the website allows for theme switching.
 
 ## :wrench: Technologies used
 * NextJS
